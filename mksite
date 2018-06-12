@@ -1,0 +1,87 @@
+basedir=/etc/apache2/sites-available
+if [ -z $1 ]
+	then
+		read -p "FQDN: " domain
+	else
+		domain=$1
+fi
+
+if [ -z $domain ]
+then
+	echo "Please enter a FQDN for this"
+	exit 99
+fi
+echo '<VirtualHost *:80>'
+echo "ServerAdmin webmaster@${domain}"
+echo "DocumentRoot /var/www/html/${domain}"
+echo "ServerName ${domain}"
+echo "ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}"
+echo 'ErrorLog ${APACHE_LOG_DIR}/'${domain}/error.log
+echo 'CustomLog ${APACHE_LOG_DIR}/'${domain}/acces.log combined
+echo '</VirtualHost>'
+
+echo -e "\n"
+echo "<VirtualHost *:443>"
+echo "ServerAdmin webmaster@${domain}"
+echo "DocumentRoot /var/www/html/ssl/${domain}"
+echo "ServerName ${domain}"
+echo "ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}"
+echo 'ErrorLog ${APACHE_LOG_DIR}'/${domain}/ssl-error.log
+echo 'CustomLog ${APACHE_LOG_DIR}'/${domain}/ssl-acces.log combined
+echo "SSLEngine on"
+echo "SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem"
+echo "SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem"
+echo "</VirtualHost>"
+
+"Check Prerequisites"
+
+echo "Check base doc dir /var/www/html/${domain}"
+if [ -d /var/www/html/${domain} ]
+	then
+		echo "Base directory /var/www/html/${domain} is good to go!"
+	else
+		echo "Whoops! We need to create /var/www/html/${domain} - Making directory"
+		mkdir /var/www/html/${domain}
+		echo "${domain}" > /var/www/html/${domain}/index.html
+		ls -ld /var/www/html/${domain}
+	fi
+
+echo "Check for logging directory"
+if [ -d /var/log/apache2/${domain} ]
+	then
+		echo "Looks like we got a logging directory boys!"
+	else
+		echo "Whoops! Looks like we need to create /var/log/apache2/${domain} guys! Making directory"
+		mkdir /var/log/apache2/${domain}
+		ls -ld /var/log/apache2/${domain}
+	fi
+
+exit
+
+dte=`date +%s`
+
+if [ -f ${basedir}/${domain.conf} ]
+	then
+	cp ${basedir}/$domain.conf ${basedir}/$domain.conf.$dte
+fi
+
+echo '<VirtualHost *:80>' > ${basedir}/$domain.conf
+echo "ServerAdmin webmaster@${domain}" >> ${basedir}/$domain.conf
+echo "DocumentRoot /var/www/html/${domain}" >> ${basedir}/$domain.conf
+echo "ServerName ${domain}" >> ${basedir}/$domain.conf
+echo "ServerAlias www.${domain}" >> ${basedir}/$domain.conf
+echo 'ErrorLog ${APACHE_LOG_DIR}/'${basedir}/${domain}/error.log >>$domain.conf
+echo 'CustomLog ${APACHE_LOG_DIR}/'${basedir}/${domain}/acces.log combined >>$domain.conf
+echo '</VirtualHost>' >> ${basedir}/$domain.conf
+echo -e "\n" >> ${basedir}/$domain.conf
+echo "<VirtualHost *:443>" >> ${basedir}/$domain.conf
+echo "ServerAdmin webmaster@${domain}" >> ${basedir}/$domain.conf
+echo "DocumentRoot /var/www/html/ssl/${domain}" >> ${basedir}/$domain.conf
+echo "ServerName ${domain}" >> ${basedir}/$domain.conf
+echo "ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}" >> ${basedir}/$domain.conf
+echo "ErrorLog ${APACHE_LOG_DIR}/${domain}/ssl-error.log" >> ${basedir}/$domain.conf
+echo "CustomLog ${APACHE_LOG_DIR}/${domain}/ssl-acces.log combined" >> ${basedir}/$domain.conf
+echo "SSLEngine on" >> ${basedir}/$domain.conf
+echo "SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem" >> ${basedir}/$domain.conf
+echo "SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem" >> ${basedir}/$domain.conf
+echo "</VirtualHost>" >> ${basedir}/$domain.conf
