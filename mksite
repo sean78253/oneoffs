@@ -56,8 +56,6 @@ if [ -d /var/log/apache2/${domain} ]
 		ls -ld /var/log/apache2/${domain}
 	fi
 
-exit
-
 dte=`date +%s`
 
 if [ -f ${basedir}/${domain.conf} ]
