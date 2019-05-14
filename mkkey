@@ -1,4 +1,5 @@
-Quick, easy way to create SSH keys
+# General Linux use
+# Quick, easy way to create SSH keys
 read -p "Who is this key for?: " fr
 echo -n 'Enter your email address: '; \
     read E; env E=$E D=$(date +%Y%m%d) \

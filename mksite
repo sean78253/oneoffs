@@ -1,3 +1,4 @@
+# Useful for Apache2
 # Quick easy way to add virtual servers with SSL certs from LetsEncrypt (manual at this point.)
 basedir=/etc/apache2/sites-available
 if [ -z $1 ]

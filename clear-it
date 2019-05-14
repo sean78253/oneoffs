@@ -1,3 +1,4 @@
+# Raspbery Pi specific
 # after setting cmdline.txt use this to give yourself some space to fart around
 # the idea here is to give yourself wiggle room for the smallest SD you can
 # use. This is becoming less important as SD devices are cheaper in 32 Meg
