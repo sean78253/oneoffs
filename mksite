@@ -83,3 +83,6 @@ echo "SSLEngine on" >> ${basedir}/$domain.conf
 echo "SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem" >> ${basedir}/$domain.conf
 echo "SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem" >> ${basedir}/$domain.conf
 echo "</VirtualHost>" >> ${basedir}/$domain.conf
+
+# Start of section to put certificate renewal in a cron job, for now, we'll remind folks
+echo "Don't forget to write a cron job to renew the certificats."
