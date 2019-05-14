@@ -1,0 +1,14 @@
+One thing that has irked me after being an engineer for Openstack SWIFT is that if a drive is flaky, the way the
+mount is set in the FS tab will make the system hang up and refuse to boot.
+Some versions of linux allow a fstab option of NOWAIT, others do not. My solution was to mark all SWIFT drives
+as not automatically mounted at boot time, and to have the systemd or service command mount the drives using
+timeout 30 mount blah blah blah when the SWIFT process started. That eleminated the drededed situation where a dead drive prevents booting. At least you can SSH into it and start poking around.
+
+I was laughted at ridiculed and generally told I'm an idiot. OK. I get that. I was working with the very people whose names are on the patent.
+Of course they are smarter than I am. (Side note, Rackspace has laid off many of these people, if not all.)
+
+It's a real bummer having to boot a system into single user mode. It takes getting in to the out of band management card (and if you don't have the right  Java Ghu help you), stopping the boot (sometimes that time window is like 1 second) remembering WHICH verion of the distro you are using and how to boot single user. When your SWIFT deployment has like plus 80 hard drives, figuring out which one (or two, or three, or more) is dead to the world is fustrating and time consuming. SWIFT is such this isn't a real issue for a day or two, but as drives continue to fail, partition danage adds up. Once SWIFT has only one copy of your object, it refuses to serve it up. 
+
+Worse, mount will sometimes lie to you, saying a drive is mounted and on line when, in fact, it isn't. Use lsblk. If it doesn't list a partition,
+then that drive is off line and the system doesn't know it. Typical tells is pulling a df -h and a long hang time, or nonsense usage reports.
+
