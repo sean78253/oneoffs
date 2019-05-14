@@ -1,1 +1,6 @@
+# Mount CIFS shares. I have a really old NAS but it still works, but it uses V1. Uncomment what you need
+# and change the username and password to what you need. CAUTION: If you are on a production system
+# the credentials should be stored in a seperate file readable by root only as /etc/fstab is world readable.
 //192.168.1.36/nas1 /nas1 cifs nofail,sec=ntlm,username=user,password=password,uid=1000,gid=1000,vers=1.0 0 0
+# //192.168.1.36/nas1 /nas1 cifs nofail,sec=ntlm,username=user,password=password,uid=1000,gid=1000,vers=2.0 0 0
+# //192.168.1.36/nas1 /nas1 cifs nofail,sec=ntlm,username=user,password=password,uid=1000,gid=1000,vers=3.0 0 0

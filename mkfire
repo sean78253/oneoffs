@@ -1,1 +1,5 @@
+# quick way to firewall IP addresses that are annoying you.
+# mkfire 8.0.1.0/24 will block the 8.0.1.0/24 CDIR
+# mkfire 8.0.1.0 will block just that IP
 iptables -I INPUT -s $1 -j DROP
+
