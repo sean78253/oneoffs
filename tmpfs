@@ -1,0 +1,11 @@
+if [ -d /mnt/scratch ]
+then
+	sudo echo "Good"
+else
+	sudo mkdir /mnt/scratch
+	sudo chmod 711 /mnt/scratch
+
+fi
+
+sudo mount -t tmpfs -o size=10m scratch /mnt/scratch
+
