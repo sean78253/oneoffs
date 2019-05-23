@@ -1,0 +1,3 @@
+Don't forget to add ssh key
+git config --global user.email "feb09@usersunion.net"
+git config --global user.name "sean78253"
