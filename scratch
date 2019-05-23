@@ -1,0 +1,10 @@
+#!/bin/bash
+# ditty to check for a /mnt/scratch, make it if not, then mount a file system.
+if [ -d /mnt/scratch ]; 
+then 
+	sudo mount -t tmpfs -o size=10m scratch /mnt/scratch
+else 
+	sudo mkdir /mnt/scratch
+	sudo chmod 777 /mnt/scratch
+	sudo mount -t tmpfs -o size=10m scratch /mnt/scratch 
+fi
