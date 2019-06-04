@@ -35,7 +35,7 @@ echo "SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem"
 echo "SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem"
 echo "</VirtualHost>"
 
-"Check Prerequisites"
+echo "Check Prerequisites"
 
 echo "Check base doc dir /var/www/html/${domain}"
 if [ -d /var/www/html/${domain} ]
