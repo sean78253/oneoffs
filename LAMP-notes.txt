@@ -1,0 +1,14 @@
+# Install apache
+apt install apache2 
+# Install PHP 
+sudo apt-get install php php-curl php-xml libapache2-mod-php php-mysql php-mbstring php-gettext 
+# Install MySql 
+sudo apt-get install mysql-server mysql-client 
+sudo mysql_secure_installation 
+sudo phpenmod mbstring 
+sudo systemctl restart apache2 
+mysql -u root -p # MySQL CLI SELECT user,authentication_string,plugin,host FROM mysql.user; ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'yourpass'; exit; 
+
+AddHandler mod_python .py
+PythonHandler mod_python.publisher
+PythonDebug On
