@@ -1,6 +1,16 @@
 # Useful for Apache2
 # Quick easy way to add virtual servers with SSL certs from LetsEncrypt (manual at this point.)
 basedir=/etc/apache2/sites-available
+if [ -f /etc/apache2/mods-enabled/ssl.conf ]
+	then
+		echo "Looks like /etc/apache2/mods-enabled/ssl.conf is there"
+	else
+		echo "Whoops! Looks like you don't have ssl configured yet. Try sudo e2enmod ssl and don't forget to restart apache!"
+		exit 99
+	fi
+
+exit 0
+
 if [ -z $1 ]
 	then
 		read -p "FQDN: " domain
