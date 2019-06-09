@@ -5,7 +5,7 @@ if [ -f /etc/apache2/mods-enabled/ssl.conf ]
 	then
 		echo "Looks like /etc/apache2/mods-enabled/ssl.conf is there"
 	else
-		echo "Whoops! Looks like you don't have ssl configured yet. Try sudo e2enmod ssl and don't forget to restart apache!"
+		echo "Whoops! Looks like you don't have ssl configured yet. Try sudo a2enmod ssl and don't forget to restart apache!"
 		exit 99
 	fi
 
