@@ -30,7 +30,7 @@ echo 'ErrorLog ${APACHE_LOG_DIR}/'${domain}/error.log
 echo 'CustomLog ${APACHE_LOG_DIR}/'${domain}/acces.log combined
 echo '</VirtualHost>'
 
-echo -e "\n"
+echo " "
 echo "<VirtualHost *:443>"
 echo "ServerAdmin webmaster@${domain}"
 echo "DocumentRoot /var/www/html/ssl/${domain}"
