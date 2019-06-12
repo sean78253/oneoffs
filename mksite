@@ -68,9 +68,11 @@ if [ -d /var/log/apache2/${domain} ]
 
 dte=`date +%s`
 
-if [ -f ${basedir}/${domain.conf} ]
+echo  $basedir/$domain.conf
+if [ -f $basedir/$domain.conf ]
 	then
-	cp ${basedir}/$domain.conf ${basedir}/$domain.conf.$dte
+	# cp ${basedir}/$domain.conf ${basedir}/$domain.conf.$dte
+	echo OK
 fi
 
 echo '<VirtualHost *:80>' > ${basedir}/$domain.conf
