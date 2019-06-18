@@ -33,7 +33,7 @@ echo '</VirtualHost>'
 echo " "
 echo "<VirtualHost *:443>"
 echo "ServerAdmin webmaster@${domain}"
-echo "DocumentRoot /var/www/html/ssl/${domain}"
+echo "DocumentRoot /var/www/html/${domain}"
 echo "ServerName ${domain}"
 echo "ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}"
 echo 'ErrorLog ${APACHE_LOG_DIR}'/${domain}/ssl-error.log
