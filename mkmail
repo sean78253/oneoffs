@@ -1,0 +1,4 @@
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password phae9Phif4ahquey'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password phae9Phif4ahquey'
+sudo apt-get -y install mysql-server
+
