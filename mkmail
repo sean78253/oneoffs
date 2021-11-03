@@ -1,4 +1,4 @@
-### echo "ABORTING" ; exit 99
+echo "ABORTING" ; exit 99
 
 
 if [ ! -e /etc/hosts.bak ]
