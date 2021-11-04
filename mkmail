@@ -5,10 +5,10 @@ if [ ! -e /etc/hosts.bak ]
 then
 	read -p  'Enter domain name: ' domainname
 	echo $domainname
-###	cp /etc/hosts /etc/hosts.bak
-###	cp /etc/hostname /etc/hostname.bak
-#	sed -i 's/localhost/'$domainname'/g' /etc/hosts
-#	sed -i 's/localhost/'$domainname'/g' /etc/hostname
+	cp /etc/hosts /etc/hosts.bak
+	cp /etc/hostname /etc/hostname.bak
+	sed -i 's/localhost/'$domainname'/g' /etc/hosts
+	sed -i 's/localhost/'$domainname'/g' /etc/hostname
 
 	read -p "Enter desired Msql Password: " mypass
 	echo "Rebooting the system for changes to take effect"
