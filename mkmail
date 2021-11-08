@@ -40,19 +40,22 @@ pwgen=`which pwgen`
 			echo "Proposed password (you can change it next step) is: " $propass
 	fi
 
-exit 0
 read -p "Enter desired Msql Password: " mypass
 read -p "re-enter desired Msql Password: " mypass2
 	if [ -z $mypass ] || [ -z $mypass2 ]
 		then
-		clear;echo -e "\a***************************\n* Please enter a password *\n***************************\n"; exit 99
+		echo "Using suggested password $propass "
+		mypass=$propass
+		mypass2=$propass
 	fi
 
 	if [ $mypass != $mypass2 ]	
 		then
 		echo -e "\a******password mismatch******\n" ; exit 99
 	fi
-
+unset mypass2 propass
+echo "Using password: $mypass "
+exit 0
 # debconf-set-selections <<< "postfix postfix/mailname string $domainname"
 # sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password your_password'
 # sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password your_password'
