@@ -30,6 +30,16 @@ if [ ! -z $newhost ]
 fi
 unset newhost
 echo -e "Hostname is: \c"; hostname
+pwgen=`which pwgen`
+
+	if [ -z $pwgen ]
+		then
+			echo -e "\a\n******\nLooks like pwgen isn't installed or is not in the path please correct\n******"
+		else
+			propass=`pwgen  16 1`
+			echo "Proposed password (you can change it next step) is: " $propass
+	fi
+
 exit 0
 read -p "Enter desired Msql Password: " mypass
 read -p "re-enter desired Msql Password: " mypass2
