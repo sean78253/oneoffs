@@ -27,7 +27,7 @@ echo "DocumentRoot /var/www/html/${domain}"
 echo "ServerName ${domain}"
 echo "ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}"
 echo 'ErrorLog ${APACHE_LOG_DIR}/'${domain}/error.log
-echo 'CustomLog ${APACHE_LOG_DIR}/'${domain}/acces.log combined
+echo 'CustomLog ${APACHE_LOG_DIR}/'${domain}/access.log combined
 echo '</VirtualHost>'
 
 echo " "
@@ -37,7 +37,7 @@ echo "DocumentRoot /var/www/html/${domain}"
 echo "ServerName ${domain}"
 echo "ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}"
 echo 'ErrorLog ${APACHE_LOG_DIR}'/${domain}/ssl-error.log
-echo 'CustomLog ${APACHE_LOG_DIR}'/${domain}/ssl-acces.log combined
+echo 'CustomLog ${APACHE_LOG_DIR}'/${domain}/ssl-access.log combined
 echo "SSLEngine on"
 echo "SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem"
 echo "SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem"
@@ -81,7 +81,7 @@ echo "DocumentRoot /var/www/html/${domain}" >> ${basedir}/$domain.conf
 echo "ServerName ${domain}" >> ${basedir}/$domain.conf
 echo "ServerAlias www.${domain}" >> ${basedir}/$domain.conf
 echo 'ErrorLog ${APACHE_LOG_DIR}/'${basedir}/${domain}/error.log >>$domain.conf
-echo 'CustomLog ${APACHE_LOG_DIR}/'${basedir}/${domain}/acces.log combined >>$domain.conf
+echo 'CustomLog ${APACHE_LOG_DIR}/'${basedir}/${domain}/access.log combined >>$domain.conf
 echo '</VirtualHost>' >> ${basedir}/$domain.conf
 echo -e "\n" >> ${basedir}/$domain.conf
 echo "<VirtualHost *:443>" >> ${basedir}/$domain.conf
@@ -90,7 +90,7 @@ echo "DocumentRoot /var/www/html/ssl/${domain}" >> ${basedir}/$domain.conf
 echo "ServerName ${domain}" >> ${basedir}/$domain.conf
 echo "ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}" >> ${basedir}/$domain.conf
 echo "ErrorLog ${APACHE_LOG_DIR}/${domain}/ssl-error.log" >> ${basedir}/$domain.conf
-echo "CustomLog ${APACHE_LOG_DIR}/${domain}/ssl-acces.log combined" >> ${basedir}/$domain.conf
+echo "CustomLog ${APACHE_LOG_DIR}/${domain}/ssl-access.log combined" >> ${basedir}/$domain.conf
 echo "SSLEngine on" >> ${basedir}/$domain.conf
 echo "SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem" >> ${basedir}/$domain.conf
 echo "SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem" >> ${basedir}/$domain.conf
