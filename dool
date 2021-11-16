@@ -1,0 +1,58 @@
+# /bin/bash 
+# dool Days Of Our Lives - calculates number of days between dates.
+# dates in YYYYMMDD format
+
+# pass cmd line arg count to args - workaround for some non POSIX systems messing it up
+args=$#
+
+today=`date +%Y%m%d`
+
+case $args in
+
+	1) 
+	# From date entered to today
+
+	if [ $1 -gt $today ]
+		then
+		echo -e "Calculating days to go! \c"
+	fi
+
+	let days=($(date +%s -d $today)-$(date +%s -d $1))/86400
+		if [ $? -eq 0 ]
+			then
+				echo "$days days"
+		fi
+		echo "" > /dev/null;;
+
+	2) 
+	# calc from first date to second
+	
+	if [ $2 -le $1 ]
+		then
+			echo "$2 is earlier than $1 - abort!"
+			exit 99
+	fi
+		
+		kicked=$1; today=$2; let days=($(date +%s -d $today)-$(date +%s -d $kicked))/86400
+
+		echo $days;;
+	*)
+	echo "Usage";;
+esac
+
+exit 0
+if [ $args -le 0 || -gt 2 ]
+  then
+	echo "Not enough arguements"
+	echo "Usage: enter starting date, will calculate to number of days until today"
+	echo "       enter starting date to ending date, will calculate number of days between them"
+	echo "       Dates in YYYYMMDD format."
+	exit 1
+fi
+echo $# $1 $2
+exit 0
+# eric holder
+kicked='20120628'; let first=($(date +%s -d $today)-$(date +%s -d $kicked))/86400
+kicked='20190518'; let barr=($(date +%s -d $today)-$(date +%s -d $kicked))/86400
+kicked='20170120'; let trump=($(date +%s -d 20210120)-$(date +%s -d $kicked))/86400
+echo $first, $barr, $trump
