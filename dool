@@ -37,7 +37,11 @@ case $args in
 
 		echo $days;;
 	*)
-	echo "Usage";;
+		echo "Not enough arguements"
+		echo "Usage: enter starting date, will calculate to number of days until today"
+		echo "       enter starting date to ending date, will calculate number of days between them"
+		echo "       Dates in YYYYMMDD format.";;
+
 esac
 
 exit 0
@@ -50,9 +54,3 @@ if [ $args -le 0 || -gt 2 ]
 	exit 1
 fi
 echo $# $1 $2
-exit 0
-# eric holder
-kicked='20120628'; let first=($(date +%s -d $today)-$(date +%s -d $kicked))/86400
-kicked='20190518'; let barr=($(date +%s -d $today)-$(date +%s -d $kicked))/86400
-kicked='20170120'; let trump=($(date +%s -d 20210120)-$(date +%s -d $kicked))/86400
-echo $first, $barr, $trump
