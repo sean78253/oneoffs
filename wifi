@@ -1,0 +1,3 @@
+ 1184  nmcli d wifi hotspot ifname wlx1cbfce55cb92 ssid sean password password
+ 1185  nmcli dev wifi show-password
+ 1189  nmcli connection delete id Hotspot
