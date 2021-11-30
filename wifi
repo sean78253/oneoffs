@@ -1,3 +1,13 @@
- 1184  nmcli d wifi hotspot ifname wlx1cbfce55cb92 ssid sean password password
- 1185  nmcli dev wifi show-password
- 1189  nmcli connection delete id Hotspot
+ nmcli d wifi hotspot ifname wlx1cbfce55cb92 ssid sean password password
+ nmcli dev wifi show-password
+ nmcli connection delete id Hotspot
+
+-----
+nmcli con add type wifi ifname wlx1cbfce55cb92 con-name Hotspot autoconnect yes ssid sean 
+nmcli con modify Hotspot 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method shared
+nmcli con modify Hotspot wifi-sec.key-mgmt wpa-psk
+nmcli con modify Hotspot wifi-sec.psk "password"
+nmcli con up Hotspot
+
+to bring up after reboot:
+UUID=$(grep uuid /etc/NetworkManager/system-connections/Hotspot | cut -d= -f2); nmcli con up uuid $UUID
