@@ -18,6 +18,8 @@
 #
 # project notes:
 # YT date format presented as Oct 12, 2006
+# Notes
+# echo "https://www.youtube.com/watch?v=6oMVHWgzLNs" | awk -F'/' '{print $4}' | sed 's/watch?v=//'
 
 function montnum()
 {
@@ -58,6 +60,9 @@ DBVERID='1.0'
 rptdate=`date +%Y-%m-%d`
 url='x'
 
+read -p "Video: " video
+myvideo=`echo $video | awk -F'/' '{print $4}' | sed 's/watch?v=//'`
+
 while [ ! -z $url ]
 do
 read -p "URL: " url
@@ -66,6 +71,7 @@ read -p "URL: " url
 			exit 0
 	fi
 
+read -p "Common name: " myname
 read -p "Create date: " credate
 read -p "type: por|bit|site" typer
 mon=`echo $credate | sed 's/,//g' | awk '{print $1}'`
@@ -74,7 +80,8 @@ myday=`echo $credate | awk '{print $2}' | sed 's/,//'`
 montnum
 myurl=`echo $url | awk -F'/' '{print $5}'`
 
-echo $myurl,"$myyear-$month-$myday",$rptdate,$DBVERID,,,,$typer
-unset myurl myyear month myday rptdate typer
+echo $myurl,"$myyear-$month-$myday",$rptdate,$DBVERID,,,,$typer >> ~/youtube-reports
+echo $myurl,$myname,"$myyear-$month-$myday",$rptdate,$DBVERID,$myvideo,,,$typer
+unset myurl myyear month myday rptdate typer myname
 
 done
