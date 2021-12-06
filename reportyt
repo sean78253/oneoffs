@@ -82,6 +82,6 @@ myurl=`echo $url | awk -F'/' '{print $5}'`
 
 echo $myurl,$myname,"$myyear-$month-$myday",$rptdate,$DBVERID,$myvideo,,,$typer >> ~/youtube-reports
 echo $myurl,$myname,"$myyear-$month-$myday",$rptdate,$DBVERID,$myvideo,,,$typer
-unset myurl myyear month myday rptdate typer myname
+unset myurl myyear month myday typer myname
 
 done
