@@ -80,7 +80,7 @@ myday=`echo $credate | awk '{print $2}' | sed 's/,//'`
 montnum
 myurl=`echo $url | awk -F'/' '{print $5}'`
 
-echo $myurl,"$myyear-$month-$myday",$rptdate,$DBVERID,,,,$typer >> ~/youtube-reports
+echo $myurl,$myname,"$myyear-$month-$myday",$rptdate,$DBVERID,$myvideo,,,$typer >> ~/youtube-reports
 echo $myurl,$myname,"$myyear-$month-$myday",$rptdate,$DBVERID,$myvideo,,,$typer
 unset myurl myyear month myday rptdate typer myname
 
