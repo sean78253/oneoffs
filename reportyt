@@ -1,0 +1,80 @@
+#!/bin/bash
+# 
+# MySQL formatter for reporting YT abuse
+# little ditties to maintain them.
+#
+# *********************************************************************
+# *
+# * Sean Embry
+# * 2021-12-05
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * 2021-12-05-000	Initial buildout 
+# *
+# *
+# *
+# *********************************************************************
+#
+# project notes:
+# YT date format presented as Oct 12, 2006
+
+function montnum()
+{
+
+case $mon in
+
+	"Jan")
+		month="01";;
+	"Feb")
+		month="02";;
+	"Mar")
+		month="03";;
+	"Apr")
+		month="04";;
+	"May")
+		month="05";;
+	"Jun")
+		month="06";;
+	"Jul")
+		month="07";;
+	"Aug")
+		month="08";;
+	"Sep")
+		month="09";;
+	"Oct")
+		month="10";;
+	"Nov")
+		month="11";;
+	"Dec")
+		month="12";;
+	*)
+		echo "ERROR";exit 99;;
+esac
+}
+
+DBVERID='1.0'
+
+rptdate=`date +%Y-%m-%d`
+url='x'
+
+while [ ! -z $url ]
+do
+read -p "URL: " url
+	if [ -z $url ]
+		then
+			exit 0
+	fi
+
+read -p "Create date: " credate
+read -p "type: por|bit|site" typer
+mon=`echo $credate | sed 's/,//g' | awk '{print $1}'`
+myyear=`echo $credate | awk '{print $3}'`
+myday=`echo $credate | awk '{print $2}' | sed 's/,//'`
+montnum
+myurl=`echo $url | awk -F'/' '{print $5}'`
+
+echo $myurl,"$myyear-$month-$myday",$rptdate,$DBVERID,,,,$typer
+unset myurl myyear month myday rptdate typer
+
+done
