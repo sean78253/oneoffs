@@ -13,6 +13,7 @@
 # * 2021-12-04-000	Initial buildout 
 # * 2021-12-05-000	fixups to .bashrc mods
 # * 2021-12-06-000      Add hostname and sshd change ups
+# * 2021-12-07-000      Add hostname ctl
 # *
 # *********************************************************************
 
@@ -40,7 +41,7 @@ BASHMODSWE="true"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
-	ssh_keys=`find ~/.ssh/id_rsa* | grep -v '\.pub' | xargs` && ssh-add -q $ssh_keys
+	ssh_keys=`find ~/.ssh/id_rsa* | grep -v '\.pub' | xargs` && ssh-add -q ${ssh_keys}
 	unset ssh_keys
 fi
 function cleanup()
@@ -59,6 +60,7 @@ fi
 function check_host()
 {
 	curhost=`hostname`
+	hnc=`which hostnamectl
 	if [ ${curhost} = 'localhost' ]
 		then
 			read -p "New host name: " newhost
@@ -66,6 +68,12 @@ function check_host()
 			hostname $newhost
 			cp /etc/hosts /etc/hosts.${datenm}
 			sed "s/localhost/$newhost/" /etc/hosts.${datenm} > /etc/hosts 
+
+				if [ ! -z ${hnc} ]
+					then
+						echo "${hnc} detected: Calling it as well"
+						hostnamectl set-hostname ${newhost}
+				fi
 		else
 			echo "Skipping hostname, it is not localhost"
 	fi
