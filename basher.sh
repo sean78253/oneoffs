@@ -76,7 +76,7 @@ function move_ssh()
 {
 		grep -q "^Port" /etc/ssh/sshd_config
 		porter=`echo $?`
-		if [ ${porter} -ne 1 ]
+		if [ ${porter} -eq 1 ]
 			then
 				echo "Doing sshd mods"
 				cp /etc/ssh/sshd_config /etc/ssh/sshd_config.${datenm}
