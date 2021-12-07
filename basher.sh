@@ -1,3 +1,23 @@
+#!/bin/bash
+# 
+# Set up new Ubuntu 20.04 LTS
+# 
+#
+# *********************************************************************
+# *
+# * Sean Embry
+# * 2021-12-04
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * 2021-12-04-000	Initial buildout 
+# * 2021-12-05-000	fixups to .bashrc mods
+# * 2021-12-06-000      Add hostname and sshd change ups
+# *
+# *********************************************************************
+
+
+
 datenm=`date +%Y%m%d`
 ##### FUNCTIONS
 
@@ -13,6 +33,10 @@ then
 HISTSIZE=-1
 HISTFILESIZE=-1
 BASHMODSWE="true"
+# url = git@github.com:sean78253/notes.git
+# url = git@github.com:sean78253/fsmod.git
+# url = git@github.com:sean78253/oneoffs.git
+# url = git@github.com:sean78253/blocklists.git
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
