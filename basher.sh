@@ -96,6 +96,28 @@ function move_ssh()
 		fi
 }
 
+function pi-wired()
+
+{
+
+# for wireless being used for internet, wired for private netowrk. No packet forwarding. That's another step.
+
+#steps:
+#check we're a pi
+#check wired interface has nothing allocated
+#check wired interface is disconnected?
+
+}
+
+function grab_ssh_keys()
+{
+
+# create a temp dir to hold keys
+# Prompt for URL to grab from, check for .gpg extention.
+# grab 
+# 
+
+}
 
 ###### WORK
 check_bash
