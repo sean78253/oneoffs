@@ -20,9 +20,20 @@
 
 
 datenm=`date +%Y%m%d`
-##### FUNCTIONS
+# Test for raspberry pi
+   if [ -r /sys/firmware/devicetree/base/model ]
+        then
+            Raspberry=0
+	else
+	    Raspberry=1
+   fi
+
+#####################
+##### FUNCTIONS #####
+#####################
 
 function check_bash() 
+
 {
 grep -q 'BASHMODSWE' ~/.bashrc
 nobash=`echo $?`
@@ -81,7 +92,6 @@ function check_host()
 }
 
 function move_ssh()
-
 {
 		grep -q "^Port" /etc/ssh/sshd_config
 		porter=`echo $?`
@@ -96,8 +106,17 @@ function move_ssh()
 		fi
 }
 
-function pi-wired()
+function is-a-pi()
+{
 
+   if [ -r /sys/firmware/devicetree/base/model ]
+	then
+	    ISPI=0
+   fi
+
+}
+
+function pi-wired()
 {
 
 # for wireless being used for internet, wired for private netowrk. No packet forwarding. That's another step.
@@ -106,6 +125,16 @@ function pi-wired()
 #check we're a pi
 #check wired interface has nothing allocated
 #check wired interface is disconnected?
+
+echo "
+interface eth0
+static ip_address=192.168.1.1
+#static ip6_address=fd51:42f8:caae:d92e::ff/64
+static routers=192.168.1.1/24
+nogateway
+denyinterfaces wlan0
+denyinterfaces wlan1
+"
 
 }
 
@@ -118,8 +147,10 @@ function grab_ssh_keys()
 # 
 
 }
+################
+##### WORK #####
+################
 
-###### WORK
 check_bash
 check_host
 move_ssh

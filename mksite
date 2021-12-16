@@ -98,3 +98,34 @@ echo "</VirtualHost>" >> ${basedir}/$domain.conf
 
 # Start of section to put certificate renewal in a cron job, for now, we'll remind folks
 echo "Don't forget to write a cron job to renew the certificats."
+
+exit 0
+
+**********
+* NOTES *
+*********
+
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        RewriteEngine On
+
+        <Directory /var/www/>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride FileInfo
+            Order allow,deny
+            allow from all
+
+        # except a directory from this rule
+        #   RewriteCond %{REQUEST_URI} !/check/
+        # except a file from this rule
+        #   RewriteCond %{REQUEST_URI} !/check/index.html
+
+            RewriteCond %{REQUEST_METHOD} ^(POST|PUT|DELETE|PATCH|HEAD|CONNECT|TRACE|TRACK|OPTIONS)
+            RewriteRule .* - [F]
+        </Directory>
+
+</VirtualHost>
