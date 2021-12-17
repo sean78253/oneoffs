@@ -119,6 +119,13 @@ exit 0
             Order allow,deny
             allow from all
 
+        ErrorDocument 404 /index.html
+	# ErrorDocument 500 /custom_50x.html
+	# ErrorDocument 502 /custom_50x.html
+	# ErrorDocument 503 /custom_50x.html
+	# ErrorDocument 504 /custom_50x.html
+
+
         # except a directory from this rule
         #   RewriteCond %{REQUEST_URI} !/check/
         # except a file from this rule
