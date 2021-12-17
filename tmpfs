@@ -1,11 +1,10 @@
-if [ -d /mnt/scratch ]
-then
-	sudo echo "Good"
-else
+if [ ! -d /mnt/scratch ]
+    then
+
 	sudo mkdir /mnt/scratch
-	sudo chmod 711 /mnt/scratch
+	sudo chmod 777 /mnt/scratch
 
 fi
 
-sudo mount -t tmpfs -o size=10m scratch /mnt/scratch
+sudo mount -t tmpfs -o rw,size=10m tmpfs /mnt/scratch
 
