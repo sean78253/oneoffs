@@ -50,6 +50,11 @@ BASHMODSWE="true"
 # url = git@github.com:sean78253/fsmod.git
 # url = git@github.com:sean78253/oneoffs.git
 # url = git@github.com:sean78253/blocklists.git
+# or
+# https://github.com:sean78253/notes.git
+# https://github.com:sean78253/fsmod.git
+# https://github.com:sean78253/oneoffs.git
+# https://github.com:sean78253/blocklists.git
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
