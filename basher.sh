@@ -14,6 +14,7 @@
 # * 2021-12-05-000	fixups to .bashrc mods
 # * 2021-12-06-000      Add hostname and sshd change ups
 # * 2021-12-07-000      Add hostname ctl
+# * 2012-12-20-000	Add common tools I use
 # *
 # *********************************************************************
 
