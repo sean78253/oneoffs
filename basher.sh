@@ -147,6 +147,12 @@ function grab_ssh_keys()
 # 
 
 }
+
+fuction install_tools()
+{
+	sudo apt install pwgen net-tools iptables-persistent www-browser xtables-addons-common
+}
+
 ################
 ##### WORK #####
 ################
