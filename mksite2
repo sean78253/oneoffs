@@ -1,0 +1,230 @@
+#!/bin/bash
+# mksite2 - revision to original 
+# 
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry
+# * 2021-09-05
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * 2021-09-09-000	rewrite of original script for portability
+# * 2021-10-01-000	reorder for funtions
+# * 2021-14-15-000      Bug touchups
+# * 2021-11-30-000	commenting code
+# * 2021-12-02-000	discussed with jbd, logic change for large virtual farms
+# * 2021-12-10-000	discussed log rotation with cjm, pointed to need to allow
+# * 			customers a directory where they can d.l their own logs
+# *			be sure to change ownership so only admin or cust can get them
+# * 2021-12-19-000	do default HTML files
+# * 2021-12-20-000	common area for .htpasswd files ${secrets}${domain}
+# *
+# *********************************************************************
+#
+# project notes:
+# as with a lot of bash scritps it is helpful to see variable substitution for debug with
+# bash -x ./script-name
+# or uncomment
+# set -x
+# TO DO
+# create empty index.html and errorXXX.html files if none present
+# Fix loging rotation scripts for apache so they are compressed
+# make user for each new domain and set ownership rights to their web dir secrets and logs
+
+# Most variable not set in the script go here
+#
+# where we put our virtual configs
+basedir=/etc/apache2/sites-available
+# what extention we're going to give to backup files
+dte=`date +%s`
+# havessl 0 = no 1 = yes
+havessl=0
+secrets=/usr/local/etc
+
+#############
+# FUNCTIONS #
+#############
+
+# Tests for Apache
+function baseapache()
+{
+apwhich=`which apache2`
+	if [ -z ${apache2} ]
+	    then
+		echo -e "Apache2 doesn't seem to be installed or in my path:\n${PATH}"
+		exit 100
+	    else
+		apwhich=`apache2 -v`
+	fi
+
+if [ ! -f /etc/apache2/mods-enabled/ssl.conf ]
+	then
+		echo "
+	   Whoops! Looks like you don't have ssl configured yet.
+	   Press <ENTER> to continue, or <CTRL><C> to abort and do:
+	sudo a2enmod ssl 
+	   and don't forget to 
+	sudo apache2ctl restart
+"
+
+		read -p "<CTRL>+<C> to exit, <ENTER> to continue without a SSL virtual server stanza"
+	else
+		havessl=1
+	fi
+
+
+# Grab the domain name if not from command line
+if [ -z $1 ]
+	then
+		read -p "FQDN: " domain
+	else
+		domain=$1
+fi
+
+if [ -z $domain ]
+    then
+	echo "Please enter a FQDN"
+	exit 102
+fi
+}
+
+function dircheck()
+{
+
+if [ ! -d /var/www/html/${domain} ]
+        then
+                mkdir /var/www/html/${domain}
+                echo "${domain}" > /var/www/html/${domain}/index.html
+        fi
+
+if [ ! -d /var/log/apache2/${domain} ]
+                mkdir /var/log/apache2/${domain}
+        fi
+#### I do not know what the hell this is
+	# echo  $basedir/$domain.conf
+	# if [ -f $basedir/$domain.conf ]
+        # then
+        # cp ${basedir}/$domain.conf ${basedir}/$domain.conf.$dte
+        # echo OK
+	# fi
+}
+
+function makeit()
+{
+echo "
+<VirtualHost *:80>
+    ServerAdmin webmaster@${domain}
+    DocumentRoot /var/www/html/${domain}
+    ServerName ${domain}
+    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}
+    ErrorLog \${APACHE_LOG_DIR}/${domain}/error.log
+    CustomLog \${APACHE_LOG_DIR}/${domain}/access.log combined
+    RewriteEngine On
+
+    <Directory /var/www/html/${domain}>
+	    Options Indexes FollowSymLinks MultiViews
+	    AllowOverride FileInfo AuthConfig
+	    Order allow,deny
+	    allow from all
+
+	    ErrorDocument 404 /index.html
+	    # ErrorDocument 500 /custom_50x.html
+	    # ErrorDocument 502 /custom_50x.html
+	    # ErrorDocument 503 /custom_50x.html
+	    # ErrorDocument 504 /custom_50x.html
+
+
+	    #####################################
+	    # except a directory from this rule #
+	    #####################################
+	    #   RewriteCond %{REQUEST_URI} !/check/
+
+	    ################################
+	    # except a file from this rule #
+	    ################################
+	    #   RewriteCond %{REQUEST_URI} !/check/index.html
+
+	    # These are HTML request methods we will not allow
+	    RewriteCond %{REQUEST_METHOD} ^(POST|PUT|DELETE|PATCH|HEAD|CONNECT|TRACE|TRACK|OPTIONS)
+	    RewriteRule .* - [F]
+    </Directory>
+
+</VirtualHost>
+"
+function makeitssl()
+{
+echo "
+
+<VirtualHost *:443>
+    ServerAdmin webmaster@${domain}
+    DocumentRoot /var/www/html/${domain}
+    ServerName ${domain}
+    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}
+    ErrorLog \${APACHE_LOG_DIR}/${domain}/ssl-error.log
+    CustomLog \${APACHE_LOG_DIR}/${domain}/ssl-access.log combined
+    SSLEngine on
+    RewriteEngine On
+    SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem
+
+    <Directory>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride FileInfo AuthConfig
+            Order allow,deny
+            allow from all
+
+            ErrorDocument 404 /index.html
+            # ErrorDocument 500 /custom_50x.html
+            # ErrorDocument 502 /custom_50x.html
+            # ErrorDocument 503 /custom_50x.html
+            # ErrorDocument 504 /custom_50x.html
+
+
+            #####################################
+            # except a directory from this rule #
+            #####################################
+            #   RewriteCond %{REQUEST_URI} !/check/
+
+            ################################
+            # except a file from this rule #
+            ################################
+            #   RewriteCond %{REQUEST_URI} !/check/index.html
+
+	    # These are HTML request methods we will not allow
+            RewriteCond %{REQUEST_METHOD} ^(POST|PUT|DELETE|PATCH|HEAD|CONNECT|TRACE|TRACK|OPTIONS)
+            RewriteRule .* - [F]
+    </Directory>
+
+</VirtualHost>
+"
+}
+
+function defaultfiles()
+{
+echo "
+<!doctype html>
+<html>
+  <head>
+    <title>Welcome to ${domain}</title>
+  </head>
+  <body>
+    <p><center><H1>Hello!</H1><BR>As you can see, we are setting up our server ${domain}</p>
+  </body>
+</html>
+" > /var/www/html/${domain}/index.html
+}
+
+########
+# WORK #
+########
+
+baseapache
+dircheck
+
+makeit
+if [ ${havessl} -eq 1 ]
+	then
+	makeitssl
+fi
