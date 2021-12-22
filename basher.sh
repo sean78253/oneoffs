@@ -173,6 +173,17 @@ true
 
 ###}
 
+function whichdistro()
+{
+cat /etc/redhat-release
+cat /etc/centos-release
+cat /etc/fedora-release
+cat /etc/debian_version
+# ---------- On Ubuntu and Linux Mint ----------
+cat /etc/lsb-release
+cat /etc/gentoo-release
+cat /etc/SuSE-release
+}
 ################
 ##### WORK #####
 ################
