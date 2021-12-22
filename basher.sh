@@ -102,6 +102,10 @@ function check_host()
 
 function move_ssh()
 {
+	# do we even have sshd installed?
+	if [ -f /etc/ssh/sshd_config ]
+	then
+		# if we do does it have a Port defined if so abort
 		grep -q "^Port" /etc/ssh/sshd_config
 		porter=`echo $?`
 		if [ ${porter} -eq 1 ]
@@ -111,8 +115,9 @@ function move_ssh()
 				echo "Port 4822" >> /etc/ssh/sshd_config
 				systemctl reload sshd
 			else
-				echo "Skipping ssh changes, done"
+				echo "Skipping ssh changes, /etc/ssh/sshd_config has a defined port"
 		fi
+	fi
 }
 
 function is-a-pi()
@@ -162,7 +167,7 @@ true
 
 ###{
 
-###sudo apt install pwgen net-tools iptables-persistent www-browser xtables-addons-common
+###sudo apt install pwgen net-tools htop iptables-persistent www-browser xtables-addons-common
 
 ###}
 
