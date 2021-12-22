@@ -104,19 +104,21 @@ function move_ssh()
 {
 	# do we even have sshd installed?
 	if [ -f /etc/ssh/sshd_config ]
-	then
-		# if we do does it have a Port defined if so abort
-		grep -q "^Port" /etc/ssh/sshd_config
-		porter=`echo $?`
-		if [ ${porter} -eq 1 ]
-			then
-				echo "Doing sshd mods"
-				cp /etc/ssh/sshd_config /etc/ssh/sshd_config.${datenm}
-				echo "Port 4822" >> /etc/ssh/sshd_config
-				systemctl reload sshd
-			else
-				echo "Skipping ssh changes, /etc/ssh/sshd_config has a defined port"
-		fi
+		then
+			# if we do does it have a Port defined if so abort
+			grep -q "^Port" /etc/ssh/sshd_config
+			porter=`echo $?`
+			if [ ${porter} -eq 1 ]
+				then
+					echo "Doing sshd mods"
+					cp /etc/ssh/sshd_config /etc/ssh/sshd_config.${datenm}
+					echo "Port 4822" >> /etc/ssh/sshd_config
+					systemctl reload sshd
+				else
+					echo "Skipping ssh changes, /etc/ssh/sshd_config has a defined port"
+			fi
+		else
+			echo "sshd does not have a config file - is it installed?"
 	fi
 }
 
