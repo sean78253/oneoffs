@@ -14,7 +14,10 @@
 # * 2021-12-05-000	fixups to .bashrc mods
 # * 2021-12-06-000      Add hostname and sshd change ups
 # * 2021-12-07-000      Add hostname ctl
-# * 2012-12-20-000	Add common tools I use
+# * 2021-12-20-000	Add common tools I use
+# * 2021-21-22-000	fix bugs from typos
+# *
+# *
 # *
 # *********************************************************************
 
@@ -51,10 +54,10 @@ BASHMODSWE="true"
 # url = git@github.com:sean78253/oneoffs.git
 # url = git@github.com:sean78253/blocklists.git
 # or
-# https://github.com:sean78253/notes.git
-# https://github.com:sean78253/fsmod.git
-# https://github.com:sean78253/oneoffs.git
-# https://github.com:sean78253/blocklists.git
+# https://github.com/sean78253/notes.git
+# https://github.com/sean78253/fsmod.git
+# https://github.com/sean78253/oneoffs.git
+# https://github.com/sean78253/blocklists.git
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
@@ -71,14 +74,14 @@ function cleanup()
 trap cleanup EXIT
 ' >> ~/.bashrc
 else
-	echo "Skipping bash fixup, it's done"
+	echo "Skipping bash fixup, it is done"
 fi
 }
 
 function check_host()
 {
 	curhost=`hostname`
-	hnc=`which hostnamectl
+	hnc=`which hostnamectl`
 	if [ ${curhost} = 'localhost' ]
 		then
 			read -p "New host name: " newhost
@@ -125,10 +128,10 @@ function is-a-pi()
 function pi-wired()
 {
 
-# for wireless being used for internet, wired for private netowrk. No packet forwarding. That's another step.
+# for wireless being used for internet, wired for private netowrk. No packet forwarding. That is another step.
 
 #steps:
-#check we're a pi
+#check we are a pi
 #check wired interface has nothing allocated
 #check wired interface is disconnected?
 
@@ -146,7 +149,7 @@ denyinterfaces wlan1
 
 function grab_ssh_keys()
 {
-
+true
 # create a temp dir to hold keys
 # Prompt for URL to grab from, check for .gpg extention.
 # grab 
@@ -154,10 +157,14 @@ function grab_ssh_keys()
 
 }
 
-fuction install_tools()
-{
-	sudo apt install pwgen net-tools iptables-persistent www-browser xtables-addons-common
-}
+
+###fuction install_tools()
+
+###{
+
+###sudo apt install pwgen net-tools iptables-persistent www-browser xtables-addons-common
+
+###}
 
 ################
 ##### WORK #####
