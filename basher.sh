@@ -175,6 +175,7 @@ true
 
 function whichdistro()
 {
+	# https://www.tecmint.com/find-linux-kernel-version-distribution-name-version-number/
 cat /etc/redhat-release
 cat /etc/centos-release
 cat /etc/fedora-release
