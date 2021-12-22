@@ -141,8 +141,9 @@ function pi-wired()
 #check we are a pi
 #check wired interface has nothing allocated
 #check wired interface is disconnected?
-
-echo "
+if [ ${isapi} -eq 1 ]
+then
+	echo "
 interface eth0
 static ip_address=192.168.1.1
 #static ip6_address=fd51:42f8:caae:d92e::ff/64
@@ -151,6 +152,10 @@ nogateway
 denyinterfaces wlan0
 denyinterfaces wlan1
 "
+else
+	echo "This is not a raspbery Pi system"
+fi
+
 
 }
 
