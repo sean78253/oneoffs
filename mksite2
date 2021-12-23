@@ -20,6 +20,12 @@
 # *			be sure to change ownership so only admin or cust can get them
 # * 2021-12-19-000	do default HTML files
 # * 2021-12-20-000	common area for .htpasswd files ${secrets}${domain}
+# * 2021-12-23-000	logic fix up neaten up, commenting
+# *
+# *
+# *
+# *
+# *
 # *
 # *********************************************************************
 #
@@ -29,19 +35,26 @@
 # or uncomment
 # set -x
 # TO DO
-# create empty index.html and errorXXX.html files if none present
 # Fix loging rotation scripts for apache so they are compressed
 # make user for each new domain and set ownership rights to their web dir secrets and logs
 
 # Most variable not set in the script go here
 #
+
 # where we put our virtual configs
 basedir=/etc/apache2/sites-available
+
+#directory for crypto bags like .htpass
+secrets=/usr/local/etc
+
+# Virtual server log director
+vslog=/var/log/apache2/
+
 # what extention we're going to give to backup files
 dte=`date +%s`
+
 # havessl 0 = no 1 = yes
 havessl=0
-secrets=/usr/local/etc
 
 #############
 # FUNCTIONS #
@@ -93,22 +106,27 @@ fi
 function dircheck()
 {
 
-if [ ! -d /var/www/html/${domain} ]
+	if [ ! -d /var/www/html/${domain} ]
         then
                 mkdir /var/www/html/${domain}
-                echo "${domain}" > /var/www/html/${domain}/index.html
         fi
 
-if [ ! -d /var/log/apache2/${domain} ]
+	if [ ! -d /var/log/apache2/${domain} ]
                 mkdir /var/log/apache2/${domain}
         fi
-#### I do not know what the hell this is
-	# echo  $basedir/$domain.conf
-	# if [ -f $basedir/$domain.conf ]
-        # then
-        # cp ${basedir}/$domain.conf ${basedir}/$domain.conf.$dte
-        # echo OK
-	# fi
+#### need to create a basic auth sub dir
+	if [ ! -d ${secrets}/${domain} ]
+                mkdir /var/log/apache2/${domain}
+        fi
+
+#### need to check for a .htpass file for secrets
+
+# back up an exsisting config
+if [ -f $basedir/$domain.conf ]
+        then
+	        cp ${basedir}/$domain.conf ${basedir}/$domain.conf.$dte
+fi
+
 }
 
 function makeit()
@@ -129,7 +147,7 @@ echo "
 	    Order allow,deny
 	    allow from all
 
-	    ErrorDocument 404 /index.html
+	    ErrorDocument 404 /error404.html
 	    # ErrorDocument 500 /custom_50x.html
 	    # ErrorDocument 502 /custom_50x.html
 	    # ErrorDocument 503 /custom_50x.html
@@ -175,7 +193,7 @@ echo "
             Order allow,deny
             allow from all
 
-            ErrorDocument 404 /index.html
+            ErrorDocument 404 /error404.html
             # ErrorDocument 500 /custom_50x.html
             # ErrorDocument 502 /custom_50x.html
             # ErrorDocument 503 /custom_50x.html
@@ -203,7 +221,9 @@ echo "
 
 function defaultfiles()
 {
-echo "
+	if [ ! -f /var/www/html/${domain}/index.html ]
+	then
+		echo "
 <!doctype html>
 <html>
   <head>
@@ -214,6 +234,7 @@ echo "
   </body>
 </html>
 " > /var/www/html/${domain}/index.html
+	fi
 }
 
 ########
@@ -226,5 +247,6 @@ dircheck
 makeit
 if [ ${havessl} -eq 1 ]
 	then
+	makeit
 	makeitssl
 fi
