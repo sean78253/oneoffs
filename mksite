@@ -6,7 +6,8 @@ if [ -f /etc/apache2/mods-enabled/ssl.conf ]
 		echo "Looks like /etc/apache2/mods-enabled/ssl.conf is there"
 	else
 		echo "Whoops! Looks like you don't have ssl configured yet. Try sudo a2enmod ssl and don't forget to restart apache!"
-		exit 99
+A		read -p "Press <CTRL><C> to abort, or <ENTER> for no SSL stanza (look at ${basedir}.conf.ssl for it :" trash
+		nossl=true
 	fi
 
 if [ -z $1 ]
