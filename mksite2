@@ -23,6 +23,7 @@
 # * 2021-12-23-000	logic fix up neaten up, commenting
 # * 2021-12-25-000	logic fix up for incorrect directories and fix non braced variables
 # * 2021-12-25-001	update revision list
+# * 2021-12-25-002	add comment for .htpass, add default .htaccess domain variables in script TODO
 # *
 # *
 # *
@@ -38,6 +39,9 @@
 # TO DO
 # Fix loging rotation scripts for apache so they are compressed
 # make user for each new domain and set ownership rights to their web dir secrets and logs
+# add humans.txt file to domain root
+# add robots.txt file to domain root
+# add checking to make sure script variable directories exsist
 
 # Most variable not set in the script go here
 #
@@ -139,6 +143,8 @@ function makeit()
 {
 echo "
 <VirtualHost *:80>
+
+	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
     ServerAdmin webmaster@${domain}
     DocumentRoot /var/www/html/${domain}
     ServerName ${domain}
@@ -184,6 +190,9 @@ function makeitssl()
 echo "
 
 <VirtualHost *:443>
+
+	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
+	
     ServerAdmin webmaster@${domain}
     DocumentRoot /var/www/html/${domain}
     ServerName ${domain}
@@ -256,6 +265,5 @@ dircheck
 makeit
 if [ ${havessl} -eq 1 ]
 	then
-	makeit
 	makeitssl
 fi
