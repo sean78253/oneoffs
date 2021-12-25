@@ -21,7 +21,8 @@
 # * 2021-12-19-000	do default HTML files
 # * 2021-12-20-000	common area for .htpasswd files ${secrets}${domain}
 # * 2021-12-23-000	logic fix up neaten up, commenting
-# *
+# * 2021-12-25-000	logic fix up for incorrect directories and fix non braced variables
+# * 2021-12-25-001	update revision list
 # *
 # *
 # *
@@ -64,7 +65,7 @@ havessl=0
 function baseapache()
 {
 apwhich=`which apache2`
-	if [ -z ${apache2} ]
+	if [ -z ${apwhich} ]
 	    then
 		echo -e "Apache2 doesn't seem to be installed or in my path:\n${PATH}"
 		exit 100
@@ -108,23 +109,28 @@ function dircheck()
 
 	if [ ! -d /var/www/html/${domain} ]
         then
+		echo "/var/www/html/${domain}"
                 mkdir /var/www/html/${domain}
         fi
 
 	if [ ! -d /var/log/apache2/${domain} ]
+	then
+		echo "/var/log/apache2/${domain}"
                 mkdir /var/log/apache2/${domain}
         fi
 #### need to create a basic auth sub dir
 	if [ ! -d ${secrets}/${domain} ]
-                mkdir /var/log/apache2/${domain}
+	then
+		echo "${secrets}/${domain}"
+                mkdir ${secrets}/${domain}
         fi
 
 #### need to check for a .htpass file for secrets
 
 # back up an exsisting config
-if [ -f $basedir/$domain.conf ]
+if [ -f ${basedir}/${domain}.conf ]
         then
-	        cp ${basedir}/$domain.conf ${basedir}/$domain.conf.$dte
+	        cp ${basedir}/${domain}.conf ${basedir}/${domain}.conf.{$dte}
 fi
 
 }
@@ -171,6 +177,8 @@ echo "
 
 </VirtualHost>
 "
+}
+
 function makeitssl()
 {
 echo "
@@ -233,7 +241,8 @@ function defaultfiles()
     <p><center><H1>Hello!</H1><BR>As you can see, we are setting up our server ${domain}</p>
   </body>
 </html>
-" > /var/www/html/${domain}/index.html
+"
+# " > /var/www/html/${domain}/index.html
 	fi
 }
 
