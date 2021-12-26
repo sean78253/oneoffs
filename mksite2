@@ -114,19 +114,19 @@ function dircheck()
 	if [ ! -d /var/www/html/${domain} ]
         then
 		echo "/var/www/html/${domain}"
-                mkdir /var/www/html/${domain}
+###		mkdir /var/www/html/${domain}
         fi
 
 	if [ ! -d /var/log/apache2/${domain} ]
 	then
 		echo "/var/log/apache2/${domain}"
-                mkdir /var/log/apache2/${domain}
+###		mkdir /var/log/apache2/${domain}
         fi
 #### need to create a basic auth sub dir
 	if [ ! -d ${secrets}/${domain} ]
 	then
 		echo "${secrets}/${domain}"
-                mkdir ${secrets}/${domain}
+###		mkdir ${secrets}/${domain}
         fi
 
 #### need to check for a .htpass file for secrets
