@@ -12,7 +12,7 @@
 # * YYYY-MM-DD-xxx	Notes
 # * 2021-09-09-000	rewrite of original script for portability
 # * 2021-10-01-000	reorder for funtions
-# * 2021-14-15-000      Bug touchups
+# * 2021-10-15-000      Bug touchups
 # * 2021-11-30-000	commenting code
 # * 2021-12-02-000	discussed with jbd, logic change for large virtual farms
 # * 2021-12-10-000	discussed log rotation with cjm, pointed to need to allow
@@ -23,9 +23,9 @@
 # * 2021-12-23-000	logic fix up neaten up, commenting
 # * 2021-12-25-000	logic fix up for incorrect directories and fix non braced variables
 # * 2021-12-25-001	update revision list
-# * 2021-12-25-002	add comment for .htpass, add default .htaccess domain variables in script TODO
-# *
-# *
+# * 2021-12-25-002	add comment for .htpass, add default .htaccess domain variables in script
+# * 2021-12-26-000	add logic to prefix a site config with a number
+# *			add robots and humans text files
 # *
 # *
 # *
@@ -37,20 +37,18 @@
 # or uncomment
 # set -x
 # TO DO
+# fix domain count prefix to domain name to detect domains already defined under another number
 # Fix loging rotation scripts for apache so they are compressed
 # make user for each new domain and set ownership rights to their web dir secrets and logs
-# add humans.txt file to domain root
-# add robots.txt file to domain root
-# add checking to make sure script variable directories exsist
-
-# Most variable not set in the script go here
+# 
 #
 
+# Most variable not set in the script go here
 # where we put our virtual configs
 basedir=/etc/apache2/sites-available
 
 #directory for crypto bags like .htpass
-secrets=/usr/local/etc
+secrets=/usr/local/etc/apache
 
 # Virtual server log director
 vslog=/var/log/apache2/
@@ -60,6 +58,8 @@ dte=`date +%s`
 
 # havessl 0 = no 1 = yes
 havessl=0
+
+domain=$1
 
 #############
 # FUNCTIONS #
@@ -94,11 +94,9 @@ if [ ! -f /etc/apache2/mods-enabled/ssl.conf ]
 
 
 # Grab the domain name if not from command line
-if [ -z $1 ]
+if [ -z $domain ]
 	then
 		read -p "FQDN: " domain
-	else
-		domain=$1
 fi
 
 if [ -z $domain ]
@@ -114,19 +112,19 @@ function dircheck()
 	if [ ! -d /var/www/html/${domain} ]
         then
 		echo "/var/www/html/${domain}"
-###		mkdir /var/www/html/${domain}
+#		mkdir /var/www/html/${domain}
         fi
 
 	if [ ! -d /var/log/apache2/${domain} ]
 	then
 		echo "/var/log/apache2/${domain}"
-###		mkdir /var/log/apache2/${domain}
+#		mkdir /var/log/apache2/${domain}
         fi
 #### need to create a basic auth sub dir
 	if [ ! -d ${secrets}/${domain} ]
 	then
 		echo "${secrets}/${domain}"
-###		mkdir ${secrets}/${domain}
+#		mkdir ${secrets}/${domain}
         fi
 
 #### need to check for a .htpass file for secrets
@@ -137,6 +135,29 @@ if [ -f ${basedir}/${domain}.conf ]
 	        cp ${basedir}/${domain}.conf ${basedir}/${domain}.conf.{$dte}
 fi
 
+}
+
+function countsites()
+{
+	if [ -d /etc/apache2 ] && [ -d /etc/apache2/sites-available ]
+	then
+
+		if [ -f /etc/apache2/sites-available/count ]
+		then
+			cnt=`cat /etc/apache2/sites-available/count`
+		else
+			echo "1" > /etc/apache2/sites-available/count
+			cnt=0
+		fi
+
+	cnt=`expr ${cnt} + 1`
+	echo $cnt > /etc/apache2/sites-available/count
+	cnt=`printf "%0*d-" 3 $cnt`
+
+	else
+		echo "Something is wrong with /etc/apache2/site-avaliable path"
+		exit 200
+	fi
 }
 
 function makeit()
@@ -182,8 +203,8 @@ echo "
     </Directory>
 
 </VirtualHost>
-"
-}
+" 
+} > ${basedir}/${cnt}${domain}.conf
 
 function makeitssl()
 {
@@ -234,7 +255,7 @@ echo "
 
 </VirtualHost>
 "
-}
+} >> ${basedir}/${cnt}${domain}.conf
 
 function defaultfiles()
 {
@@ -250,8 +271,30 @@ function defaultfiles()
     <p><center><H1>Hello!</H1><BR>As you can see, we are setting up our server ${domain}</p>
   </body>
 </html>
-"
-# " > /var/www/html/${domain}/index.html
+" > /var/www/html/${domain}/index.html
+	fi
+
+	if [ ! -f /var/www/html/${domain}/humans.txt ]
+	then
+		echo "
+<!doctype html>
+<html>
+  <head>
+    <title>Welcome to ${domain}</title>
+  </head>
+  <body>
+    <p><center><H1>Hello!</H1><BR>Our team has not enabled the humans.txt function ${domain}</p>
+  </body>
+</html>
+" > /var/www/html/${domain}/humans.txt
+	fi
+
+	if [ ! -f /var/www/html/${domain}/robots.txt ]
+	then
+		echo "
+User-agent: *
+Disallow: /DirectoriesNotToBeSearched/
+" > /var/www/html/${domain}/robots.txt
 	fi
 }
 
@@ -261,9 +304,10 @@ function defaultfiles()
 
 baseapache
 dircheck
-
+# countsites
 makeit
 if [ ${havessl} -eq 1 ]
 	then
 	makeitssl
 fi
+defaultfiles
