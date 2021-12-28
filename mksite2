@@ -26,6 +26,10 @@
 # * 2021-12-25-002	add comment for .htpass, add default .htaccess domain variables in script
 # * 2021-12-26-000	add logic to prefix a site config with a number
 # *			add robots and humans text files
+# * 2021-12-27-000	Test Certbot workings
+# * 2021-12-27-001	Fix SSL stanza for missing directory location
+# *
+# *
 # *
 # *
 # *
