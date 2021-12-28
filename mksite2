@@ -29,6 +29,7 @@
 # * 2021-12-27-000	Test Certbot workings
 # * 2021-12-27-001	Fix SSL stanza for missing directory location
 # * 2021-12-28-000	Add HTTP to HTTPS redirect in comment for the VS
+# * 2021-12-28-001	Add CERT bot instructions
 # *
 # *
 # *
@@ -185,7 +186,7 @@ echo "
 #####	ServerAlias www.example.com
 #####	Redirect permanent / https://${domain}/
 #####</VirtualHost>
-
+##### comment from HERE to below
 <VirtualHost *:80>
 
 	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
@@ -226,15 +227,20 @@ echo "
     </Directory>
 
 </VirtualHost>
+##### STOP commenting out here for a redirect from above
 " 
 } > ${basedir}/${cnt}${domain}.conf
 
 function makeitssl()
 {
 echo "
-
 <VirtualHost *:443>
-
+	###
+	# Free certs with certbot - instructions as of 2021-12-28 - https://certbot.eff.org/instructions
+	# Be sure to tip EFF for their help now, hear? (ME TOO! TIP ME!)
+	###
+	# grab certificates with cert bot 
+	# certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain}
 	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
 	
     ServerAdmin webmaster@${domain}
