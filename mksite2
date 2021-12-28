@@ -28,7 +28,7 @@
 # *			add robots and humans text files
 # * 2021-12-27-000	Test Certbot workings
 # * 2021-12-27-001	Fix SSL stanza for missing directory location
-# *
+# * 2021-12-28-000	Add HTTP to HTTPS redirect in comment for the VS
 # *
 # *
 # *
@@ -44,7 +44,7 @@
 # fix domain count prefix to domain name to detect domains already defined under another number
 # Fix loging rotation scripts for apache so they are compressed
 # make user for each new domain and set ownership rights to their web dir secrets and logs
-# 
+# certbot certonly --dry-run -d vixenfakenews.com,www.vixenfakenews.com,north.vixenfakenews.com,east.vixenfakenews.com,south.vixenfakenews.com,west.vixenfakenews.com,mail.vixenfakenews.com
 #
 
 # Most variable not set in the script go here
@@ -167,6 +167,13 @@ function countsites()
 function makeit()
 {
 echo "
+#####   TO REDIRECT non-ssl traffic to ssl, uncomment below and comment out the port 80 virtual host
+#####<VirtualHost *:80> 
+#####	ServerName example.com
+#####	ServerAlias www.example.com
+#####	Redirect permanent / https://${domain}/
+#####</VirtualHost>
+
 <VirtualHost *:80>
 
 	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
@@ -300,6 +307,16 @@ User-agent: *
 Disallow: /DirectoriesNotToBeSearched/
 " > /var/www/html/${domain}/robots.txt
 	fi
+
+	if [ ! -f /var/www/html/${domain}/error404.html ]
+	then
+		echo "
+		<center><P><P><h1>
+		We are sorry - Domain ${domain} doesn't have that web page!"
+		</center></h1>
+" > /var/www/html/${domain}/error404.html
+	fi
+echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain}" >> ~/cerbot.notes
 }
 
 ########
