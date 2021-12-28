@@ -225,7 +225,7 @@ echo "
     SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem
 
-    <Directory>
+    <Directory /var/www/html/${domain}>
             Options Indexes FollowSymLinks MultiViews
             AllowOverride FileInfo AuthConfig
             Order allow,deny
