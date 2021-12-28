@@ -93,6 +93,7 @@ if [ ! -f /etc/apache2/mods-enabled/ssl.conf ]
 
 		read -p "<CTRL>+<C> to exit, <ENTER> to continue without a SSL virtual server stanza"
 	else
+
 		havessl=1
 	fi
 
@@ -162,6 +163,17 @@ function countsites()
 		echo "Something is wrong with /etc/apache2/site-avaliable path"
 		exit 200
 	fi
+}
+
+function makeitredir()
+{
+	echo "
+<VirtualHost *:80> 
+ServerName example.com
+ServerAlias www.example.com
+Redirect permanent / https://${domain}/
+</VirtualHost>
+" > ${basedir}/${cnt}${domain}.conf
 }
 
 function makeit()
