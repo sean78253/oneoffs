@@ -312,11 +312,12 @@ Disallow: /DirectoriesNotToBeSearched/
 	then
 		echo "
 		<center><P><P><h1>
-		We are sorry - Domain ${domain} doesn't have that web page!"
+		We are sorry - Domain ${domain} doesn't have that web page!
 		</center></h1>
 " > /var/www/html/${domain}/error404.html
 	fi
 echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain}" >> ~/cerbot.notes
+
 }
 
 ########
