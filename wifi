@@ -11,3 +11,6 @@ nmcli con up Hotspot
 
 to bring up after reboot:
 UUID=$(grep uuid /etc/NetworkManager/system-connections/Hotspot | cut -d= -f2); nmcli con up uuid $UUID
+=====
+Or other
+
