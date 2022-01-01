@@ -31,7 +31,7 @@
 # * 2021-12-28-000	Add HTTP to HTTPS redirect in comment for the VS
 # * 2021-12-28-001	Add CERT bot instructions
 # * 2021-12-31-000	Add default 000-default logic for port 80 and self signed cert
-# *
+# * 2022-01-01-000	Tune back so webpages are NOT created under /var/www/html/, but /var/www/
 # *
 # *
 # *
@@ -66,6 +66,10 @@ dte=`date +%s`
 # havessl 0 = no 1 = yes
 havessl=0
 
+# base directory for websites
+web='/var/www'
+
+# pass in cmd line parms
 domain=$1
 
 #############
@@ -116,19 +120,25 @@ fi
 
 function dircheck()
 {
-
-	if [ ! -d /var/www/html/${domain} ]
+# directory for web site
+	if [ ! -d ${web}/${domain} ]
         then
-		echo "/var/www/html/${domain}"
-		mkdir /var/www/html/${domain}
+		echo "${web}/${domain}"
+		mkdir ${web}/${domain}
         fi
 
+# directory for logs for the domain
 	if [ ! -d /var/log/apache2/${domain} ]
 	then
 		echo "/var/log/apache2/${domain}"
 		mkdir /var/log/apache2/${domain}
         fi
 #### need to create a basic auth sub dir
+	if [ ! -d ${secrets} ]
+		echo "${secrets}"
+		mkdir ${secrets}
+	fi
+
 	if [ ! -d ${secrets}/${domain} ]
 	then
 		echo "${secrets}/${domain}"
@@ -147,7 +157,7 @@ fi
 
 function countsites()
 {
-	if [ -d /etc/apache2 ] && [ -d /etc/apache2/sites-available ]
+# orphaned at the moment. Be sure to go back and add ${cnt}-${domain} everywhere before use
 	then
 
 		if [ -f /etc/apache2/sites-available/count ]
@@ -193,14 +203,14 @@ echo "
 
 	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
     ServerAdmin webmaster@${domain}
-    DocumentRoot /var/www/html/${domain}
+    DocumentRoot ${web}/${domain}
     ServerName ${domain}
     ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}
     ErrorLog \${APACHE_LOG_DIR}/${domain}/error.log
     CustomLog \${APACHE_LOG_DIR}/${domain}/access.log combined
     RewriteEngine On
 
-    <Directory /var/www/html/${domain}>
+    <Directory ${web}/${domain}>
 	    Options Indexes FollowSymLinks MultiViews
 	    AllowOverride FileInfo AuthConfig
 	    Order allow,deny
@@ -251,7 +261,7 @@ echo "
 	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
 	
     ServerAdmin webmaster@${domain}
-    DocumentRoot /var/www/html/${domain}
+    DocumentRoot ${web}/${domain}
     ServerName ${domain}
     ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}
     ErrorLog \${APACHE_LOG_DIR}/${domain}/ssl-error.log
@@ -261,7 +271,7 @@ echo "
     SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem
 
-    <Directory /var/www/html/${domain}>
+    <Directory ${web}/${domain}>
             Options Indexes FollowSymLinks MultiViews
             AllowOverride FileInfo AuthConfig
             Order allow,deny
@@ -293,7 +303,7 @@ echo "
 "
 } >> ${basedir}/${cnt}${domain}.conf
 
-function makeit()
+function makeitdefault()
 {
 echo "
 # This is strictly for making a default port 80 to handle domains not otherwise specified
@@ -349,7 +359,7 @@ echo "
 
 function defaultfiles()
 {
-	if [ ! -f /var/www/html/${domain}/index.html ]
+	if [ ! -f ${web}/${domain}/index.html ]
 	then
 		echo "
 <!doctype html>
@@ -361,10 +371,10 @@ function defaultfiles()
     <p><center><H1>Hello!</H1><BR>As you can see, we are setting up our server ${domain}</p>
   </body>
 </html>
-" > /var/www/html/${domain}/index.html
+" > ${web}/${domain}/index.html
 	fi
 
-	if [ ! -f /var/www/html/${domain}/humans.txt ]
+	if [ ! -f ${web}/${domain}/humans.txt ]
 	then
 		echo "
 <!doctype html>
@@ -376,24 +386,24 @@ function defaultfiles()
     <p><center><H1>Hello!</H1><BR>Our team has not enabled the humans.txt function ${domain}</p>
   </body>
 </html>
-" > /var/www/html/${domain}/humans.txt
+" > ${web}/${domain}/humans.txt
 	fi
 
-	if [ ! -f /var/www/html/${domain}/robots.txt ]
+	if [ ! -f ${web}/${domain}/robots.txt ]
 	then
 		echo "
 User-agent: *
 Disallow: /DirectoriesNotToBeSearched/
-" > /var/www/html/${domain}/robots.txt
+" > ${web}/${domain}/robots.txt
 	fi
 
-	if [ ! -f /var/www/html/${domain}/error404.html ]
+	if [ ! -f ${web}/${domain}/error404.html ]
 	then
 		echo "
 		<center><P><P><h1>
 		We are sorry - Domain ${domain} doesn't have that web page!
 		</center></h1>
-" > /var/www/html/${domain}/error404.html
+" > ${web}/${domain}/error404.html
 	fi
 echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}," >> ~/cerbot.${domain}.notes
 
@@ -401,6 +411,8 @@ echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east
 
 function mkselfsign()
 {
+
+# Sometimes folks do not want the snakeoil certificate - I don't know why but here is the process
 
 echo "authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
