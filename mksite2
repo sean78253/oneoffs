@@ -18,6 +18,7 @@
 # * 2021-12-10-000	discussed log rotation with cjm, pointed to need to allow
 # * 			customers a directory where they can d.l their own logs
 # *			be sure to change ownership so only admin or cust can get them
+# *
 # * 2021-12-19-000	do default HTML files
 # * 2021-12-20-000	common area for .htpasswd files ${secrets}${domain}
 # * 2021-12-23-000	logic fix up neaten up, commenting
@@ -26,12 +27,22 @@
 # * 2021-12-25-002	add comment for .htpass, add default .htaccess domain variables in script
 # * 2021-12-26-000	add logic to prefix a site config with a number
 # *			add robots and humans text files
+# *
 # * 2021-12-27-000	Test Certbot workings
 # * 2021-12-27-001	Fix SSL stanza for missing directory location
 # * 2021-12-28-000	Add HTTP to HTTPS redirect in comment for the VS
 # * 2021-12-28-001	Add CERT bot instructions
 # * 2021-12-31-000	Add default 000-default logic for port 80 and self signed cert
 # * 2022-01-01-000	Tune back so webpages are NOT created under /var/www/html/, but /var/www/
+# *			per Apache security updates
+# *
+# * 2022-01-01-001	
+# *
+# *
+# *
+# *
+# *
+# *
 # *
 # *
 # *
@@ -135,6 +146,7 @@ function dircheck()
         fi
 #### need to create a basic auth sub dir
 	if [ ! -d ${secrets} ]
+	then
 		echo "${secrets}"
 		mkdir ${secrets}
 	fi
@@ -150,7 +162,13 @@ function dircheck()
 # back up an exsisting config
 if [ -f ${basedir}/${domain}.conf ]
         then
-	        cp ${basedir}/${domain}.conf ${basedir}/${domain}.conf.{$dte}
+	        cp ${basedir}/${domain}.conf ${basedir}/${domain}.conf.${dte}
+fi
+
+# back up an exsisting ssl config
+if [ -f ${basedir}/${cnt}${domain}-ssl.conf ]
+        then
+	        cp ${basedir}/${domain}-ssl.conf ${basedir}/${domain}-ssl.conf.${dte}
 fi
 
 }
@@ -158,6 +176,7 @@ fi
 function countsites()
 {
 # orphaned at the moment. Be sure to go back and add ${cnt}-${domain} everywhere before use
+	if [ -d /etc/apache2 ] && [ -d /etc/apache2/sites-available ]
 	then
 
 		if [ -f /etc/apache2/sites-available/count ]
@@ -196,7 +215,7 @@ echo "
 #####<VirtualHost *:80> 
 #####	ServerName example.com
 #####	ServerAlias www.example.com
-#####	Redirect permanent / https://${domain}/
+#####	Redirect / https://${domain}/
 #####</VirtualHost>
 ##### comment from HERE to below
 <VirtualHost *:80>
@@ -301,7 +320,7 @@ echo "
 
 </VirtualHost>
 "
-} >> ${basedir}/${cnt}${domain}.conf
+} > ${basedir}/${cnt}${domain}-ssl.conf
 
 function makeitdefault()
 {
@@ -383,7 +402,8 @@ function defaultfiles()
     <title>Welcome to ${domain}</title>
   </head>
   <body>
-    <p><center><H1>Hello!</H1><BR>Our team has not enabled the humans.txt function ${domain}</p>
+    <p><center><H1>Hello!</H1><BR>Our team has not updated the humans.txt file for ${domain}</p>
+    <p>Greetings from the creator of the mksite script, may your day be safe and productive</center>
   </body>
 </html>
 " > ${web}/${domain}/humans.txt
@@ -405,7 +425,7 @@ Disallow: /DirectoriesNotToBeSearched/
 		</center></h1>
 " > ${web}/${domain}/error404.html
 	fi
-echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}," >> ~/cerbot.${domain}.notes
+echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}" >> ~/cerbot.${domain}.notes
 
 }
 
