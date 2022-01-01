@@ -30,10 +30,13 @@
 # * 2021-12-27-001	Fix SSL stanza for missing directory location
 # * 2021-12-28-000	Add HTTP to HTTPS redirect in comment for the VS
 # * 2021-12-28-001	Add CERT bot instructions
+# * 2021-12-31-000	Add default 000-default logic for port 80 and self signed cert
 # *
 # *
 # *
 # *
+# * Certbot docs (as of 2021-12-31) https://eff-certbot.readthedocs.io/en/stable/using.html
+# * self signed certs: (bad idea) https://www.baeldung.com/openssl-self-signed-cert
 # *********************************************************************
 #
 # project notes:
@@ -42,7 +45,6 @@
 # or uncomment
 # set -x
 # TO DO
-# fix domain count prefix to domain name to detect domains already defined under another number
 # Fix loging rotation scripts for apache so they are compressed
 # make user for each new domain and set ownership rights to their web dir secrets and logs
 # certbot certonly --dry-run -d vixenfakenews.com,www.vixenfakenews.com,north.vixenfakenews.com,east.vixenfakenews.com,south.vixenfakenews.com,west.vixenfakenews.com,mail.vixenfakenews.com
@@ -240,7 +242,12 @@ echo "
 	# Be sure to tip EFF for their help now, hear? (ME TOO! TIP ME!)
 	###
 	# grab certificates with cert bot 
-	# certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain}
+# Docs (as of 2021-12-31) https://eff-certbot.readthedocs.io/en/stable/using.html
+# TEST: certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain}
+# FORREAL: certbot certonly -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}
+	#########
+	# ALERT # Do not mix your domains on a virtual web server for certificats because it leakes all the domain namesi if they look at the cert
+	#########
 	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
 	
     ServerAdmin webmaster@${domain}
@@ -285,6 +292,60 @@ echo "
 </VirtualHost>
 "
 } >> ${basedir}/${cnt}${domain}.conf
+
+function makeit()
+{
+echo "
+# This is strictly for making a default port 80 to handle domains not otherwise specified
+<VirtualHost *:80>
+    ServerAdmin forgetit@example.com
+    DocumentRoot /var/www/html/default
+    ServerName :80
+    ErrorLog \${APACHE_LOG_DIR}/default/error.log
+    CustomLog \${APACHE_LOG_DIR}/default/access.log combined
+    RewriteEngine On
+
+    <Directory /var/www/html/default
+	    Options Indexes FollowSymLinks MultiViews
+	    AllowOverride FileInfo AuthConfig
+	    Order allow,deny
+	    allow from all
+	    # These are HTML request methods we will not allow
+	    RewriteCond %{REQUEST_METHOD} ^(POST|PUT|DELETE|PATCH|HEAD|CONNECT|TRACE|TRACK|OPTIONS)
+	    RewriteRule .* - [F]
+    </Directory>
+
+</VirtualHost>
+" 
+}
+
+function makedefaultssl()
+{
+echo "
+<VirtualHost *:443>
+    ServerAdmin forgetaboutit@example.com
+    DocumentRoot /var/www/html/default
+    ServerName :443
+    ErrorLog \${APACHE_LOG_DIR}/default/ssl-error.log
+    CustomLog \${APACHE_LOG_DIR}/default/ssl-access.log combined
+    SSLEngine on
+    RewriteEngine On
+    # These need changing to someplace other than /etc/letsencrypt
+    # SSLCertificateFile /etc/letsencrypt/live/${domain}/fullchain.pem
+    # SSLCertificateKeyFile /etc/letsencrypt/live/${domain}/privkey.pem
+
+    <Directory /var/www/html/default>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride none
+            Order allow,deny
+            allow from all
+            RewriteCond %{REQUEST_METHOD} ^(POST|PUT|DELETE|PATCH|HEAD|CONNECT|TRACE|TRACK|OPTIONS)
+            RewriteRule .* - [F]
+    </Directory>
+
+</VirtualHost>
+"
+}
 
 function defaultfiles()
 {
@@ -334,9 +395,27 @@ Disallow: /DirectoriesNotToBeSearched/
 		</center></h1>
 " > /var/www/html/${domain}/error404.html
 	fi
-echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain}" >> ~/cerbot.notes
+echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}," >> ~/cerbot.${domain}.notes
 
 }
+
+function mkselfsign()
+{
+
+echo "authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = Place-Holder-Something-Is-Wrong.com" > ${secrets}/default/domain.ext
+
+openssl req -newkey rsa:2048 -nodes -keyout ${secrets}/default/domain.key -out domain.csr -subj "/C=US/ST=Confusion/L=Confusion/O=Really Fake Key/OU=No one here/CN=thisisascam.com"
+openssl req -newkey rsa:2048 -nodes -keyout ${secrets}/default/domain.key -x509 -days 365 -out ${secrets}/default/domain.crt -subj "/C=US/ST=Confusion/L=Confusion/O=Really Fake Key/OU=No one here/CN=thisisascam.com"
+openssl req -x509 -sha256 -days 1825 -nodes -newkey rsa:2048 -keyout ${secrets}/default/rootCA.key -out ${secrets}/default/rootCA.crt -subj "/C=US/ST=Confusion/L=Confusion/O=Really Fake Key/OU=No one here/CN=thisisascam.com"
+openssl x509 -req -CA ${secrets}/${default}/rootCA.crt -CAkey ${secrets}/default/rootCA.key -in ${secrets}/default/domain.csr -out ${secrets}/default/domain.crt -days 365 -CAcreateserial -extfile ${secrets}/default/domain.ext
+
+}
+
+
 
 ########
 # WORK #
