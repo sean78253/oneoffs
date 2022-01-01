@@ -36,11 +36,14 @@
 # * 2022-01-01-000	Tune back so webpages are NOT created under /var/www/html/, but /var/www/
 # *			per Apache security updates
 # *
-# * 2022-01-01-001	
-# *
-# *
-# *
-# *
+# * 2022-01-01-001	PGMR: SWE HoursWasted: 1.25
+# * 2022-01-01-001	PGMR: SWE HoursSpent: 0.25
+# *			Bad words bad words bad words. Rediscoved a gotcha in apache2 vis-a-vi default sites that I forgoten about!
+# *			And YES! you WANT a default site for bots that use the IP address instead of a named virtual host!
+# *			The fix is to add 
+# *			ServerName :80 to the standard default site /etc/apache2/sites-avalable/000-default.conf
+# *			ServerName :443 to the ssl default site /etc/apache2/sites-available/default-ssl.conf
+# *			Added warnings to the configs for sites created with this script
 # *
 # *
 # *
@@ -211,6 +214,8 @@ Redirect permanent / https://${domain}/
 function makeit()
 {
 echo "
+# PROBLEM? - If you have 000-default.conf enabled, you might get that instead of your intended site. If so, what is going on is you need to add:
+# PROBLEM? - ServerName :80 to the /etc/apache2/sites-avaialbe/000-default.conf file.
 #####   TO REDIRECT non-ssl traffic to ssl, uncomment below and comment out the port 80 virtual host
 #####<VirtualHost *:80> 
 #####	ServerName example.com
@@ -224,7 +229,7 @@ echo "
     ServerAdmin webmaster@${domain}
     DocumentRoot ${web}/${domain}
     ServerName ${domain}
-    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}
+    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain},db01.${domain},db02.${domain}
     ErrorLog \${APACHE_LOG_DIR}/${domain}/error.log
     CustomLog \${APACHE_LOG_DIR}/${domain}/access.log combined
     RewriteEngine On
@@ -266,16 +271,18 @@ function makeitssl()
 {
 echo "
 <VirtualHost *:443>
+# PROBLEM? - If you have default-ssl.conf enabled, you might get that instead of your intended site. If so, what is going on is you need to add:
+# PROBLEM? - ServerName :443 to the /etc/apache2/sites-avaialbe/default-ssl.conf file.
 	###
 	# Free certs with certbot - instructions as of 2021-12-28 - https://certbot.eff.org/instructions
 	# Be sure to tip EFF for their help now, hear? (ME TOO! TIP ME!)
 	###
 	# grab certificates with cert bot 
 # Docs (as of 2021-12-31) https://eff-certbot.readthedocs.io/en/stable/using.html
-# TEST: certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain}
+# TEST: certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}
 # FORREAL: certbot certonly -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}
 	#########
-	# ALERT # Do not mix your domains on a virtual web server for certificats because it leakes all the domain namesi if they look at the cert
+	# ALERT # Do not mix your domains on a virtual web server for certificats because it leakes all the domain names if they look at the cert
 	#########
 	# Please put your .htpass file here: ${secrets}/${domain} for basic auth
 	
