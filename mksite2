@@ -45,8 +45,8 @@
 # *			ServerName :443 to the ssl default site /etc/apache2/sites-available/default-ssl.conf
 # *			Added warnings to the configs for sites created with this script
 # *
-# *
-# *
+# * 2022-01-05-000	Correct file name for certbot.notes and correct missing standard aliases
+# * 2022-01-05-001	Think about moving standard aliases to a defined stanza and look for a file to override it for a domain
 # *
 # *
 # * Certbot docs (as of 2021-12-31) https://eff-certbot.readthedocs.io/en/stable/using.html
@@ -229,7 +229,7 @@ echo "
     ServerAdmin webmaster@${domain}
     DocumentRoot ${web}/${domain}
     ServerName ${domain}
-    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain},db01.${domain},db02.${domain}
+    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain} db01.${domain} db02.${domain}
     ErrorLog \${APACHE_LOG_DIR}/${domain}/error.log
     CustomLog \${APACHE_LOG_DIR}/${domain}/access.log combined
     RewriteEngine On
@@ -289,7 +289,7 @@ echo "
     ServerAdmin webmaster@${domain}
     DocumentRoot ${web}/${domain}
     ServerName ${domain}
-    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain}
+    ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain} db01.${domain} db01.${domain}
     ErrorLog \${APACHE_LOG_DIR}/${domain}/ssl-error.log
     CustomLog \${APACHE_LOG_DIR}/${domain}/ssl-access.log combined
     SSLEngine on
@@ -432,7 +432,7 @@ Disallow: /DirectoriesNotToBeSearched/
 		</center></h1>
 " > ${web}/${domain}/error404.html
 	fi
-echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}" >> ~/cerbot.${domain}.notes
+echo "certbot certonly --dry-run -d ${domain},www.${domain},north.${domain},east.${domain},south.${domain},west.${domain},mail.${domain},db01.${domain},db02.${domain}" >> ~/certbot.${domain}.notes
 
 }
 
