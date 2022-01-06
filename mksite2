@@ -230,6 +230,7 @@ echo "
     DocumentRoot ${web}/${domain}
     ServerName ${domain}
     ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain} db01.${domain} db02.${domain}
+    LogLevel warn
     ErrorLog \${APACHE_LOG_DIR}/${domain}/error.log
     CustomLog \${APACHE_LOG_DIR}/${domain}/access.log combined
     RewriteEngine On
@@ -290,6 +291,7 @@ echo "
     DocumentRoot ${web}/${domain}
     ServerName ${domain}
     ServerAlias www.${domain} north.${domain} east.${domain} south.${domain} west.${domain} mail.${domain} db01.${domain} db01.${domain}
+    LogLevel warn
     ErrorLog \${APACHE_LOG_DIR}/${domain}/ssl-error.log
     CustomLog \${APACHE_LOG_DIR}/${domain}/ssl-access.log combined
     SSLEngine on
@@ -337,6 +339,7 @@ echo "
     ServerAdmin forgetit@example.com
     DocumentRoot /var/www/html/default
     ServerName :80
+    LogLevel warn
     ErrorLog \${APACHE_LOG_DIR}/default/error.log
     CustomLog \${APACHE_LOG_DIR}/default/access.log combined
     RewriteEngine On
@@ -362,6 +365,7 @@ echo "
     ServerAdmin forgetaboutit@example.com
     DocumentRoot /var/www/html/default
     ServerName :443
+    LogLevel warn
     ErrorLog \${APACHE_LOG_DIR}/default/ssl-error.log
     CustomLog \${APACHE_LOG_DIR}/default/ssl-access.log combined
     SSLEngine on
