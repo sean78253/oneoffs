@@ -49,6 +49,16 @@
 # * 2022-01-05-001	Think about moving standard aliases to a defined stanza and look for a file to override it for a domain
 # *
 # *
+# * 2022-01-07-000	Notes to check if a cert matches
+# * 			openssl x509 –noout –modulus –in <file>.crt | openssl md5
+# * 			openssl rsa –noout –modulus –in <file>.key | openssl md5
+# *
+# *
+# *
+# *
+# *
+# *
+# *
 # * Certbot docs (as of 2021-12-31) https://eff-certbot.readthedocs.io/en/stable/using.html
 # * self signed certs: (bad idea) https://www.baeldung.com/openssl-self-signed-cert
 # *********************************************************************
