@@ -170,13 +170,13 @@ true
 }
 
 
-###fuction install_tools()
+fuction install_tools()
 
-###{
+{
 
-###sudo apt install pwgen net-tools htop iptables-persistent www-browser xtables-addons-common
+sudo apt install pwgen net-tools htop iptables-persistent www-browser xtables-addons-common
 
-###}
+}
 
 function whichdistro()
 {
@@ -197,3 +197,4 @@ cat /etc/SuSE-release
 check_bash
 check_host
 move_ssh
+install_tools
