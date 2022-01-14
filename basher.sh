@@ -174,7 +174,7 @@ fuction install_tools()
 
 {
 
-sudo apt install pwgen net-tools htop iptables-persistent www-browser xtables-addons-common
+sudo apt install pwgen net-tools htop iptables-persistent lynx xtables-addons-common debconf-utils
 
 }
 

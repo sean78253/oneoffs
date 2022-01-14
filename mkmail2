@@ -109,14 +109,16 @@ chmod 600 ~/mkmail2.pass
 
 function debconfset()
 {
-debconf-set-selections $postfix stuff
+echo "mysql-server mysql-server/root_password password ${mypass}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password i${mypass}" | debconf-set-selections
+echo "postfix postfix/mailname string ${domain}" | debconf-set-selections
+echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
+# debconf-set-selections <<< "postfix postfix/mailname string ${domain}"
+# debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password' ${mypass}
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password' ${mypass}
-debconf-set-selections <<< "postfix postfix/mailname string ${domain}"
-debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
-
+# after install, run echo PURGE | debconf-communicate <package> to secure things and not leave landminds for unwary.
 }
+
 # ****************
 # * BODY OF WORK *
 # ****************
