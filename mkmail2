@@ -24,7 +24,7 @@
 # *********************************************************************
 # NOTES:
 # Keep in mind to abstract so that new ISPs can easily be added.
-#
+# useful postfix site: https://serverfault.com/questions/243638/automate-postfix-instalaltion-with-debconf-set-selections
 #
 #
 #
@@ -74,6 +74,39 @@ function hostme()
 
 }
 
+
+function passwords()
+{
+
+# passwords for MySQL
+domain=`uname -n`
+mypass=`pwgen 10 1`
+mymail=`pwgen 10 1`
+
+echo -"OK, I've got defaults for ya.
+Domain name is being set to: ${domain} for MySQL
+MySql root pass is:          ${mypass}
+user mailreader password is: ${mymail}"
+
+read -p "To change them, enter anything. To keep these, press enter" trash
+	if [ ! -z ${trash} ]
+	then
+		read -p "Mysql ROOT password: " mypass
+		read -p "mailreader account password: " mymail
+	else
+		read -p "Mysql ROOT password: " mypass
+		read -p "mailreader account password: " mymail
+	fi
+unset trash
+echo "Writing passwords to ~/mkmail2.pass"
+echo "
+msql root password: ${mypass}
+mailreader password ${mymail}
+" > ~/mkmail2.pass
+
+chmod 600 ~/mkmail2.pass
+}
+
 function debconfset()
 {
 debconf-set-selections $postfix stuff
@@ -89,7 +122,10 @@ debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Si
 # ****************
 
 hostme
+passwords
+debconfset
 
+exit 0
 
 # Catchall poison pill to stop fall throughs
 echo "ABORTING" ; exit 99
