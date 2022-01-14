@@ -8,6 +8,7 @@
 # *
 # * Revision list here:
 # * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
 # *********************************************************************
 # NOTES:
 #

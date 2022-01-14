@@ -8,11 +8,12 @@
 # *
 # * Revision list here:
 # * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITIALS HOURS in decimal format eg: 15 minutes is 0.25
 # * 2022-01-12-000	Adapt from mkmail 
 # *			reformat to maintainability format standards
-# *
-# *
-# *
+# *			HOURS: SWE 2.75
+# * 2022-01-13-000	Various updates
+# *			HOURS: SWE 0.75
 # *
 # *
 # *
@@ -25,7 +26,7 @@
 # NOTES:
 # Keep in mind to abstract so that new ISPs can easily be added.
 # useful postfix site: https://serverfault.com/questions/243638/automate-postfix-instalaltion-with-debconf-set-selections
-#
+# useful mysql site: https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 #
 #
 # *********************************************************************
