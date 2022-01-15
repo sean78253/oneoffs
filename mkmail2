@@ -94,9 +94,6 @@ read -p "To change them, enter anything. To keep these, press enter" trash
 	then
 		read -p "Mysql ROOT password: " mypass
 		read -p "mailreader account password: " mymail
-	else
-		read -p "Mysql ROOT password: " mypass
-		read -p "mailreader account password: " mymail
 	fi
 unset trash
 echo "Writing passwords to ~/mkmail2.pass"
