@@ -15,6 +15,15 @@
 # * 2022-01-13-000	Various updates
 # *			HOURS: SWE 0.75
 # *
+# * 2022-01-14-000	Various things
+# *			HOURS: SWE 1.50
+# *
+# *
+# *
+# *
+# *
+# *
+# *
 # *
 # *
 # *
@@ -31,8 +40,8 @@
 #
 # *********************************************************************
 # TO DO
-#
-#
+# do something with creating standard accounts with a new domain. EG:
+# abuse@ webmaster@ hostmaster@ postmaster@ admin@
 #
 #
 #
@@ -55,7 +64,7 @@ _MkMailLog='/var/log/mkmail/${_MkMailVer}'
 function hostme()
 {
 	domain=`uname -n`
-	read -p "Current hostname is ${domain} - if this is incorrect, enter new host name" newhost
+	read -p "Current hostname is ${domain} - if this is incorrect, enter new host name: " newhost
 		if [ ! -z ${newhost} ]
 		then
 			echo "Changing hostname to ${newhost}"
@@ -82,8 +91,8 @@ function passwords()
 # passwords for MySQL
 domain=`uname -n`
 mypass=`pwgen 10 1`
+myadmin=`pwgen 10 1`
 mymail=`pwgen 10 1`
-
 echo -"OK, I've got defaults for ya.
 Domain name is being set to: ${domain} for MySQL
 MySql root pass is:          ${mypass}
@@ -93,12 +102,19 @@ read -p "To change them, enter anything. To keep these, press enter" trash
 	if [ ! -z ${trash} ]
 	then
 		read -p "Mysql ROOT password: " mypass
+		read -p "Mysql mailadmin password" myadmin
 		read -p "mailreader account password: " mymail
 	fi
 unset trash
 echo "Writing passwords to ~/mkmail2.pass"
+if [ -f ~/mkmail2.pass ]
+	then
+	echo "backing up ~/mkmail2.pass to ~/mkmail2.pass.${_dte}"
+	cp ~/mkmail2.pass ~/mkmail2.pass.${_dte}
+	fi
 echo "
 msql root password: ${mypass}
+mailadmin password ${myadmin}
 mailreader password ${mymail}
 " > ~/mkmail2.pass
 
@@ -120,7 +136,7 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 # ****************
 # * BODY OF WORK *
 # ****************
-
+clear
 hostme
 passwords
 debconfset
