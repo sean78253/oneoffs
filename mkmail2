@@ -74,8 +74,11 @@ function hostme()
 			
 			hnc=`which hostnamectl`
 			if [ ! -z ${hnc} ]
-				then
-				hostnamectl set-hostname ${newhost}
+			then
+					hostnamectl set-hostname ${newhost}
+				else
+					echo "You'll need to adjust the hostname because hostnamectl isn't available"
+					echo "It's set for postfix, but the system might be wrong"
 			fi
 
 		else
@@ -96,14 +99,15 @@ mymail=`pwgen 10 1`
 echo -"OK, I've got defaults for ya.
 Domain name is being set to: ${domain} for MySQL
 MySql root pass is:          ${mypass}
-user mailreader password is: ${mymail}"
+user myadmin password is     ${myadmin}
+user mailuser password is: ${mymail}"
 
 read -p "To change them, enter anything. To keep these, press enter" trash
 	if [ ! -z ${trash} ]
 	then
 		read -p "Mysql ROOT password: " mypass
 		read -p "Mysql mailadmin password" myadmin
-		read -p "mailreader account password: " mymail
+		read -p "mailuser account password: " mymail
 	fi
 unset trash
 echo "Writing passwords to ~/mkmail2.pass"
@@ -113,9 +117,9 @@ if [ -f ~/mkmail2.pass ]
 	cp ~/mkmail2.pass ~/mkmail2.pass.${_dte}
 	fi
 echo "
-msql root password: ${mypass}
+msql-root password ${mypass}
 mailadmin password ${myadmin}
-mailreader password ${mymail}
+mailuser password ${mymail}
 " > ~/mkmail2.pass
 
 chmod 600 ~/mkmail2.pass
@@ -127,8 +131,6 @@ echo "mysql-server mysql-server/root_password password ${mypass}" | debconf-set-
 echo "mysql-server mysql-server/root_password_again password ${mypass}" | debconf-set-selections
 echo "postfix postfix/mailname string ${domain}" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
-# debconf-set-selections <<< "postfix postfix/mailname string ${domain}"
-# debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
 # after install, run echo PURGE | debconf-communicate <package> to secure things and not leave landminds for unwary.
 }
@@ -142,13 +144,3 @@ passwords
 debconfset
 # apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
 exit 0
-
-# Catchall poison pill to stop fall throughs
-echo "ABORTING" ; exit 99
-
-# sudo apt-get -y install mysql-serverdebconf-set-selections <<< "postfix postfix/main_mailer_type string Internet Site"
-# sudo apt-get install -y postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
-#
-#
-# from instructions
-# apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server

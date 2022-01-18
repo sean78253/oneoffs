@@ -49,7 +49,7 @@
 # *******************
 _dte=`date +%s`
 mailadminpassword=`cat ~/mkmail2.pass | grep 'mailadmin' | awk '{print $3}'`
-mailuserpassword=`cat ~/mkmail2.pass | grep 'mailuser' | awk '{print $3}'`
+mailuserpassword=`cat ~/mkmail2.pass | grep 'mailuseser' | awk '{print $3}'`
 
 # **********************
 # * RESOLVE VAR ISSUES *
@@ -67,7 +67,7 @@ echo "
 	CREATE USER 'mailuser'@'localhost' IDENTIFIED BY '${mailuserpassword}';
 	GRANT SELECT ON mailserver.* TO 'mailuser'@'localhost';
 	CREATE USER 'mailadmin'@'localhost' IDENTIFIED BY '${mailadminpassword}';
-	GRANT * ON mailserver.* TO 'mailadmin'@'localhost';
+	GRANT ALL ON mailserver.* TO 'mailadmin'@'localhost';
 	FLUSH PRIVILEGES;
 	USE mailserver;
 
@@ -97,7 +97,7 @@ echo "
 
 function populate_domains()
 {
-	echo "mysql -u mailreader -p${mailuserpassword}"
+	echo "mysql -u mailuser -p${mailuserpassword}"
  	while read domain id
  	do
 		if [ -z ${id} ]
