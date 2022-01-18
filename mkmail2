@@ -52,6 +52,9 @@ _dte=`date +%s`
 _MkMailVer='2.0'
 _MkMailLog='/var/log/mkmail/${_MkMailVer}'
 
+# We are going to limit special chars in passwords from pwgen to just these:
+_PWLIMIT=\"\@\?\^\&\*\(\)\:\~\?\;\:\[\]\{\}\.\,\\\/
+
 # **********************
 # * RESOLVE VAR ISSUES *
 # **********************
@@ -93,14 +96,18 @@ function passwords()
 
 # passwords for MySQL
 domain=`uname -n`
-mypass=`pwgen 10 1`
-myadmin=`pwgen 10 1`
-mymail=`pwgen 10 1`
-echo -"OK, I've got defaults for ya.
+mypass=`pwgen -sy 10 1 -r ${_PWLIMIT}`
+myadmin=`pwgen -sy 10 1 -r ${_PWLIMIT}`
+mymail=`pwgen -sy 10 1 -r ${_PWLIMIT}`
+echo -"
+
+OK, I've got defaults for ya.
 Domain name is being set to: ${domain} for MySQL
 MySql root pass is:          ${mypass}
 user myadmin password is     ${myadmin}
-user mailuser password is: ${mymail}"
+user mailuser password is:   ${mymail}
+
+"
 
 read -p "To change them, enter anything. To keep these, press enter" trash
 	if [ ! -z ${trash} ]

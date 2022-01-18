@@ -49,7 +49,7 @@
 # *******************
 _dte=`date +%s`
 mailadminpassword=`cat ~/mkmail2.pass | grep 'mailadmin' | awk '{print $3}'`
-mailuserpassword=`cat ~/mkmail2.pass | grep 'mailuseser' | awk '{print $3}'`
+mailuserpassword=`cat ~/mkmail2.pass | grep 'mailuser' | awk '{print $3}'`
 
 # **********************
 # * RESOLVE VAR ISSUES *
@@ -63,41 +63,22 @@ mailuserpassword=`cat ~/mkmail2.pass | grep 'mailuseser' | awk '{print $3}'`
 function create_database()
 {
 echo "
-	CREATE DATABASE IF NOT EXISTS mailserver;
-	CREATE USER 'mailuser'@'localhost' IDENTIFIED BY '${mailuserpassword}';
-	GRANT SELECT ON mailserver.* TO 'mailuser'@'localhost';
-	CREATE USER 'mailadmin'@'localhost' IDENTIFIED BY '${mailadminpassword}';
-	GRANT ALL ON mailserver.* TO 'mailadmin'@'localhost';
-	FLUSH PRIVILEGES;
-	USE mailserver;
-
-	CREATE TABLE IF NOT EXISTS \`virtual_domains\` ( 
-	\`id\` int NOT NULL auto_increment, 
-	\`name\` varchar(50) NOT NULL, 
-	PRIMARY KEY (\`id\`)
-	) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-	CREATE TABLE IF NOT EXISTS \`virtual_users\` (
-       	\`id\` int NOT NULL auto_increment,
-       	\`domain_id\` int NOT NULL, 
-	\`password\` varchar(106) NOT NULL,
-       	\`email\` varchar(100) NOT NULL,
-       	\`quota\` int NOT NULL DEFAULT 0, 
-	PRIMARY KEY (\`id\`), UNIQUE KEY \`email\` (\`email\`),
-       	FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-	CREATE TABLE IF NOT EXISTS \`virtual_aliases\` (
-       	\`id\` int NOT NULL auto_increment,
-       	\`domain_id\` int NOT NULL,
-       	\`source\` varchar(100) NOT NULL,
-       	\`destination\` varchar(100) NOT NULL,
-       	PRIMARY KEY (\`id\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+CREATE DATABASE IF NOT EXISTS mailserver;
+CREATE USER 'mailuser'@'localhost' IDENTIFIED BY '${mailuserpassword}';
+GRANT SELECT ON mailserver.* TO 'mailuser'@'localhost';
+CREATE USER 'mailadmin'@'localhost' IDENTIFIED BY '${mailadminpassword}';
+GRANT ALL ON mailserver.* TO 'mailadmin'@'localhost';
+FLUSH PRIVILEGES;
+USE mailserver;
+CREATE TABLE IF NOT EXISTS \`virtual_domains\` ( \`id\` int NOT NULL auto_increment, \`name\` varchar(50) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+CREATE TABLE IF NOT EXISTS \`virtual_users\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`password\` varchar(106) NOT NULL, \`email\` varchar(100) NOT NULL, \`quota\` int NOT NULL DEFAULT 0, PRIMARY KEY (\`id\`), UNIQUE KEY \`email\` (\`email\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+CREATE TABLE IF NOT EXISTS \`virtual_aliases\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`source\` varchar(100) NOT NULL, \`destination\` varchar(100) NOT NULL, PRIMARY KEY (\`id\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 "
 }
 
 function populate_domains()
 {
-	echo "mysql -u mailuser -p${mailuserpassword}"
+	echo "mysql -u mailadmin -p${mailadmin}"
  	while read domain id
  	do
 		if [ -z ${id} ]
@@ -105,6 +86,19 @@ function populate_domains()
  		echo "INSERT INTO mailserver.virtual_domains (name) VALUES ('${domain}');"
 		fi
  	done < ~/maildomains
+}
+
+function populate_users()
+{
+	true
+# insert into virtual_users (domain_id, password, email) values ((select id from virtual_domains where name = 'atcsrailfan.com'), TO_BASE64(UNHEX(SHA2('password', 512))), 'pooh@usersunion.com');
+}
+
+function populate_alias()
+{
+	true
+#	abuse@ webmaster@ hostmaster@ postmaster@
+# insert into mailserver.virtual_aliases (domain_id, source, destination) VALUES ('1', 'alias@example.com', 'user@example.com');
 }
 
 # ****************
