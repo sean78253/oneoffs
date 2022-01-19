@@ -73,25 +73,68 @@ USE mailserver;
 CREATE TABLE IF NOT EXISTS \`virtual_domains\` ( \`id\` int NOT NULL auto_increment, \`name\` varchar(50) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 CREATE TABLE IF NOT EXISTS \`virtual_users\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`password\` varchar(106) NOT NULL, \`email\` varchar(100) NOT NULL, \`quota\` int NOT NULL DEFAULT 0, PRIMARY KEY (\`id\`), UNIQUE KEY \`email\` (\`email\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 CREATE TABLE IF NOT EXISTS \`virtual_aliases\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`source\` varchar(100) NOT NULL, \`destination\` varchar(100) NOT NULL, PRIMARY KEY (\`id\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-"
+" > /tmp/swe
 }
 
 function populate_domains()
 {
-	echo "mysql -u mailadmin -p${mailadmin}"
  	while read domain id
  	do
 		if [ -z ${id} ]
 	       	then
  		echo "INSERT INTO mailserver.virtual_domains (name) VALUES ('${domain}');"
 		fi
- 	done < ~/maildomains
+ 	done < ~/maildomains >> /tmp/swe
+# select domains with no accounts: should be no admin accounts
+# select name from virtual_domains where id not in (select domain_id from virtual_users);
+
 }
 
 function populate_users()
 {
 	true
-# insert into virtual_users (domain_id, password, email) values ((select id from virtual_domains where name = 'atcsrailfan.com'), TO_BASE64(UNHEX(SHA2('password', 512))), 'pooh@usersunion.com');
+while read acct quota apass
+do
+	edomain=`echo $acct | sed 's/@/ /' | awk '{print $2}'`
+	if [ -z ${quota} ]
+	then
+		quota=0
+	fi
+	if [ -z ${apass} ]
+	then
+		apass=`pwgen 10 1`
+	fi
+echo "insert into mailserver.virtual_users (domain_id, password, email, quota) values ((select id from virtual_domains where name = '${edomain}'), TO_BASE64(UNHEX(SHA2('${apass}', 512))), '${acct}', ${quota});"
+	quota='' apass=''
+done < ~/mailaccounts >> /tmp/swe
+echo -e "\n\n**********"
+echo "* NOTE!! *"
+echo "**********"
+echo -e "\nIf you have not yet created an admin@(domainname_here) you should. Here's the SQL for that:\n"
+
+}
+
+function rfcaccounts()
+{
+# while read a b; do echo $a | sed 's/@/ /'; done < mailaccounts | awk '{print $2}' | sort | uniq | xargs
+# clear
+echo "I can set up your RFC required accounts if you like. Enter the password for the administrative email accout"
+echo -e "Do not worry - if it is already there, it won't change a thing.\n"
+admdomain=`while read admaccount trash; do echo ${admaccount} | sed 's/@/ /'; done < ~/mailaccounts | awk '{print $2}' | sort | uniq | xargs`
+
+for admact in ${admdomain}
+do
+read -p "       Please input a password for the admin@${admdomain}:" admdomainpass
+
+echo "
+insert ignore into mailserver.virtual_users (domain_id, password, email) values ((select id from virtual_domains where name = '${admact}'), TO_BASE64(UNHEX(SHA2('${admdomainpass}', 512))), 'admin@${admact}');
+INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ((select id from virtual_domains where name = '${admact}'), 'abuse@${admact}', 'admin@${admact}');
+INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ((select id from virtual_domains where name = '${admact}'), 'postmaster@${admact}', 'admin@${admact}');
+INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ((select id from virtual_domains where name = '${admact}'), 'hostmaster@${admact}', 'admin@${admact}');
+INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ((select id from virtual_domains where name = '${admact}'), 'webmaster@${admact}', 'admin@${admact}');
+" >> /tmp/swe
+done
+
 }
 
 function populate_alias()
@@ -107,4 +150,7 @@ function populate_alias()
 
 create_database
 populate_domains
+populate_users
+rfcaccounts
 
+exit 0
