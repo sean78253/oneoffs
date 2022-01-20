@@ -26,8 +26,17 @@
 # * 2022-01-15-001	Start with adding a control table for virtual domains and users for imports
 # * 2022-01-15-001	HOURS: SWE 1.50
 # 
-# * 2022-01-16-000	Add mailadmin accout - add to mkmail2.sh
+# * 2022-01-16-000	Add mailadmin accout - add to mkmail.sh
 # * 2022-01-16-000	HOURS: SWE 0.25
+# *
+# * 2022-01-20-000	clean up, change not allowed for pwgen, change some table logic
+# * 2022-01-20-000	HOURS: SWE 3.0
+# *
+# *
+# *
+# *
+# *
+# *
 # *
 # *
 # *********************************************************************
@@ -54,9 +63,9 @@ _dte=`date +%s`
 _PWLIMIT=\@\?\&\:\?\;\:\[\]\{\}\.\,\'\%\"\*\(\)\\\/
 
 # the mailadmin user has full rights to mailserver.* tables
-mailadminpassword=`cat ~/mkmail2.pass | grep 'mailadmin' | awk '{print $3}'`
+mailadminpassword=`cat ~/mkmail.pass | grep 'mailadmin' | awk '{print $3}'`
 # the mailuser has only select rights on mailserver.* and I may make it only on virtual_user, virtual_aliases and virtual_domain tables
-mailuserpassword=`cat ~/mkmail2.pass | grep 'mailuser' | awk '{print $3}'`
+mailuserpassword=`cat ~/mkmail.pass | grep 'mailuser' | awk '{print $3}'`
 
 # **********************
 # * RESOLVE VAR ISSUES *
@@ -80,7 +89,7 @@ USE mailserver;
 CREATE TABLE IF NOT EXISTS \`virtual_domains\` ( \`id\` int NOT NULL auto_increment, \`name\` varchar(50) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 CREATE TABLE IF NOT EXISTS \`virtual_users\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`password\` varchar(106) NOT NULL, \`email\` varchar(100) NOT NULL, \`quota\` int NOT NULL DEFAULT 0, PRIMARY KEY (\`id\`), UNIQUE KEY \`email\` (\`email\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 CREATE TABLE IF NOT EXISTS \`virtual_aliases\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`source\` varchar(100) NOT NULL, \`destination\` varchar(100) NOT NULL, PRIMARY KEY (\`id\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-" > /tmp/swe
+" > ~/make_email.sql
 }
 
 function populate_domains()
@@ -91,7 +100,7 @@ function populate_domains()
 	       	then
  		echo "INSERT INTO mailserver.virtual_domains (name) VALUES ('${domain}');"
 		fi
- 	done < ~/maildomains >> /tmp/swe
+ 	done < ~/maildomains >> ~/make_email.sql
 # select domains with no accounts: should be no admin accounts
 # select name from virtual_domains where id not in (select domain_id from virtual_users);
 
@@ -112,7 +121,7 @@ do
 	fi
 echo "insert into mailserver.virtual_users (domain_id, password, email, quota) values ((select id from virtual_domains where name = '${edomain}'), TO_BASE64(UNHEX(SHA2('${apass}', 512))), '${acct}', ${quota});"
 	quota='' apass=''
-done < ~/mailaccounts >> /tmp/swe
+done < ~/mailaccounts >> ~/make_email.sql
 }
 
 function rfcaccounts()
@@ -129,8 +138,8 @@ INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) V
 INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ((select id from virtual_domains where name = '${domain}'), 'postmaster@${domain}', 'admin@${domain}'); 
 INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ((select id from virtual_domains where name = '${domain}'), 'hostmaster@${domain}', 'admin@${domain}');
 INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ((select id from virtual_domains where name = '${domain}'), 'webmaster@${domain}', 'admin@${domain}');
-" >> /tmp/swe
-done < ~/maildomains >> ~/admacctpass
+" >> ~/make_email.sql
+done < ~/maildomains 
 }
 
 # ****************
@@ -141,5 +150,6 @@ create_database
 populate_domains
 rfcaccounts
 populate_users
-
+echo "Now log into mysql with your root password and run source ~/make_email.sql
+Remember to delete this file and the ~/mkemail.pass file as they have passwords in them."
 exit 0
