@@ -21,8 +21,8 @@
 # * 2022-01-20-000	table logic change, update not allowed chars for pwgen
 # * 2022-01-20-000	HOURS: SWE 3.50
 # *
-# *
-# *
+# * 2022-01-21-000	Setup domain directories for Dovecot
+# *			HOURS: SWE 0.75
 # *
 # *
 # *
@@ -118,18 +118,18 @@ read -p "To change them, enter anything. To keep these, press enter" trash
 	fi
 unset trash
 echo "Writing passwords to ~/mkmail2.pass"
-if [ -f ~/mkmail.pass ]
+if [ -f ~/mkmail2.pass ]
 	then
 	echo "backing up ~/mkmail2.pass to ~/mkmail2.pass.${_dte}"
-	cp ~/mkmail.pass ~/mkmail.pass.${_dte}
+	cp ~/mkmail2.pass ~/mkmail2.pass.${_dte}
 	fi
 echo "
 msql-root password ${mypass}
 mailadmin password ${myadmin}
 mailuser password ${mymail}
-" > ~/mkmail.pass
+" > ~/mkmail2.pass
 
-chmod 600 ~/mkmail.pass
+chmod 600 ~/mkmail2.pass
 }
 
 function debconfset()

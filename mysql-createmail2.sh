@@ -32,6 +32,16 @@
 # * 2022-01-20-000	clean up, change not allowed for pwgen, change some table logic
 # * 2022-01-20-000	HOURS: SWE 3.0
 # *
+# * 2022-01-21-000	Add debconf purge logic
+# *
+# *
+# *
+# *
+# *
+# *
+# *
+# *
+# *
 # *
 # *
 # *
@@ -63,9 +73,9 @@ _dte=`date +%s`
 _PWLIMIT=\@\?\&\:\?\;\:\[\]\{\}\.\,\'\%\"\*\(\)\\\/
 
 # the mailadmin user has full rights to mailserver.* tables
-mailadminpassword=`cat ~/mkmail.pass | grep 'mailadmin' | awk '{print $3}'`
+mailadminpassword=`cat ~/mkmail2.pass | grep 'mailadmin' | awk '{print $3}'`
 # the mailuser has only select rights on mailserver.* and I may make it only on virtual_user, virtual_aliases and virtual_domain tables
-mailuserpassword=`cat ~/mkmail.pass | grep 'mailuser' | awk '{print $3}'`
+mailuserpassword=`cat ~/mkmail2.pass | grep 'mailuser' | awk '{print $3}'`
 
 # **********************
 # * RESOLVE VAR ISSUES *
@@ -142,6 +152,37 @@ INSERT ignore INTO mailserver.virtual_aliases (domain_id, source, destination) V
 done < ~/maildomains 
 }
 
+function cleandevconf()
+{
+echo PURGE | debconf-communicate mysql-server
+echo PURGE | debconf-communicate postfix
+}
+
+function crdc()
+{
+	# Create directories for virtual domains using dovecot
+havegrp=`grep vmail /etc/group`
+haveusr=`grep vmail /etc/passwd`
+if [ -z ${havegrp} ]
+then
+	echo "Needs group"
+	groupadd -g 5000 vmail
+fi
+
+if [ -z ${haveusr} ]
+then
+	echo "Needs user"
+	useradd -g vmail -u 5000 vmail -d /var/mail --shell /usr/bin/false
+fi
+
+while read domain
+do
+	mkdir -p /var/mail/vhosts/${domain}
+done
+chown -R vmail:vmail /var/mail
+}
+
+
 # ****************
 # * BODY OF WORK *
 # ****************
@@ -150,6 +191,9 @@ create_database
 populate_domains
 rfcaccounts
 populate_users
+crdc
+cleandevconf
+
 echo "Now log into mysql with your root password and run source ~/make_email.sql
-Remember to delete this file and the ~/mkemail.pass file as they have passwords in them."
+Remember to delete ~/make_emai.sql and the ~/mkemail.pass file as they have passwords in them."
 exit 0
