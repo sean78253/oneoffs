@@ -178,7 +178,7 @@ fi
 while read domain
 do
 	mkdir -p /var/mail/vhosts/${domain}
-done
+done < ~/maildomains
 chown -R vmail:vmail /var/mail
 }
 
