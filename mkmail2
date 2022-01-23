@@ -139,6 +139,48 @@ echo "mysql-server mysql-server/root_password_again password ${mypass}" | debcon
 echo "postfix postfix/mailname string ${domain}" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
 
+if [ ! -f /usr/local/bin/mail-disable-it ]
+then
+	echo "systemctl stop postfix
+systemctl stop dovecot
+systemctl stop mysql
+systemctl disable postfix
+systemctl disable dovecot
+systemctl disable mysql
+" > /usr/local/bin/mail-disable-it
+chmod 755 /usr/local/bin/mail-disable-it
+fi
+
+if [ ! -f /usr/local/bin/mail-enable-it ]
+then
+	echo "systemctl start postfix
+systemctl start dovecot
+systemctl start mysql
+systemctl enable postfix
+systemctl enable dovecot
+systemctl enable mysql
+" > /usr/local/bin/mail-enable-it
+chmod 755 /usr/local/bin/mail-enable-it
+fi
+
+if [ ! -f /usr/local/bin/mail-start-it ]
+then
+	echo "systemctl start postfix
+systemctl start dovecot
+systemctl start mysql
+" > /usr/local/bin/mail-start-it
+chmod 755 /usr/local/bin/mail-start-it
+fi
+
+if [ ! -f /usr/local/bin/mail-stop-it ]
+then
+	echo "systemctl stop postfix
+systemctl stop dovecot
+systemctl stop mysql
+" > /usr/local/bin/mail-stop-it
+chmod 755 /usr/local/bin/mail-stop-it
+fi
+
 # after install, run echo PURGE | debconf-communicate <package> to secure things and not leave landminds for unwary.
 }
 
@@ -146,8 +188,13 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 # * BODY OF WORK *
 # ****************
 clear
-hostme
-passwords
+# hostme
+# passwords
 debconfset
-# apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
+echo "OK, now run:
+apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
+then run
+echo PURGE | debconf-communicate mysql-server
+echo PURGE | debconf-communicate postfix
+"
 exit 0
