@@ -170,7 +170,7 @@ true
 }
 
 
-fuction install_tools()
+function install_tools()
 
 {
 
