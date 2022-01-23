@@ -190,6 +190,18 @@ cat /etc/lsb-release
 cat /etc/gentoo-release
 cat /etc/SuSE-release
 }
+
+function gitconfig()
+{
+if [ ! -f ~/.gitconfig ]
+then
+echo "[user]
+# Please adapt and uncomment the following lines:
+	name = sean78253
+	email = sean_e6@yahoo.com"
+" > ~/.gitconfig
+fi
+}
 ################
 ##### WORK #####
 ################
@@ -197,4 +209,5 @@ cat /etc/SuSE-release
 check_bash
 check_host
 move_ssh
+gitconfig
 install_tools
