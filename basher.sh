@@ -198,7 +198,7 @@ then
 echo "[user]
 # Please adapt and uncomment the following lines:
 	name = sean78253
-	email = sean_e6@yahoo.com"
+	email = sean_e6@yahoo.com
 " > ~/.gitconfig
 fi
 }
