@@ -182,6 +182,34 @@ done < ~/maildomains
 chown -R vmail:vmail /var/mail
 }
 
+function postfixmaps()
+{
+
+echo "user = mailuser
+password = ${mailuserpassword}
+hosts = 127.0.0.1
+dbname = mailserver
+query = SELECT 1 FROM virtual_domains WHERE name='%s'" > /etc/postfix/mysql-virtual-mailbox-domains.cf
+
+echo "user = mailuser
+password = ${mailuserpassword}
+hosts = 127.0.0.1
+dbname = mailserver
+query = SELECT 1 FROM virtual_users WHERE email='%s'" > /etc/postfix/mysql-virtual-mailbox-maps.cf
+
+echo "user = mailuser
+password = ${mailuserpassword}
+hosts = 127.0.0.1
+dbname = mailserver
+query = SELECT destination FROM virtual_aliases WHERE source='%s'" > /etc/postfix/mysql-virtual-alias-maps.cf
+
+echo "user = mailuser
+password = ${mailuserpassword}
+hosts = 127.0.0.1
+dbname = mailserver
+query = SELECT email FROM virtual_users WHERE email='%s'" > /etc/postfix/mysql-virtual-email2email.cf
+}
+
 
 # ****************
 # * BODY OF WORK *
@@ -193,7 +221,9 @@ rfcaccounts
 populate_users
 crdc
 cleandevconf
+postfixmaps
 
 echo "Now log into mysql with your root password and run source ~/make_email.sql
-Remember to delete ~/make_emai.sql and the ~/mkemail.pass file as they have passwords in them."
+Remember to delete ~/make_emai.sql and the ~/mkemail.pass file as they have passwords in them.
+Remember that /etc/dovecot/dovecot-sql.conf.ext will need the password set"
 exit 0

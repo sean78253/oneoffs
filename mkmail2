@@ -53,7 +53,7 @@ _MkMailVer='2.0'
 _MkMailLog='/var/log/mkmail/${_MkMailVer}'
 
 # We are going to limit special chars in passwords from pwgen to not allow:
-_PWLIMIT=\@\?\^\&\:\~\?\;\:\[\]\{\}\.\,\'\%\"\*\(\)\\\/
+_PWLIMIT=\&\:\~\?\;\:\[\]\{\}\.\'\%\"\*\(\)\\\/\|
 
 # **********************
 # * RESOLVE VAR ISSUES *
@@ -188,8 +188,8 @@ fi
 # * BODY OF WORK *
 # ****************
 clear
-# hostme
-# passwords
+hostme
+passwords
 debconfset
 echo "OK, now run:
 apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
