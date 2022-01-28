@@ -401,14 +401,18 @@ function defaultfiles()
 {
 	if [ ! -f ${web}/${domain}/index.html ]
 	then
-		echo "
-<!doctype html>
+		echo "<!doctype html>
 <html>
   <head>
-    <title>Welcome to ${domain}</title>
+    <title>Welcome to usersunion.net</title>
   </head>
   <body>
-    <p><center><H1>Hello!</H1><BR>As you can see, we are setting up our server ${domain}</p>
+    <p><center><H1>Hello!</H1><BR>As you can see, we are setting up our server</p>
+    <h3 id="sitename">[Current URL Here]</h3>
+    <SCRIPT LANGUAGE="JavaScript">
+   document.getElementById('sitename').innerHTML = window.location.href;
+</SCRIPT>
+
   </body>
 </html>
 " > ${web}/${domain}/index.html
