@@ -1,0 +1,79 @@
+if [ ! -f ~/.email-pass ]; then
+	echo "[client]
+user=your-sql-user
+password=your-sql-user-password" > ~/.email-pass
+chmod 600 ~/.email-pass
+	echo "Please update ~/.email-pass with correct credentials."
+	echo "You are going to have problems until this is fixed"
+	exit 83
+fi
+
+# Load up variables
+if [ $# -eq 2 ]; then
+	email=`echo $1 | tr '[:upper:]' '[:lower:]'`
+	password1=$2
+	domain=`echo ${email} | awk -F'@' '{print $2}'`
+else
+	echo "Need the email addres and password"
+fi
+
+# Check Domain
+	domid=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+	select id from mailserver.virtual_domains where name = '${domain}';
+	EOF`
+	if [ ! -z ${domid} ]; then
+		true
+		#create domain
+		#create /var/mail/vhost/${domain}
+		#chmod  /var/mail/vhost/${domain}
+		#Add admin@domain and RFC users
+	fi
+# Check User
+
+	actid=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+	select id from mailserver.virtual_users where email = '${email}';
+	EOF`
+	if [ ! -z ${actid} ]; then
+        	echo "Sorry, username in use, use change or delete";
+        	exit 80
+	fi
+
+# Add user
+res=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+update mailserver.virtual_users set password = TO_BASE64(UNHEX(SHA2('${password1}', 512))) where id = '${actid}';
+EOF`
+echo "User added"
+exit 0
+
+exit 100
+
+####################################################################################################
+# STOP HERE - Reformting to come.
+
+read -p "Enter email address to change password: " email
+actid=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+select id from mailserver.virtual_users where email = '${email}';
+EOF`
+
+if [ -z ${actid} ]
+then
+	echo "Sorry, bad username";
+	exit 80
+fi
+
+echo ${actid}
+
+read -s -p "Please enter new password for ${email}: " password1
+echo ""
+read -s -p "Please re-enter new password for ${email}: " password2
+echo ""
+if [ ${password1} != ${password2} ]
+then
+	echo "Passwords must match and not be empty"
+	exit 99
+fi
+
+res=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+update mailserver.virtual_users set password = TO_BASE64(UNHEX(SHA2('${password1}', 512))) where id = '${actid}';
+EOF`
+echo "Password for account ${email} changed"

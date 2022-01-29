@@ -1,0 +1,46 @@
+#!/bin/bash
+if [ ! -f ~/.email-pass ];then
+	echo "[client]
+	user=your-sql-user
+	password=your-sql-user-password" > ~/.email-pass
+	chmod 600 ~/.email-pass
+	echo "Please update ~/.email-pass with correct credentials for the MySQL user."
+	echo "You are going to have problems until this is fixed"
+	exit 83
+fi
+
+if [ $# -eq 1 ]; then
+	email=$1
+actid=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+select id from mailserver.virtual_users where email = '${email}';
+EOF`
+	if [ -z ${actid} ]
+	then
+        	echo "Sorry, bad username";
+        	exit 80
+	fi
+res=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+delete from mailserver.virtual_users where id = '${actid}';
+delete from mailserver.virtual_aliases where destination = '${email}';
+EOF`
+echo "Account ${email} deleted."
+exit 0
+fi
+
+
+read -p "Enter email address to delete: " email
+actid=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+select id from mailserver.virtual_users where email = '${email}';
+EOF`
+
+if [ -z ${actid} ]
+then
+	echo "Sorry, bad username";
+	exit 80
+fi
+
+res=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
+delete from mailserver.virtual_users where id = '${actid}';
+delete from mailserver.virtual_aliases where destination = '${email}';
+EOF`
+echo "Account ${email} deleted"
