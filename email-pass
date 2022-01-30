@@ -1,3 +1,11 @@
+#!/bin/bash
+
+if [ $# -eq 2 ]; then
+        email=$1
+        password1=$2
+fi
+function check_preq()
+{
 if [ ! -f ~/.email-pass ];then
 	echo "[client]
 	user=your-sql-user
@@ -7,13 +15,15 @@ if [ ! -f ~/.email-pass ];then
 	echo "You are going to have problems until this is fixed"
 	exit 83
 fi
+}
 
-if [ $# -eq 2 ]; then
-	email=$1
-	password1=$2
+function change_account()
+
+{
 actid=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
 select id from mailserver.virtual_users where email = '${email}';
 EOF`
+
 	if [ -z ${actid} ]
 	then
         	echo "Sorry, bad username";
@@ -23,10 +33,11 @@ res=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
 update mailserver.virtual_users set password = TO_BASE64(UNHEX(SHA2('${password1}', 512))) where id = '${actid}';
 EOF`
 echo "Password changed"
-exit 0
-fi
+# exit 0
+}
 
-
+function manual_change()
+{
 read -p "Enter email address to change password: " email
 actid=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
 select id from mailserver.virtual_users where email = '${email}';
@@ -54,3 +65,16 @@ res=`mysql --defaults-extra-file=~/.email-pass -N <<EOF
 update mailserver.virtual_users set password = TO_BASE64(UNHEX(SHA2('${password1}', 512))) where id = '${actid}';
 EOF`
 echo "Password for account ${email} changed"
+}
+# ***********
+# * W O R K *
+# ***********
+
+check_preq
+
+if [ -z ${password1} ]; then
+	manual_change
+else
+	change_account
+fi
+
