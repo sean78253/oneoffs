@@ -1,0 +1,3 @@
+#!/bin/bash
+#make a copy of a file with the epoc appened.
+cp $1 $1.`date +%s`
