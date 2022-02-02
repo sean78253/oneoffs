@@ -70,7 +70,7 @@ _dte=`date +%s`
 
 # _PWLIMIT are charecters we will not permit pwgen to use in the SQL mailserver.virtual_user database does not apply to mysql.user at this time
 # _PWLIMIT=\@\?\^\&\:\~\?\;\:\[\]\{\}\.\,
-_PWLIMIT=\@\?\&\:\?\;\:\[\]\{\}\.\,\'\%\"\*\(\)\\\/
+_PWLIMIT=\@\?\&\:\?\;\:\[\]\{\}\.\,\'\%\"\*\(\)\\\/\<\>
 
 # the mailadmin user has full rights to mailserver.* tables
 mailadminpassword=`cat ~/mkmail2.pass | grep 'mailadmin' | awk '{print $3}'`
@@ -98,7 +98,7 @@ FLUSH PRIVILEGES;
 USE mailserver;
 CREATE TABLE IF NOT EXISTS \`virtual_domains\` ( \`id\` int NOT NULL auto_increment, \`name\` varchar(50) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 CREATE TABLE IF NOT EXISTS \`virtual_users\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`password\` varchar(106) NOT NULL, \`email\` varchar(100) NOT NULL, \`quota\` int NOT NULL DEFAULT 0, PRIMARY KEY (\`id\`), UNIQUE KEY \`email\` (\`email\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-CREATE TABLE IF NOT EXISTS \`virtual_aliases\` ( \`id\` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`source\` varchar(100) NOT NULL, \`destination\` varchar(100) NOT NULL, PRIMARY KEY (\`id\`), FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+CREATE TABLE IF NOT EXISTS `virtual_aliases` ( `id` int NOT NULL auto_increment, \`domain_id\` int NOT NULL, \`source\` varchar(100) NOT NULL, \`destination\` varchar(100) NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (destination) REFERENCES virtual_users(email) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 " > ~/make_email.sql
 }
 
