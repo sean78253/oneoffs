@@ -174,6 +174,8 @@ function install_tools()
 
 {
 
+sudo apt update
+sudo apt -y upgrade
 sudo apt install pwgen net-tools htop iptables-persistent lynx xtables-addons-common debconf-utils
 
 }
