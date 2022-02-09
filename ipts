@@ -1,0 +1,53 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+
+# *************
+# * FUNCTIONS *
+# *************
+
+
+
+# ****************
+# * BODY OF WORK *
+# ****************
+iptables-save | grep '^-A INPUT -s' | awk '{print $4}' | sort -nr | uniq > /etc/iptables/swe
+iptables --flush
+while read a
+do
+	mkfire $a
+done < /etc/iptables/swe
+cp /etc/iptables/rules.v4 /etc/iptables/rules.v4.${_dte}
+iptables-save > /etc/iptables/rules.v4
