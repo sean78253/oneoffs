@@ -176,7 +176,7 @@ function install_tools()
 
 sudo apt update
 sudo apt -y upgrade
-sudo apt install pwgen net-tools htop iptables-persistent lynx xtables-addons-common debconf-utils
+sudo apt install pwgen net-tools htop iptables-persistent lynx xtables-addons-common debconf-utils cpuid curl gpg
 
 }
 
