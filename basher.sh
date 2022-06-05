@@ -58,6 +58,7 @@ BASHMODSWE="true"
 # https://github.com/sean78253/fsmod.git
 # https://github.com/sean78253/oneoffs.git
 # https://github.com/sean78253/blocklists.git
+# sshfs -p 4822 root@unfoxthecablebox.com:/root /home/sean/rmtmnt
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
