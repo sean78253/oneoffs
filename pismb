@@ -1,0 +1,78 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+# https://pimylifeup.com/raspberry-pi-samba/
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+_hwscope="raspberrypi"
+_osscope="deb"
+
+# *************************
+# * RESOLVE PREREQUISITES *
+# *************************
+
+# ****************
+# * ANTI-CLOBBER *
+# ****************
+
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function startcheck()
+{
+clear
+echo "**** This script is to set up SMB share insecurely for local access ***"
+read -p "Enter to proceed, ^C to stop" trash
+}
+
+function startok()
+{
+apt update
+apt upgrade -y
+apt install -y samba samba-common-bin
+mkdir /home/pi/shared
+chmod -R 777 /home/pi/shared
+echo "[pimylifeupshare]
+path = /home/pi/shared
+writeable=Yes
+create mask=0777
+directory mask=0777
+public=no" >> /etc/samba/smb.conf
+}
+
+
+# ****************
+# * BODY OF WORK *
+# ****************
+
