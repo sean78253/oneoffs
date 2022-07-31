@@ -14,8 +14,11 @@
 # NOTES:
 # varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
 # https://pimylifeup.com/raspberry-pi-samba/
-#
-#
+# power off USB ports: 
+# https://core-electronics.com.au/guides/disable-features-raspberry-pi/
+# https://stackoverflow.com/questions/67101183/powering-the-usb-ports-on-and-off-using-cron-on-the-raspberry-pi-3
+# https://raspberrypi.stackexchange.com/questions/5407/how-can-i-cut-power-coming-out-of-the-pis-usb-ports
+# https://github.com/mvp/uhubctl
 #
 # *********************************************************************
 # TODOS
