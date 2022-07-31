@@ -45,9 +45,13 @@ _dte=`date +%s`
 # ****************
 iptables-save | grep '^-A INPUT -s' | awk '{print $4}' | sort -nr | uniq > /etc/iptables/swe
 iptables --flush
+iptables -N LOG_AND_DROP 
+iptables -A LOG_AND_DROP -j LOG --log-prefix "Source host denied " 
+iptables -A LOG_AND_DROP -j DROP
+
 while read a
 do
-	mkfire $a
+iptables -I INPUT -s $a -j LOG_AND_DROP
 done < /etc/iptables/swe
 cp /etc/iptables/rules.v4 /etc/iptables/rules.v4.${_dte}
-iptables-save > /etc/iptables/rules.v4
+# iptables-save > /etc/iptables/rules.v4
