@@ -1,0 +1,16 @@
+echo "HISTSIZE=-1
+HISTFILESIZE=-1
+export EDITOR=vi" >> .bashrc
+mkdir .ssh
+chmod 700 .ssh
+cd .ssh
+scp -P 4822 root@mygeekisp.com:/root/.ssh/id_* . && cat id*.pub > authorized_keys
+cd
+sudo apt-get remove --purge libreoffice* rythembox vlc
+sudo apt-get clean
+sudo apt-get autoremove
+sudo apt update
+sudo apt upgrade -y
+sudo ln -s /usr/lib/systemd/system/vncserver-x11-serviced.service /etc/systemd/system/multi-user.target.wants/vncserver-x11-serviced.service
+sudo systemctl start vncserver-x11-serviced
+
