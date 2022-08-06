@@ -180,7 +180,18 @@ function install_tools()
 
 sudo apt update
 sudo apt -y upgrade
-sudo apt install pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs
+for trg in pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs visudo gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs
+do
+	apt install -y $trg
+	rslt=$?
+	if [ ${rslt} -ne 0 ]
+	then
+		echo "$trg was not located in the respository and therefore not installed"
+		read -p "Press <ENTER> to continue"
+	fi
+
+done; unset trg rslt
+
 # For typcial desk top or personal servers
 # sudo apt install libcdio-utils
 }
