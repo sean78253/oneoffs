@@ -180,7 +180,7 @@ function install_tools()
 
 sudo apt update
 sudo apt -y upgrade
-sudo apt install pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs visudo
+sudo apt install pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs
 # For typcial desk top or personal servers
 # sudo apt install libcdio-utils
 }
