@@ -180,14 +180,14 @@ function install_tools()
 
 sudo apt update
 sudo apt -y upgrade
-for trg in pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs visudo gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs
+for trg in pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs visudo gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim
 do
 	apt install -y $trg
 	rslt=$?
 	if [ ${rslt} -ne 0 ]
 	then
 		echo "$trg was not located in the respository and therefore not installed"
-		read -p "Press <ENTER> to continue"
+		read -p "Press <ENTER> to continue" -t 10
 	fi
 
 done; unset trg rslt
@@ -220,6 +220,14 @@ echo "[user]
 " > ~/.gitconfig
 fi
 }
+
+function locali()
+{
+echo " BASHER ALIASES
+alias fmnt='findmnt -D -t nosquashfs,notmpfs,nodevtmpfs,notracefs'
+" >> ~/.bash_aliases
+}
+
 ################
 ##### WORK #####
 ################
