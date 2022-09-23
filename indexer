@@ -1,0 +1,19 @@
+#!/bin/bash
+# pth is the path to our stuff
+pth=`pwd`
+# rt is referer target, usually either HTTP(S):// or FILE://
+rt="file://"
+# trg is our target for opening in a new tab or window, leave null to open in the current
+# trg=''
+# trg='target="_blank" rel="noopener noreferrer"'
+trg='target="_blank" rel="noopener noreferrer"'
+#<p>Check out <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer">freeCodeCamp</a>.</p>
+
+for i in `ls -c1 *.jpg`
+do
+# echo "<a href=\"file:///home/sean/temp/orig/$i\"><img src=\"file:///home/sean/temp/orig/$i\" width=\"20%\" height=\"30%\"></a>"
+# echo "<a href=\"file://${pth}/$i\">_<img src=\"file://${pth}/$i\" width=\"18%\" height=\"30%\"></a>"
+# echo "<a href=\"${rt}${pth}/$i\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"${rt}${pth}/$i\" width=\"18%\" height=\"30%\"></a>"
+echo "<a href=\"${rt}${pth}/$i\" ${trg}><img src=\"${rt}${pth}/$i\" width=\"18%\" height=\"30%\"></a>"
+done
+
