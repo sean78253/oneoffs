@@ -1,6 +1,73 @@
-# General Linux use
-# Quick, easy way to create SSH keys
+#!/bin/bash
+#
+#
+#
+# *********************************************************************
+# *
+# * <NAME> <INITALS>
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *
+# * 2022-11-02-000	Update to new format, remove outdated shell calls
+# * 2022-11-02-000	SWE 0.45
+# *
+# *
+# *
+# *
+# *
+# *
+# *
+# *
+# *
+# *
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+# Update for other than RSA keys
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date -u +%Y%m%d`
+# _kylgn=1024
+# _kylgn=2048
+_kylgn=4196
+# _kylgn=8192
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+# *************
+# * FUNCTIONS *
+# *************
+
+# ****************
+# * BODY OF WORK *
+# ****************
+
 read -p "Who is this key for?: " fr
-echo -n 'Enter your email address: '; \
-    read E; env E=$E D=$(date +%Y%m%d) \
-sh -c 'ssh-keygen -trsa -b4096 -C"$E-$D" -f ~/.ssh/id_rsa${fr}-$E-$D'
+
+E=""
+read -p "Enter Email: " E
+if [ -z $E ]
+then
+	E="NoEmail"
+fi
+
+ssh-keygen -trsa -b${_kylgn} -C"${fr}-$E-${_dte}" -f ~/.ssh/id_rsa-${fr}-$E-${_dte}
