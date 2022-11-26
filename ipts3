@@ -1,0 +1,60 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+# iptables-save | grep "\-A INPUT \-s" | grep REJECT | awk '{print $4}' 
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+
+# *************
+# * FUNCTIONS *
+# *************
+
+
+
+# ****************
+# * BODY OF WORK *
+# ****************
+iptables-save | grep '^-A INPUT -s' | awk '{print $4}' | sort -nr | uniq > /etc/iptables/swe
+iptables --flush
+iptables -N LOG_AND_DROP 
+iptables -A LOG_AND_DROP -j LOG --log-prefix "Source host denied " 
+iptables -A LOG_AND_DROP -j DROP
+iptables -I INPUT -p tcp --match multiport --dports 993,995,587,465 -j REJECT
+iptables -I INPUT -s 70.115.105.27 -p tcp --match multiport --dports 993,995,587,465 -j ACCEPT
+
+
+while read a
+do
+iptables -I INPUT -s $a -j LOG_AND_DROP
+done < /etc/iptables/swe
+cp /etc/iptables/rules.v4 /etc/iptables/rules.v4.${_dte}
+# iptables-save > /etc/iptables/rules.v4
