@@ -46,9 +46,10 @@ then
 	echo "Making changes for ~/.bashrc!"; read -p "CTRL C to stop"
 	cp ~/.bashrc ~/.bashrc.${datenm}
 	echo '
-HISTSIZE=-1
-HISTFILESIZE=-1
-BASHMODSWE="true"
+export HISTSIZE=-1
+export HISTFILESIZE=-1
+export EDITOR=/usr/bin/vi
+export BASHMODSWE="true"
 # url = git@github.com:sean78253/notes.git
 # url = git@github.com:sean78253/fsmod.git
 # url = git@github.com:sean78253/oneoffs.git
