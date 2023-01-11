@@ -5,7 +5,8 @@
 # Install MySql 
 # sudo apt-get install mysql-server mysql-client 
 # Note: php-gettext is obselte
-apt install apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring mysql-server mysql-client
+apt install apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring mysql-server mysql-client python3-pip
+pip install flask
 
 sudo mysql_secure_installation 
 sudo phpenmod mbstring 
