@@ -189,9 +189,13 @@ do
 	then
 		echo "$trg was not located in the respository and therefore not installed"
 		read -p "Press <ENTER> to continue" -t 10
+	else
+		instrg=${instrg}" "${trg}
 	fi
 
-done; unset trg rslt
+apt install ${instrg}
+
+done; unset trg rslt instrg
 
 # For typcial desk top or personal servers
 # sudo apt install libcdio-utils
