@@ -179,11 +179,11 @@ function install_tools()
 
 {
 
-sudo apt update
-sudo apt -y upgrade
+sudo apt -d update
+sudo apt -y -d upgrade
 for trg in pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs visudo gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim
 do
-	apt install -y $trg
+	apt install -y -d $trg
 	rslt=$?
 	if [ ${rslt} -ne 0 ]
 	then
