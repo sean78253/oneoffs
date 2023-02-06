@@ -228,9 +228,14 @@ fi
 
 function locali()
 {
-echo " BASHER ALIASES
+echo "# BASHER ALIASES
 alias fmnt='findmnt -D -t nosquashfs,notmpfs,nodevtmpfs,notracefs'
 " >> ~/.bash_aliases
+mkdir ~/repos
+cd ~/repos
+git clone git@github.com:sean78253/oneoffs.git
+git clone git@github.com:sean78253/works.git
+
 }
 
 ################
@@ -242,3 +247,4 @@ check_host
 move_ssh
 gitconfig
 install_tools
+locali
