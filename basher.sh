@@ -61,7 +61,7 @@ export BASHMODSWE="true"
 # https://github.com/sean78253/blocklists.git
 # sshfs -p 4822 root@unfoxthecablebox.com:/root /home/sean/rmtmnt
 # VLC addons
-# apt install vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization vlc-plugin-vlsub
+# apt install -y vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization vlc-plugin-vlsub
 
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
@@ -193,7 +193,7 @@ do
 		instrg=${instrg}" "${trg}
 	fi
 
-apt install ${instrg}
+apt install -y ${instrg}
 
 done; unset trg rslt instrg
 
