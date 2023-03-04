@@ -100,7 +100,7 @@ Gentoo=1
 
 function preq-ubuntu()
 {
-apt install libcairo2-dev libjpeg-turbo8-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev
+apt install libcairo2-dev libjpeg-turbo8-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make
 
 #optional
 apt install libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev
