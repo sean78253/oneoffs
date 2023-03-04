@@ -1,0 +1,106 @@
+#!/bin/bash
+# findrelease - returns which release and version is being run
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry	SWE
+# *
+# * Revision list here:
+# * 2023-03-04		Notes initial build out
+# * 2023-03-04		HOURS: SWE 1.00 
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+# /etc/os-release         [On Debian, Ubuntu and Mint]
+# /etc/os-release         [On RHEL/CentOS/Fedora and Rocky Linux/AlmaLinux]
+# /etc/os-release         [On Alpine Linux]
+# /etc/os-release         [On Arch Linux]
+# /etc/SuSE-release       [On OpenSUSE]
+# /etc/gentoo-release     [On Gentoo Linux]
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function check_release()
+{
+Refine=1
+SuSE=1
+Gentoo=1
+	if [ -f /etc/os-release ]
+	then	
+		# is Debian, Ubuntu Mint RHEL CentOS Fedora Rocky AlmaLinux Arch Alpine]
+		Refine=0
+	fi
+
+	if [ -f /etc/SuSE-release ]
+	then
+		SuSE=0
+	fi
+
+	if [ -f /etc/gentoo-release ]
+	then
+		Gentoo=0
+	fi
+}
+
+
+# ****************
+# * BODY OF WORK *
+# ****************
+
+check_release
