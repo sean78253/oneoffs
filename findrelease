@@ -98,6 +98,22 @@ Gentoo=1
 	fi
 }
 
+function preq-ubuntu()
+{
+apt install libcairo2-dev libjpeg-turbo8-dev libjpeg-turbo8-dev libpng12-dev libtool-bin uuid-dev libossp-uuid-dev 
+
+#optional
+apt install libavcodec-dev libavformat-dev libavutil-dev libswsccale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev 
+}
+
+function preq-deb()
+{
+apt install libcairo2-dev libjpeg-turbo8-dev libjpeg62-dev libpng12-dev libtool-bin uuid-dev libossp-uuid-dev 
+
+#optional
+apt install libavcodec-dev libavformat-dev libavutil-dev libswsccale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev 
+}
+
 
 # ****************
 # * BODY OF WORK *
