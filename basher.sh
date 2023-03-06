@@ -62,7 +62,7 @@ export BASHMODSWE="true"
 # sshfs -p 4822 root@unfoxthecablebox.com:/root /home/sean/rmtmnt
 # VLC addons
 # apt install -y vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization vlc-plugin-vlsub
-
+# apache2 apt-transport-https certbot cmake cpuid curl debconf-utils dmraid dovecot-core dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-pop3d exfatprogs freerdp2-dev git gnupg2 gpart gparted gpg htop iptables-persistent jfsutils jq kpartx libapache2-mod-php libavcodec-dev libavformat-dev libavutil-dev libcairo2-dev libjpeg-turbo8-dev libossp-uuid-dev libpango1.0-dev libpng-dev libpulse-dev libssh2-1-dev libssl-dev libswscale-dev libtelnet-dev libtool-bin libvncserver-dev libvorbis-dev libwebp-dev libwebsockets-dev lynx make mtools mysql-server ncdu net-tools openjdk-11-jdk openssh-server php-curl php-mbstring php-mysql php-xml postfix postfix-mysql pwgen python3 python3-pip reiser4progs reiserfsprogs samba software-properties-common sshfs tomcat9 tomcat9-admin tomcat9-common tomcat9-docs tomcat9-examples tomcat9-user udftools uuid-dev vim vlc vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization wget xfsprogs
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
 	eval `ssh-agent -s`
