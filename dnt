@@ -1,0 +1,71 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry SWE
+# *
+# * Revision list here:
+# * 2023-03-08-000 Notes
+# * 2023-03-08-000 HOURS: SWE 1.00 
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+# *************
+# * FUNCTIONS *
+# *************
+
+# ****************
+# * BODY OF WORK *
+# ****************
+
+#!/bin/bash
+# dns-test - check SWE standard DNS entries
+dn=`hostname`
+read -p "Host to check is $dn or enter: " domain
+if [ -z ${domain} ] 
+	then
+		domain=${dn}
+fi
+
+host ${domain}
+host www.${domain}
+host north.${domain}
+host east.${domain}
+host south.${domain}
+host west.${domain}
+host mail.${domain}
+host db01.${domain}
+host db02.${domain}
+host vpn01.${domain}
+host vpn02.${domain}
+host fw01.${domain}
+host fw02.${domain}
+host rdp01.${domain}
+host rdp02.${domain}
