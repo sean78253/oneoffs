@@ -28,6 +28,7 @@
 # * DEFINE VARABLES *
 # *******************
 _dte=`date +%s`
+thdld="www north east south west mail db01 db02 vpn01 vpn02 fw01 fw02 rdp01 rdp02"
 
 # *****************
 # * CHECK PREREQS *
@@ -47,25 +48,21 @@ _dte=`date +%s`
 
 #!/bin/bash
 # dns-test - check SWE standard DNS entries
-dn=`hostname`
-read -p "Host to check is $dn or enter: " domain
-if [ -z ${domain} ] 
-	then
-		domain=${dn}
+if [ -z $1 ]
+then
+	dn=`hostname`
+	read -p "Host to check is $dn or enter: " domain
+		if [ -z ${domain} ] 
+		then
+			domain=${dn}
+		fi
+else
+	domain=$1
 fi
 
-host ${domain}
-host www.${domain}
-host north.${domain}
-host east.${domain}
-host south.${domain}
-host west.${domain}
-host mail.${domain}
-host db01.${domain}
-host db02.${domain}
-host vpn01.${domain}
-host vpn02.${domain}
-host fw01.${domain}
-host fw02.${domain}
-host rdp01.${domain}
-host rdp02.${domain}
+echo "${domain}"
+for i in $thdld
+do
+	echo $i.${domain}
+
+done
