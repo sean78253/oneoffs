@@ -1,0 +1,7 @@
+systemctl enable postfix
+systemctl enable dovecot
+systemctl enable mysql
+systemctl enable apache2
+systemctl enable tomcat9
+systemctl enable smbd
+systemctl enable nmbd

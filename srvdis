@@ -1,0 +1,7 @@
+systemctl disable postfix
+systemctl disable dovecot
+systemctl disable mysql
+systemctl disable apache2
+systemctl disable tomcat9
+systemctl disable smbd
+systemctl disable nmbd

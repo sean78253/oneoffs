@@ -1,0 +1,7 @@
+systemctl start postfix
+systemctl start dovecot
+systemctl start mysql
+systemctl start apache2
+systemctl start tomcat9
+systemctl start smbd
+systemctl start nmbd

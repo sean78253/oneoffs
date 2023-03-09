@@ -1,0 +1,7 @@
+systemctl stop postfix
+systemctl stop dovecot
+systemctl stop mysql
+systemctl stop apache2
+systemctl stop tomcat9
+systemctl stop smbd
+systemctl stop nmbd
