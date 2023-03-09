@@ -63,6 +63,8 @@
 # * DEFINE VARABLES *
 # *******************
 _dte=`date +%s`
+everything="apache2 apt-transport-https certbot cmake cpuid curl debconf-utils dmraid dovecot-core dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-pop3d exfatprogs freerdp2-dev git gnupg2 gpart gparted gpg htop iptables-persistent jfsutils kpartx libapache2-mod-php libavcodec-dev libavformat-dev libavutil-dev libcairo2-dev libcairo2-dev libjpeg-turbo8-dev libossp-uuid-dev libpango1.0-dev libpng-dev libpulse-dev libssh2-1-dev libssl-dev libswscale-dev libtelnet-dev libtool-bin libvncserver-dev libvorbis-dev libwebp-dev libwebsockets-dev lynx make mtools mysql-server ncdu net-tools openjdk-11-jdk openssh-server php php-curl php-mbstring php-mysql php-xml postfix postfix-mysql pwgen reiser4progs reiserfsprogs samba software-properties-common sshfs tomcat9 tomcat9-admin tomcat9-common tomcat9-user udftools uuid-dev vim vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization wget xfsprogs"
+addons="apache2-doc apache2-suexec-pristine apache2-suexec-custom autoconf-archive gnu-standards autoconf-doc gettext python-certbot-doc python3-certbot-apache python3-certbot-nginx cmake-doc ninja-build cmake-format cpp-doc gcc-11-locales dovecot-gssapi dovecot-ldap dovecot-lucene dovecot-managesieved dovecot-pgsql dovecot-sieve dovecot-solr dovecot-sqlite dovecot-submissiond ntp fluid-soundfont-gs gcc-multilib flex bison gdb gcc-doc gcc-11-multilib gcc-11-doc i965-va-driver-shaders default-jre php-pear libasound2-plugins alsa-utils libcuda1 libnvcuvid1 libnvidia-encode1 libbluray-bdj glibc-doc libcairo2-doc libdatrie-doc debian-keyring bzr freerdp2-x11 freetype2-doc libgcrypt20-doc libgd-tools libgirepository1.0-dev libglib2.0-doc libxml2-utils gmp-doc libgmp10-doc libmpfr-dev dns-root-data gnutls-bin gnutls-doc libgraphite2-utils libdata-dump-perl libipc-sharedcache-perl libice-doc icu-doc jackd2 libtool-doc gnome-shell | notification-daemon opus-tools uuid p11-kit-doc libpango1.0-doc pcscd pulseaudio qt5-image-formats-plugins qtwayland5 xdg-utils libsm-doc speex libssl-doc libtelnet-utils libthai-doc gfortran | fortran95-compiler gcj-jdk libbusiness-isbn-perl libwww-perl libx11-doc libxcb-doc libxext-doc libxt-doc m4-doc make-doc mailx tinyca opencl-icd openjdk-11-demo openjdk-11-source visualvm libnss-mdns fonts-ipafont-gothic fonts-ipafont-mincho fonts-wqy-microhei | fonts-wqy-zenhei fonts-indic graphicsmagick dpkg-dev procmail postfix-pgsql postfix-ldap postfix-pcre postfix-lmdb postfix-sqlite resolvconf postfix-cdb mail-reader postfix-mta-sts-resolver postfix-doc python-acme-doc python3-sniffio python3-trio python-markdown-doc python-pygments-doc ttf-bitstream-vera bind9 bind9utils ctdb ldb-tools ntp | chrony smbldap-tools winbind heimdal-clients tomcat9-docs tomcat9-examples libvdpau-va-gl1 mesa-utils"
 
 # *****************
 # * CHECK PREREQS *
@@ -100,19 +102,19 @@ Gentoo=1
 
 function justme()
 {
-inst_def="libcairo2-dev libjpeg-turbo8-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim git make cmake samba openssh-server"
+inst_def="libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim git cmake samba openssh-server"
 
-inst_guac="libcairo2-dev libjpeg-turbo8-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev"
+inst_guac="libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev"
 
-inst_mail=""
+inst_mail="postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server"
 
-inst_web=""
+inst_web="certbot apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring"
 }
 
 
 function preq-ubuntu()
 {
-apt install libcairo2-dev libjpeg-turbo8-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make
+apt install libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make
 
 #optional
 apt install libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev
