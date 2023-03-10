@@ -1,6 +1,6 @@
 #!/bin/bash
 # 
-#
+# Give a domain list with the standard thrid level domains and again all on one line for certbot
 #
 # *********************************************************************
 # *
@@ -28,7 +28,7 @@
 # * DEFINE VARABLES *
 # *******************
 _dte=`date +%s`
-thdld="www north east south west mail db01 db02 vpn01 vpn02 fw01 fw02 rdp01 rdp02"
+thdld="db01 db02 east fw01 fw02 mail north rdp01 rdp02 south vpn01 vpn02 west ww1 ww2 www"
 
 # *****************
 # * CHECK PREREQS *
@@ -66,3 +66,17 @@ do
 	echo $i.${domain}
 
 done
+
+echo -e ""
+
+echo -e "${domain}, \c" >> /tmp/dnt.${_dte}
+
+for i in  $thdld
+
+do
+	echo -e "$i.${domain}, \c"
+done >> /tmp/dnt.${_dte}
+outer=`cat /tmp/dnt.${_dte}`
+echo ${outer:0:-2}
+rm /tmp/dnt.${_dte}
+echo -e "\n"
