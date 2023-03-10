@@ -78,6 +78,38 @@ function cleanup()
 
 trap cleanup EXIT
 ' >> ~/.bashrc
+echo "Host mygeekisp.com
+	Port 4822
+	StrictHostKeyChecking no
+
+Host *.mygeekisp.com
+	Port 4822
+	StrictHostKeyChecking no
+
+Host seanembry.com
+	Port 4822
+	StrictHostKeyChecking no
+
+Host unfoxthecablebox.com
+	Port 4822
+	StrictHostKeyChecking no
+
+Host vixenfakenews.com
+	Port 4822
+	StrictHostKeyChecking no
+
+host 10.0.0.0/8
+	StrictHostKeyChecking no
+
+host 192.168.0.0/16
+	StrictHostKeyChecking no
+
+host 172.17.0.1
+	IdentitiesOnly yes
+
+host 172.16.0.0/12
+	StrictHostKeyChecking no
+" > ~/.ssh/config
 else
 	echo "Skipping bash fixup, it is done"
 fi
@@ -181,7 +213,7 @@ function install_tools()
 
 sudo apt -d update
 sudo apt -y -d upgrade
-for trg in pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs visudo gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim
+for trg in pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim
 do
 	apt install -y -d $trg
 	rslt=$?
