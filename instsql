@@ -1,0 +1,135 @@
+#!/bin/bash
+# instsql - install SQL, Miria or MySQL
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry	SWE
+# *
+# * Revision list here:
+# * 2023-03-04		Notes initial build out
+# * 2023-03-04		HOURS: SWE 1.00 
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+_PWLIMIT=\&\:\~\?\;\:\[\]\{\}\.\'\%\"\*\(\)\\\/\|
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function passwords()
+{
+
+# passwords for SQL
+domain=`uname -n`
+SQLpass=`pwgen -syr ${_PWLIMIT} 10 1`
+SQLadmin=`pwgen -syr ${_PWLIMIT} 10 1`
+SQLmail=`pwgen -syr ${_PWLIMIT} 10 1`
+echo -"
+
+OK, I've got defaults for ya.
+Domain name is being set to: ${domain} for MySQL
+SQLroot pass is:          ${SQLpass}
+"
+
+read -p "To change them, enter anything. To keep these, press enter" trash
+	if [ ! -z ${trash} ]
+	then
+		read -p "SQL ROOT password: " SQLpass
+	fi
+unset trash
+echo "Writing passwords to ~/mkSQL.pass"
+if [ -f ~/mkSQL.pass ]
+	then
+	echo "backing up ~/mkSQL.pass to ~/mkSQL.pass.${_dte}"
+	fi
+echo "
+SQL root password ${SQLpass}
+" > ~/mkSQL.pass
+
+echo "[client]
+user=root
+password=${SQLpass}" > ~/.MKSQL-root
+
+chmod 600 ~/mkSQL.pass ~/.MKSQL-root
+
+}
+
+function debconfsetMySQL()
+{
+echo "mysql-server mysql-server/root_password password ${SQLpass}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${SQLpass}" | debconf-set-selections
+# after install, run echo PURGE | debconf-communicate <package> to secure things and not leave landminds for unwary.
+}
+
+function debconfsetMariaDB()
+{
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password password ${SQLpass}'
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again password ${SQLpass}'
+}
+
+function installit()
+{
+#	apt install mariadb-server
+#	apt install mysql-server
+}
+
+# ****************
+# * BODY OF WORK *
+# ****************
+
+# check_release
+passwords
