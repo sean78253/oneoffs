@@ -95,7 +95,16 @@ echo "Writing passwords to ~/mkSQL.pass"
 if [ -f ~/mkSQL.pass ]
 	then
 	echo "backing up ~/mkSQL.pass to ~/mkSQL.pass.${_dte}"
-	fi
+	mv ~/mkSQL.pass ~/mkSQL.pass.${_dte}
+fi
+
+
+if [ -f ~/.mkSQL-root ]
+	then
+	echo "backing up ~/.mkSQL-root to ~/mkSQL-root.${_dte}"
+	~/.mkSQL-root to ~/mkSQL-root.${_dte}
+fi
+
 echo "
 SQL root password ${SQLpass}
 " > ~/mkSQL.pass
