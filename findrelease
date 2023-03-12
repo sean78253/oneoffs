@@ -63,7 +63,10 @@
 # * DEFINE VARABLES *
 # *******************
 _dte=`date +%s`
+_PWLIMIT=\&\:\~\?\;\:\[\]\{\}\.\'\%\"\*\(\)\\\/\|
+
 everything="apache2 apt-transport-https certbot cmake cpuid curl debconf-utils dmraid dovecot-core dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-pop3d exfatprogs freerdp2-dev git gnupg2 gpart gparted gpg htop iptables-persistent jfsutils kpartx libapache2-mod-php libavcodec-dev libavformat-dev libavutil-dev libcairo2-dev libcairo2-dev libjpeg-turbo8-dev libossp-uuid-dev libpango1.0-dev libpng-dev libpulse-dev libssh2-1-dev libssl-dev libswscale-dev libtelnet-dev libtool-bin libvncserver-dev libvorbis-dev libwebp-dev libwebsockets-dev lynx make mtools mysql-server ncdu net-tools openjdk-11-jdk openssh-server php php-curl php-mbstring php-mysql php-xml postfix postfix-mysql pwgen reiser4progs reiserfsprogs samba software-properties-common sshfs tomcat9 tomcat9-admin tomcat9-common tomcat9-user udftools uuid-dev vim vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization wget xfsprogs"
+
 addons="apache2-doc apache2-suexec-pristine apache2-suexec-custom autoconf-archive gnu-standards autoconf-doc gettext python-certbot-doc python3-certbot-apache python3-certbot-nginx cmake-doc ninja-build cmake-format cpp-doc gcc-11-locales dovecot-gssapi dovecot-ldap dovecot-lucene dovecot-managesieved dovecot-pgsql dovecot-sieve dovecot-solr dovecot-sqlite dovecot-submissiond ntp fluid-soundfont-gs gcc-multilib flex bison gdb gcc-doc gcc-11-multilib gcc-11-doc i965-va-driver-shaders default-jre php-pear libasound2-plugins alsa-utils libcuda1 libnvcuvid1 libnvidia-encode1 libbluray-bdj glibc-doc libcairo2-doc libdatrie-doc debian-keyring bzr freerdp2-x11 freetype2-doc libgcrypt20-doc libgd-tools libgirepository1.0-dev libglib2.0-doc libxml2-utils gmp-doc libgmp10-doc libmpfr-dev dns-root-data gnutls-bin gnutls-doc libgraphite2-utils libdata-dump-perl libipc-sharedcache-perl libice-doc icu-doc jackd2 libtool-doc gnome-shell | notification-daemon opus-tools uuid p11-kit-doc libpango1.0-doc pcscd pulseaudio qt5-image-formats-plugins qtwayland5 xdg-utils libsm-doc speex libssl-doc libtelnet-utils libthai-doc gfortran | fortran95-compiler gcj-jdk libbusiness-isbn-perl libwww-perl libx11-doc libxcb-doc libxext-doc libxt-doc m4-doc make-doc mailx tinyca opencl-icd openjdk-11-demo openjdk-11-source visualvm libnss-mdns fonts-ipafont-gothic fonts-ipafont-mincho fonts-wqy-microhei | fonts-wqy-zenhei fonts-indic graphicsmagick dpkg-dev procmail postfix-pgsql postfix-ldap postfix-pcre postfix-lmdb postfix-sqlite resolvconf postfix-cdb mail-reader postfix-mta-sts-resolver postfix-doc python-acme-doc python3-sniffio python3-trio python-markdown-doc python-pygments-doc ttf-bitstream-vera bind9 bind9utils ctdb ldb-tools ntp | chrony smbldap-tools winbind heimdal-clients tomcat9-docs tomcat9-examples libvdpau-va-gl1 mesa-utils"
 
 # *****************
@@ -130,9 +133,63 @@ apt install libcairo2-dev libjpeg-turbo8-dev libjpeg62-dev libpng-dev libtool-bi
 apt install libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev 
 }
 
+function passwords()
+{
+
+# passwords for SQL
+domain=`uname -n`
+SQLpass=`pwgen -syr ${_PWLIMIT} 10 1`
+SQLadmin=`pwgen -syr ${_PWLIMIT} 10 1`
+SQLmail=`pwgen -syr ${_PWLIMIT} 10 1`
+echo -"
+
+OK, I've got defaults for ya.
+Domain name is being set to: ${domain} for MySQL
+SQLroot pass is:          ${SQLpass}
+"
+
+read -p "To change them, enter anything. To keep these, press enter" trash
+	if [ ! -z ${trash} ]
+	then
+		read -p "SQL ROOT password: " SQLpass
+	fi
+unset trash
+echo "Writing passwords to ~/mkSQL.pass"
+if [ -f ~/mkSQL.pass ]
+	then
+	echo "backing up ~/mkSQL.pass to ~/mkSQL.pass.${_dte}"
+	fi
+echo "
+SQL root password ${SQLpass}
+" > ~/mkSQL.pass
+
+echo "[client]
+user=root
+password=${SQLpass}" > ~/.MKSQL-root
+
+chmod 600 ~/mkSQL.pass ~/.MKSQL-root
+
+}
+
+function debconfset()
+{
+echo "mysql-server mysql-server/root_password password ${SQLpass}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${SQLpass}" | debconf-set-selections
+echo "postfix postfix/mailname string ${domain}" | debconf-set-selections
+echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
+# after install, run echo PURGE | debconf-communicate <package> to secure things and not leave landminds for unwary.
+}
+
+function MariaDB()
+{
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password password ###rootpass'
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again password ###rootpass'
+}
+
 
 # ****************
 # * BODY OF WORK *
 # ****************
 
-check_release
+# check_release
+passwords
