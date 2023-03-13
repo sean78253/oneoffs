@@ -70,9 +70,9 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 	unset ssh_keys
 fi
 
-repos='oneoffs works fsmon'
+repos="oneoffs works fsmon"
 
-echo -e '\n'
+echo -e "\n"
 
 for i in $repos
 do
@@ -232,22 +232,8 @@ function install_tools()
 {
 
 sudo apt -d update
-sudo apt -y -d upgrade
-for trg in pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim
-do
-	apt install -y -d $trg
-	rslt=$?
-	if [ ${rslt} -ne 0 ]
-	then
-		echo "$trg was not located in the respository and therefore not installed"
-		read -p "Press <ENTER> to continue" -t 10
-	else
-		instrg=${instrg}" "${trg}
-	fi
-
-apt install -y ${instrg}
-
-done; unset trg rslt instrg
+sudo apt install -y pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim 
+sudo apt upgrade -Y
 
 # For typcial desk top or personal servers
 # sudo apt install libcdio-utils
