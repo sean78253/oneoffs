@@ -76,9 +76,9 @@ echo -e '\n'
 
 for i in $repos
 do
-        git -C ~/repos/$i fetch
         if [ -d ~/repos/$i ]
         then
+        	git -C ~/repos/$i fetch
                 stat=`git -C ~/repos/$i status | grep 'Your branch'`
                 echo "***** $i *****"
                 echo $stat
