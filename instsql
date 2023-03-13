@@ -132,6 +132,7 @@ debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again 
 
 function installit()
 {
+	true
 #	apt install mariadb-server
 #	apt install mysql-server
 }
@@ -140,5 +141,26 @@ function installit()
 # * BODY OF WORK *
 # ****************
 
-# check_release
 passwords
+
+read -p "Install MySQL (M) or MariaDB (A)" choice
+
+if [ -z ${choice} ]
+then
+	echo "Needs input - abort"
+	exit 100
+fi
+
+case ${choice} in
+	M|m)
+		read -p "Install MySQL: " trash
+		apt install mysql-server
+		;;
+	A|a)
+		read -p "Insall MariaDB" trash
+		apt install mariadb-server
+		;;
+	*)
+		echo "Well, that ain't happin'!";;
+esac
+
