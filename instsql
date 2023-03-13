@@ -161,6 +161,11 @@ case ${choice} in
 		apt install mariadb-server
 		;;
 	*)
-		echo "Well, that ain't happin'!";;
+		echo "Well, that ain't happin'!"
+		exit 100
+		;;
 esac
 
+# We are simply making sure the passwords are not left lying around below
+echo PURGE | debconf-communicate mariadb-server
+echo PURGE | debconf-communicate mysql-server
