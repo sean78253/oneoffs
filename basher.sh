@@ -70,6 +70,26 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 	unset ssh_keys
 fi
 
+repos='oneoffs works fsmon'
+
+echo -e '\n'
+
+for i in $repos
+do
+        git -C ~/repos/$i fetch
+        if [ -d ~/repos/$i ]
+        then
+                stat=`git -C ~/repos/$i status | grep 'Your branch'`
+                echo "***** $i *****"
+                echo $stat
+                echo "git -C ~/repos/$i pull"
+        else
+                echo "***** WARNING *****"
+                echo "$i - repository not present in ~/repos"
+        fi
+done
+
+
 function cleanup()
 {
 	test -n "$SSH_AGENT_PID" && eval `/usr/bin/ssh-agent -k`
