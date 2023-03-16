@@ -1,0 +1,214 @@
+#!/bin/bash
+# findrelease - returns which release and version is being run
+#
+#
+# *********************************************************************
+# *
+# * Sean Embry	SWE
+# *
+# * Revision list here:
+# * 2023-03-04		Notes initial build out
+# * 2023-03-04		HOURS: SWE 1.00 
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# * YYYY-MM-DD-xxx
+# * YYYY-MM-DD-xxx
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+# /etc/os-release         [On Debian, Ubuntu and Mint]
+# /etc/os-release         [On RHEL/CentOS/Fedora and Rocky Linux/AlmaLinux]
+# /etc/os-release         [On Alpine Linux]
+# /etc/os-release         [On Arch Linux]
+# /etc/SuSE-release       [On OpenSUSE]
+# /etc/gentoo-release     [On Gentoo Linux]
+
+# Update symbolic links of the system libraries
+# sudo ldconfig
+# Reload the systemd manager, and apply the new systemd service (guacd)
+# sudo systemctl daemon-reload
+# 
+# 
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+_PWLIMIT=\&\:\~\?\;\:\[\]\{\}\.\'\%\"\*\(\)\\\/\|
+_guac_port=4822
+_guac_dir=/etc/guacamole
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function inst_guac()
+{
+
+inst_guac="build-essential libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev"
+inst_mail="postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server"
+inst_web="certbot apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring"
+inst_mysql="certbot apache php php-curl php-xml libapache2-mod-php php-mysql php-mbstring"
+
+
+apt install -y ${inst_guac}
+apt install -y ${inst_web}
+apt install -y ${inst_mysql}
+}
+
+function guac-config()
+{
+
+if [ ! -d ${_guac_dir} ]
+then
+	mkdir -p /etc/${_guac_dir}/{extensions,lib}
+	touch /etc/${_guac_dir}/{guacamole.properties,guacd.conf}
+else
+	read -p "Guacamole directoy detected, giving you the chance to bail out with <ctrl-C>" trash
+exit
+
+netstat -nltup | grep -s ${_guac_port}
+
+inuse=$?
+if [ ${inuse} -eq 1 ]
+then
+	read -p "Port ${_guac_port} detected in use, giveing you the chance to bail out with <ctrl-C>" trash
+	echo "Moving Guacamole to port 4922 from default of 4822"
+	guac_port=4922
+fi
+
+unset $inuse
+
+# remember to enter ${_guac_port} into config below.
+echo "
+#
+# guacd configuration file
+#
+
+[daemon]
+
+pid_file = /var/run/guacd.pid
+log_level = info
+
+[server]
+
+bind_host = localhost
+bind_port = 4822
+
+#
+# The following parameters are valid only if
+# guacd was built with SSL support.
+#
+
+[ssl]
+
+server_certificate = /etc/ssl/certs/guacd.crt
+server_key = /etc/ssl/private/guacd.key
+" > /etc/${_guac_dir}/guacd.conf
+
+echo GUACAMOLE_HOME=/etc/guacamole >> /etc/default/tomcat9
+
+}
+
+function passwords()
+{
+
+# passwords for SQL
+domain=`uname -n`
+SQLpass=`pwgen -syr ${_PWLIMIT} 10 1`
+SQLadmin=`pwgen -syr ${_PWLIMIT} 10 1`
+SQLmail=`pwgen -syr ${_PWLIMIT} 10 1`
+echo -"
+
+OK, I've got defaults for ya.
+Domain name is being set to: ${domain} for MySQL
+SQLroot pass is:          ${SQLpass}
+"
+
+read -p "To change them, enter anything. To keep these, press enter" trash
+	if [ ! -z ${trash} ]
+	then
+		read -p "SQL ROOT password: " SQLpass
+	fi
+unset trash
+echo "Writing passwords to ~/mkSQL.pass"
+if [ -f ~/mkSQL.pass ]
+	then
+	echo "backing up ~/mkSQL.pass to ~/mkSQL.pass.${_dte}"
+	fi
+echo "
+SQL root password ${SQLpass}
+" > ~/mkSQL.pass
+
+echo "[client]
+user=root
+password=${SQLpass}" > ~/.MKSQL-root
+
+chmod 600 ~/mkSQL.pass ~/.MKSQL-root
+
+}
+
+function debconfsetMySQL()
+{
+echo "mysql-server mysql-server/root_password password ${SQLpass}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${SQLpass}" | debconf-set-selections
+# after install, run echo PURGE | debconf-communicate <package> to secure things and not leave landminds for unwary.
+}
+
+function debconfsetMariaDB()
+{
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password password ${SQLpass}'
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again password ${SQLpass}'
+}
+
+
+# ****************
+# * BODY OF WORK *
+# ****************
+
+# check_release
+passwords
