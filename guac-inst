@@ -92,12 +92,13 @@ function inst_guac()
 inst_guac="build-essential libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev"
 inst_mail="postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server"
 inst_web="certbot apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring"
-inst_mysql="certbot apache php php-curl php-xml libapache2-mod-php php-mysql php-mbstring"
 
 
+apt update
+apt upgrade -y
 apt install -y ${inst_guac}
 apt install -y ${inst_web}
-apt install -y ${inst_mysql}
+
 }
 
 function guac-config()
@@ -109,7 +110,7 @@ then
 	touch /etc/${_guac_dir}/{guacamole.properties,guacd.conf}
 else
 	read -p "Guacamole directoy detected, giving you the chance to bail out with <ctrl-C>" trash
-exit
+fi
 
 netstat -nltup | grep -s ${_guac_port}
 
@@ -137,7 +138,7 @@ log_level = info
 [server]
 
 bind_host = localhost
-bind_port = 4822
+bind_port = ${_guac_port}
 
 #
 # The following parameters are valid only if
@@ -150,7 +151,7 @@ server_certificate = /etc/ssl/certs/guacd.crt
 server_key = /etc/ssl/private/guacd.key
 " > /etc/${_guac_dir}/guacd.conf
 
-echo GUACAMOLE_HOME=/etc/guacamole >> /etc/default/tomcat9
+echo 'GUACAMOLE_HOME=/etc/guacamole' >> /etc/default/tomcat9
 
 }
 
@@ -211,4 +212,10 @@ debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again 
 # ****************
 
 # check_release
+inst_guac
+guac_config
 passwords
+debconfsetMySQL
+
+echo 'PURGE' | debconf-communicate mysql-server 
+echo 'PURGE' | debconf-communicate "mariadb-server-5.5"
