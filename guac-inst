@@ -103,13 +103,13 @@ apt install -y ${inst_web}
 
 }
 
-function guac-config()
+function guac_config()
 {
 
 if [ ! -d ${_guac_dir} ]
 then
-	mkdir -p /etc/${_guac_dir}/{extensions,lib}
-	touch /etc/${_guac_dir}/{guacamole.properties,guacd.conf}
+	mkdir -p ${_guac_dir}/{extensions,lib}
+	touch ${_guac_dir}/{guacamole.properties,guacd.conf}
 else
 	read -p "Guacamole directoy detected, giving you the chance to bail out with <ctrl-C>" trash
 fi
@@ -218,18 +218,32 @@ chown -R "${_usr}:${_usr}" /home/${_usr}
 chmod -R 700 /home/${_usr}/.ssh
 }
 
+function go-sean()
+{
+
+	if [ -f /root/go-sean ]
+	then
+		if [ ! -d /guac ]
+		then
+			mkdir /guac
+			chmod 777 /guac
+		fi
+
+		scp -P 4822 root@mygeekisp.com:/guac/* /guac/
+	fi
+}
+
 # ****************
 # * BODY OF WORK *
 # ****************
 
 # check_release
-make-user
-exit
-inst_guac
+# make-user
+# inst_guac
 guac_config
-passwords
-debconfsetMySQL
-make-user
+# passwords
+# debconfsetMySQL
+# make-user
 
 echo 'PURGE' | debconf-communicate mysql-server 
 echo 'PURGE' | debconf-communicate "mariadb-server-5.5"

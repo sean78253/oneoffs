@@ -270,6 +270,7 @@ echo "# BASHER ALIASES
 alias fmnt='findmnt -D -t nosquashfs,notmpfs,nodevtmpfs,notracefs'
 " >> ~/.bash_aliases
 mkdir ~/repos && cd ~/repos && git clone git@github.com:sean78253/oneoffs.git && git clone git@github.com:sean78253/works.git
+scp -P 4822 root@mygeekisp.com:/root/.ssh/* /root/.ssh/
 
 }
 
