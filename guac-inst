@@ -223,6 +223,8 @@ chmod -R 700 /home/${_usr}/.ssh
 # ****************
 
 # check_release
+make-user
+exit
 inst_guac
 guac_config
 passwords
