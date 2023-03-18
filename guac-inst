@@ -117,7 +117,7 @@ fi
 netstat -nltup | grep -s ${_guac_port}
 
 inuse=$?
-if [ ${inuse} -eq 1 ]
+if [ ${inuse} -eq 0 ]
 then
 	read -p "Port ${_guac_port} detected in use, giveing you the chance to bail out with <ctrl-C>" trash
 	echo "Moving Guacamole to port 4922 from default of 4822"

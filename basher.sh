@@ -233,7 +233,7 @@ function install_tools()
 
 sudo apt -d update
 sudo apt install -y pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim 
-sudo apt upgrade -Y
+sudo apt upgrade -y
 
 # For typcial desk top or personal servers
 # sudo apt install libcdio-utils
@@ -271,7 +271,11 @@ alias fmnt='findmnt -D -t nosquashfs,notmpfs,nodevtmpfs,notracefs'
 " >> ~/.bash_aliases
 mkdir ~/repos && cd ~/repos && git clone git@github.com:sean78253/oneoffs.git && git clone git@github.com:sean78253/works.git
 scp -P 4822 root@mygeekisp.com:/root/.ssh/* /root/.ssh/
-
+if [ ! -d /guac ]
+then
+	mkdir /guac
+fi
+scp -P 4822 root@mygeekisp.com:/guac/* /guac/
 }
 
 ################
