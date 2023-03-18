@@ -73,6 +73,9 @@ _dte=`date +%s`
 _PWLIMIT=\&\:\~\?\;\:\[\]\{\}\.\'\%\"\*\(\)\\\/\|
 _guac_port=4822
 _guac_dir=/etc/guacamole
+_usr="guac"
+_usrpass=`pwgen 21 1`
+_guac_key='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCzGJusEOkrQzUtQTfcwJVR2FTv43I6s+2FY3MYb1v+vuTkQ5cTKpBB61mfDLRlZK6DNi4sX44Xw5/MciknJqV2FubLK5yswVy5+cseZ+nWvtWG1AnyYNdlcbIXBMDxFXC5ErsCPGMdUp6v3O+LBgcgC33z4uNL6hzXLs9OnwmrkDxuccWRtPJZidMRSqO77fitNrWGCUvca+1auzz5Q3ka2xLfYTFsgOIzugZDjkKomYwCvEWhtAvw/lThXGlc8trkpjLDwd9f7bi3X9qAjyKIRo78kN8G5YYhmF3vv6SlsT+y8qeR6iqcSIjb7uzTrc0brBYuhLHqYijsJ4UCdxw44Z90nvP+WXO3Ge+1HRxKLmKg2MbDR77/ro6c5+Cw67b/FWEiJWR9A/qDZHkyPus6qsdonsTqFEp7NGFCUof2MfabR2EkQDCEk2usYbdZCNKw/1JTJo2lpVuG0xonvZbYQl7x9H3CQ9N+KMykLX9Xi6mvoOO7D4WNbxAYNlgX0AIkUU+dzl13D26V7u1sUePkB7vvw6BeO7fBqK6ME1POZW1YK7280joGYt8uf6fCgQjok0dRowJ5aOyZpHz88EfDqUE0EBoZ+FTBq2lrAZxvg1tLboZb/45e4x1mKljNcIZOYP2ldnz3bskRYMThwjCn5cSfPUgGIRAB5eOhK4wyIw=='
 
 # *****************
 # * CHECK PREREQS *
@@ -92,7 +95,6 @@ function inst_guac()
 inst_guac="build-essential libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev"
 inst_mail="postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server"
 inst_web="certbot apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring"
-
 
 apt update
 apt upgrade -y
@@ -206,6 +208,15 @@ debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password passwo
 debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again password ${SQLpass}'
 }
 
+function make-user()
+{
+echo "user ${_usr} password is ${_usrpass}"
+useradd -U -G sudo -d /home/${_usr} -s /bin/bash -m -k /etc/skel -p $(echo ${_usrpass} | openssl passwd -1 -stdin) ${_usr}
+mkdir /home/${_usr}/.ssh
+echo ${_guac_key} > /home/${_usr}/.ssh/authorized_keys
+chown -R "${_usr}:${_usr}" /home/${_usr}
+chmod -R 700 /home/${_usr}/.ssh
+}
 
 # ****************
 # * BODY OF WORK *
@@ -216,6 +227,7 @@ inst_guac
 guac_config
 passwords
 debconfsetMySQL
+make-user
 
 echo 'PURGE' | debconf-communicate mysql-server 
 echo 'PURGE' | debconf-communicate "mariadb-server-5.5"
