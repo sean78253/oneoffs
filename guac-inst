@@ -94,7 +94,7 @@ function inst_guac()
 
 inst_guac="build-essential libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev wget apt-transport-https gnupg2 software-properties-common openjdk-11-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user apache2 make libavcodec-dev libavformat-dev libavutil-dev libswscale-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libvncserver-dev libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev libwebp-dev"
 inst_mail="postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server"
-inst_web="certbot apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring"
+inst_web="certbot apache2 php php-curl php-xml libapache2-mod-php php-mysql php-mbstring mysql-server"
 
 apt update
 apt upgrade -y
