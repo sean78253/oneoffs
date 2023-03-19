@@ -151,7 +151,7 @@ bind_port = ${_guac_port}
 
 server_certificate = /etc/ssl/certs/guacd.crt
 server_key = /etc/ssl/private/guacd.key
-" > /etc/${_guac_dir}/guacd.conf
+" > ${_guac_dir}/guacd.conf
 
 echo 'GUACAMOLE_HOME=/etc/guacamole' >> /etc/default/tomcat9
 
