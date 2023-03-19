@@ -237,13 +237,13 @@ function go-sean()
 # * BODY OF WORK *
 # ****************
 
-# check_release
-# make-user
-# inst_guac
+check_release
+make-user
+inst_guac
 guac_config
-# passwords
-# debconfsetMySQL
-# make-user
+passwords
+debconfsetMySQL
+make-user
 
 echo 'PURGE' | debconf-communicate mysql-server 
 echo 'PURGE' | debconf-communicate "mariadb-server-5.5"
