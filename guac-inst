@@ -250,4 +250,8 @@ echo 'PURGE' | debconf-communicate mysql-server
 echo 'PURGE' | debconf-communicate "mariadb-server-5.5"
 ldconfig
 daemon-reload
+sudo systemctl enable guacd
+sudo systemctl start guacd
+sudo systemctl status guacd
+
 echo "Now log in as the guac user, and ./configure --with-init-dir=/etc/init.d
