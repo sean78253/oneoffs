@@ -231,6 +231,7 @@ function go-sean()
 
 		scp -P 4822 root@mygeekisp.com:/guac/* /guac/
 	fi
+cp /guac/guacamole-server-1.5.0.tar.gz /home/${_usr}
 }
 
 # ****************
@@ -247,3 +248,6 @@ make-user
 
 echo 'PURGE' | debconf-communicate mysql-server 
 echo 'PURGE' | debconf-communicate "mariadb-server-5.5"
+ldconfig
+daemon-reload
+echo "Now log in as the guac user, and ./configure --with-init-dir=/etc/init.d
