@@ -54,17 +54,21 @@
 # Reload the systemd manager, and apply the new systemd service (guacd)
 # sudo systemctl daemon-reload
 # 
-# 
+#
 #
 #
 #
 #
 # *********************************************************************
 # TODOS
-#
-#
-#
-#
+# add users to /etc/tomcat9/tomcat-users.xml
+# copy .WAR file to /var/lib/tomcat9/webapps/guacamole-1.5.0.war
+# systemctl stop apache2 tomcat9 mysql guacd
+# systemctl start apache2 tomcat9 mysql guacd
+# systemctl status apache2 tomcat9 mysql guacd
+# systemctl enable apache2 tomcat9 mysql guacd
+# systemctl disable apache2 tomcat9 mysql guacd
+# 
 #
 # *******************
 # * DEFINE VARABLES *
@@ -250,8 +254,13 @@ echo 'PURGE' | debconf-communicate mysql-server
 echo 'PURGE' | debconf-communicate "mariadb-server-5.5"
 ldconfig
 daemon-reload
+# sudo systemctl enable guacd
+# sudo systemctl start guacd
+# sudo systemctl status guacd
+
+echo "Now log in as the guac user, and ./configure --with-init-dir=/etc/init.d
+and when that's done, do:
 sudo systemctl enable guacd
 sudo systemctl start guacd
 sudo systemctl status guacd
-
-echo "Now log in as the guac user, and ./configure --with-init-dir=/etc/init.d
+" > /home/${_usr}/guacamole-install-note.txt
