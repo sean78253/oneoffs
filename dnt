@@ -28,7 +28,7 @@
 # * DEFINE VARABLES *
 # *******************
 _dte=`date +%s`
-thdld="db01 db02 east fw01 fw02 mail north rdp01 rdp02 south vpn01 vpn02 west ww1 ww2 www"
+thdld="db01 db02 east fw01 fw02 mail north rdp01 rdp02 south vpn01 vpn02 webmail west ww1 ww2 www"
 
 # *****************
 # * CHECK PREREQS *
