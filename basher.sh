@@ -130,6 +130,9 @@ host 172.17.0.1
 host 172.16.0.0/12
 	StrictHostKeyChecking no
 " > ~/.ssh/config
+
+journalctl --vacuum-time=10d
+
 else
 	echo "Skipping bash fixup, it is done"
 fi
