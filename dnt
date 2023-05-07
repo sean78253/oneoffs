@@ -80,3 +80,6 @@ outer=`cat /tmp/dnt.${_dte}`
 echo ${outer:0:-2}
 rm /tmp/dnt.${_dte}
 echo -e "\n"
+echo "SPF record no email: v=spf1 -all"
+echo "SPF record email only from MX: v=spf1 mx a -all"
+echo "SPF record email softfail if not from MX: v=spf1 mx a ~all"
