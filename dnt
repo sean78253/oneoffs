@@ -69,17 +69,14 @@ done
 
 echo -e ""
 
-echo -e "${domain}, \c" >> /tmp/dnt.${_dte}
+echo -e "${domain},\c" >> /tmp/dnt.${_dte}
 
 for i in  $thdld
 
 do
-	echo -e "$i.${domain}, \c"
+	echo -e "$i.${domain},\c"
 done >> /tmp/dnt.${_dte}
 outer=`cat /tmp/dnt.${_dte}`
-echo ${outer:0:-2}
+echo ${outer:0:-1}
 rm /tmp/dnt.${_dte}
-echo -e "\n"
-echo "SPF record no email: v=spf1 -all"
-echo "SPF record email only from MX: v=spf1 mx a -all"
-echo "SPF record email softfail if not from MX: v=spf1 mx a ~all"
+echo -e " \n"
