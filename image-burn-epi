@@ -1,0 +1,19 @@
+#!/bin/bash
+# Convert a base photo for a thumbnail to have an episode number
+#
+
+#End of episode
+max=257
+
+#Counter - change if you don't want to start at 1
+i=1
+
+#Base impage to put episode count in
+fle="~/Pictures/Bewitched.png"
+while [ ${i} -le ${max} ]
+do
+	cvt=`printf '%03d' ${i}`
+echo "convert Bewitched.png -pointsize 50 -fill white -annotate +20+100 \"Episode ${cvt} of ${max}\" ../Bewitched/Bewitched-Episode-$cvt.png"
+    i=$(($i+1))
+done
+
