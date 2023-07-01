@@ -1,0 +1,68 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * <NAME> <INITALS>
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+if [ -z ${DOMAINPTH} ]
+then
+	DOMAINPTH=~/domains
+fi
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function mainloop()
+{
+
+while read domainname
+do 
+# host ${domainname} | xargs | awk '{print $1" "$4" "$9}'
+x=`host ${domainname} | xargs | awk '{print $1" "$4" "$9}'`
+dnm=`echo $x | awk '{print $1}'`
+ip4=`echo $x | awk '{print $2}'`
+ip6=`echo $x | awk '{print $3}'`
+printf "%-60s %s %15s %25s\n" $dnm $ip4 $ip6
+done < ${DOMAINPTH}
+
+}
+
+# ****************
+# * BODY OF WORK *
+# ****************
+
+mainloop

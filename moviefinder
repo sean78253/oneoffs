@@ -1,0 +1,14 @@
+clear;sudo find / -type d \( -path /proc -o -path /dev -o -path /tmp -o -path /sys -o -path /run -o -path /usr/lib -o -path /usr/share/man -o -path /usr/share -o -path /var/log \) -prune -o -type f | grep '\.mkv$\|\.m4v$\|\.mp4$\|\.mov$' > /tmp/movies
+
+mach=`hostname -A`
+mach=`echo $mach | sed 's/ //'`
+while read movie
+do
+mvname=`basename "$movie"`
+echo \"$mvname\",\"$movie\"
+done < /tmp/movies
+
+# while read a
+# do
+# md5sum "$b"
+# done < /tmp/movies
