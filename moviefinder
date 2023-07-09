@@ -1,3 +1,5 @@
+# sudo find / -type d \( -path /proc -o -path /dev -o -path /tmp -o -path /sys -o -path /run -o -path /usr/lib -o -path /usr/share/man -o -path /usr/share -o -path /var -o -path /snap \) -prune -o -type f
+
 clear;sudo find / -type d \( -path /proc -o -path /dev -o -path /tmp -o -path /sys -o -path /run -o -path /usr/lib -o -path /usr/share/man -o -path /usr/share -o -path /var/log \) -prune -o -type f | grep '\.mkv$\|\.m4v$\|\.mp4$\|\.mov$' > /tmp/movies
 
 mach=`hostname -A`
