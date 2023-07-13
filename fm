@@ -66,20 +66,23 @@ done
 
 function allmondays()
 {
+#Now we know the first Monday of the year, let's out put all the rest of them
+# so we can fancy them up with a background color
+
 cday=${FirstMonday}
 nday=0
 while [ ${nday} -lt 366 ]
 do
-        # echo ${nday}
         date -d "${cday} +${nday} days" '+%m/%d/%Y' >> /tmp/fm.${_dte}
         nday=`expr $nday + 7`
 done
-
 }
 
 function headmon()
 {
 # Prepare the header for the year with jump links
+# Presented in reverse order. This is likely to be used for things they want to see what happened yesterday,
+# not what happned the first time ever. The days are done in cronological order because folks complained otherwise.
 
 echo "<li><a href=\"#Dec-${year}\">December ${year}</a></li>"
 echo "<li><a href=\"#Nov-${year}\">November ${year}</a></li>"
@@ -93,12 +96,12 @@ echo "<li><a href=\"#Apr-${year}\">April ${year}</a></li>"
 echo "<li><a href=\"#Mar-${year}\">March ${year}</a></li>"
 echo "<li><a href=\"#Feb-${year}\">February ${year}</a></li>"
 echo "<li><a href=\"#Jan-${year}\">iJanuary ${year}</a></li>"
-
-
-
 }
+
 function alldays()
 {
+#Main part of the program and where all the output happens
+
 cday="01/01/$year"
 nday=0
 while [ ${nday} -lt 366 ]
@@ -106,18 +109,17 @@ do
 	dday=`date -d "${cday} +${nday} days" '+%m/%d/%Y'`
 
 	dayday=`date -d "${dday}" '+%d'`
+
 	if [ $dayday -eq "01" ]
 	then
-	FDAY=`date -d ${dday} +%B`
-	fday=`date -d ${dday} +%b`
-	echo "<center><H3 id=\"$fday-${year}\">$FDAY $year</H3></center>"
+		FDAY=`date -d ${dday} +%B`
+		fday=`date -d ${dday} +%b`
+		echo "<center><H3 id=\"$fday-${year}\">$FDAY $year</H3></center>"
 	fi
 
 	grep -q $dday /tmp/fm.${_dte}
 	gday=$?
 
-	# if ${dday:1:2}
-	
 	if [ $gday -eq 0 ]
 	then
 		echo "<u style=\"background-color:#90EE90\">$dday</u><br>"
@@ -130,18 +132,11 @@ done
 
 }
 
-function htmllist()
-{
-	date -d '2015-09-26 +30 days'
-}
-
 # ****************
 # * BODY OF WORK *
 # ****************
 firstMonday
-# echo "$FirstMonday is the first Monday of $year"
 allmondays
 headmon
 alldays
 rm -f /tmp/fm.${_dte}
-
