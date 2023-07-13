@@ -1,0 +1,147 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * <NAME> <INITALS>
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+if [ $# -eq 0 ]
+then
+	year=`date +%Y`
+else
+	year=$1
+fi
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function firstMonday()
+{
+# Adapted from https://stackoverflow.com/questions/21383054/how-to-list-date-of-every-monday-and-thrusdays-in-shell-scripting
+# by glenn jackman on Jan 27, 2014 at 15:05
+month=1
+# last=$(date -d "$year-$month-1 + 1 month - 1 day" +%d)
+last=7
+wday=$(date -d "$year-$month-1" +%w)
+for (( day=1; day<=$last; day++ )); do
+    if (( wday == 1 )); then
+        FirstMonday=`printf "%4d-%02d-%02d\n" $year $month $day`
+    fi
+    (( wday = (wday + 1) % 7 ))
+done
+}
+
+function allmondays()
+{
+cday=${FirstMonday}
+nday=0
+while [ ${nday} -lt 366 ]
+do
+        # echo ${nday}
+        date -d "${cday} +${nday} days" '+%m/%d/%Y' >> /tmp/fm.${_dte}
+        nday=`expr $nday + 7`
+done
+
+}
+
+function headmon()
+{
+# Prepare the header for the year with jump links
+
+echo "<li><a href=\"#Dec-${year}\">December ${year}</a></li>"
+echo "<li><a href=\"#Nov-${year}\">November ${year}</a></li>"
+echo "<li><a href=\"#Oct-${year}\">October ${year}</a></li>"
+echo "<li><a href=\"#Sep-${year}\">September ${year}</a></li>"
+echo "<li><a href=\"#Aug-${year}\">August ${year}</a></li>"
+echo "<li><a href=\"#Jul-${year}\">July ${year}</a></li>"
+echo "<li><a href=\"#Jun-${year}\">June ${year}</a></li>"
+echo "<li><a href=\"#May-${year}\">May ${year}</a></li>"
+echo "<li><a href=\"#Apr-${year}\">April ${year}</a></li>"
+echo "<li><a href=\"#Mar-${year}\">March ${year}</a></li>"
+echo "<li><a href=\"#Feb-${year}\">February ${year}</a></li>"
+echo "<li><a href=\"#Jan-${year}\">iJanuary ${year}</a></li>"
+
+
+
+}
+function alldays()
+{
+cday="01/01/$year"
+nday=0
+while [ ${nday} -lt 366 ]
+do
+	dday=`date -d "${cday} +${nday} days" '+%m/%d/%Y'`
+
+	dayday=`date -d "${dday}" '+%d'`
+	if [ $dayday -eq "01" ]
+	then
+	FDAY=`date -d ${dday} +%B`
+	fday=`date -d ${dday} +%b`
+	echo "<center><H3 id=\"$fday-${year}\">$FDAY $year</H3></center>"
+	fi
+
+	grep -q $dday /tmp/fm.${_dte}
+	gday=$?
+
+	# if ${dday:1:2}
+	
+	if [ $gday -eq 0 ]
+	then
+		echo "<u style=\"background-color:#90EE90\">$dday</u><br>"
+	else
+		echo "$dday<br>"
+	fi
+
+	nday=`expr $nday + 1`
+done
+
+}
+
+function htmllist()
+{
+	date -d '2015-09-26 +30 days'
+}
+
+# ****************
+# * BODY OF WORK *
+# ****************
+firstMonday
+# echo "$FirstMonday is the first Monday of $year"
+allmondays
+headmon
+alldays
+rm -f /tmp/fm.${_dte}
+
