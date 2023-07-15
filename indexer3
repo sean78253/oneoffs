@@ -65,6 +65,7 @@ fndmed=0
 
 function filelists()
 {
+# find ${pth} -type f -print | sed 's/\.\///' > ${pthtemp}/indexer-list.${_dte}
 find ${pth} -type f -print | sed 's/\.\///' > ${pthtemp}/indexer-list.${_dte}
 
 while read filenm
@@ -82,10 +83,10 @@ function gotpng()
 function gotvid()
 {
 
-for i in $_movietypes
-do
-	echo $i
-done
+# for i in $_movietypes
+# do
+	# echo $i
+# done
 
 while read bare
 do
@@ -94,7 +95,8 @@ do
 		if [ -f "${bare}"."${mvt}" -a -f "${bare}".png ]
 		then	
 			### echo ""${bare}"."${mvt}" "${bare}".png"
-			echo "<a href=\"http://"${bare}"."${mvt}"\"><img src=\"http://"${bare}".png\" width=\"33%\" height=\"33%\"></a>"
+			# echo "<a href=\"http://"${bare}"."${mvt}"\"><img src=\"http://"${bare}".png\" width=\"33%\" height=\"33%\"></a>"
+			echo "<a href=\""${bare}"."${mvt}"\"><img src=\""${bare}".png\" width=\"33%\" height=\"33%\"></a>"
 		fi
 	done
 if [ ! -f "${bare}".png ]
@@ -107,7 +109,7 @@ done < "${pthtemp}"/indexer-bare."${_dte}"
 }
 
 function remtemp()
-{
+ {
 	rm "${pthtemp}"/indexer-list."${_dte}" "${pthtemp}"/indexer-bare."${_dte}"
 }
 
