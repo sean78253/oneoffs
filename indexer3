@@ -47,9 +47,10 @@
 # *******************
 _dte=`date +%s`
 _movietypes="mkv m4v mp4 mov"
+_docroot=`apache2ctl -t -D DUMP_VHOSTS | grep -m1 '80' | awk '{print $3}' | sed 's/(//' | sed 's/:/ /' | awk '{print $1}' | grep 'DocumentRoot' $a | awk '{print $2}'`
 pthtemp="/tmp"
 pth='.'
-fqdn=""
+fqdn="http://pinas.home.arpa/"
 fndmed=0
 # *****************
 # * CHECK PREREQS *
@@ -65,7 +66,6 @@ fndmed=0
 
 function filelists()
 {
-# find ${pth} -type f -print | sed 's/\.\///' > ${pthtemp}/indexer-list.${_dte}
 find ${pth} -type f -print | sed 's/\.\///' > ${pthtemp}/indexer-list.${_dte}
 
 while read filenm
@@ -95,8 +95,7 @@ do
 		if [ -f "${bare}"."${mvt}" -a -f "${bare}".png ]
 		then	
 			### echo ""${bare}"."${mvt}" "${bare}".png"
-			# echo "<a href=\"http://"${bare}"."${mvt}"\"><img src=\"http://"${bare}".png\" width=\"33%\" height=\"33%\"></a>"
-			echo "<a href=\""${bare}"."${mvt}"\"><img src=\""${bare}".png\" width=\"33%\" height=\"33%\"></a>"
+			echo "<a href="\"$fqdn${bare}"."${mvt}"\"><img src=\"${fqdn}"${bare}".png\" width=\"24%\" height=\"24%\"></a>"
 		fi
 	done
 if [ ! -f "${bare}".png ]
@@ -109,7 +108,7 @@ done < "${pthtemp}"/indexer-bare."${_dte}"
 }
 
 function remtemp()
- {
+{
 	rm "${pthtemp}"/indexer-list."${_dte}" "${pthtemp}"/indexer-bare."${_dte}"
 }
 
@@ -122,23 +121,3 @@ rm -f /tmp/indexer-nopng.`date +%Y%m%d`
 filelists
 gotvid
 remtemp
-
-exit 0
-
-for mv in `ls -c1 *.png`
-do
-mv1=`basename $mv .png`
-echo $mv1
-done | sort > /tmp/swe
-echo "<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<center>"
-
-while read mv1
-do
-# echo "<a href=\"file://$pth/$mv1.m4v\"> <img src=\"file://$pth/$mv1.png\" width=\"33%\" height=\"33%\"></a>" 
-echo "<a href=\"http://pinas.home.arpa/$pth/$mv1.m4v\"><img src=\"http://pinas.home.arpa/$pth/$mv1.png\" width=\"33%\" height=\"33%\"></a>" 
-done < /tmp/swe
-echo "</center>"
-rm /tmp/swe
