@@ -1,0 +1,109 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * <NAME> <INITALS>
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+# Rate limit to one run per day
+# Total incidents per state
+# Total killed/wounded per state
+# make site pull code
+#
+#
+#
+#
+# Prepare a HTML file for others to pull and use on their web sites.
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_License="
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+"
+
+#date epoc, date for sort: YYYYMMDD
+_dte=`date +%s`; _sdte=`date +%Y$m$d`
+
+$date for year
+_ydte=`date +%Y`
+
+# temp dir for working files
+_tmpdir="/tmp"
+
+# were we will ask wget to pull down the current data. Should only run once per day.
+_sitepull="https://mass-shooting-tracker-data.s3.us-east-2.amazonaws.com/${_ydte}-data.json"
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function checkrate()
+{
+	# check rate limit
+	true
+}
+
+function incidents()
+{
+	# total incidents per state
+true
+cat a.json | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | awk -F',' '{print $4}' | sort | uniq -c | sort -rn | awk '{printf("%3d %s\n", $1,$2)}'
+
+
+}
+
+function kaw()
+{
+	# killed and wounded per state
+	true
+}
+
+# ****************
+# * BODY OF WORK *
+# ****************
+#!/bin/bash
+# mass shooting stats from https://massshootingtracker.site
+# GNU license 3.0
+
+cat a.json | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | awk -F',' '{print $4}' | sort | uniq -c | sort -rn | awk '{printf("%3d %s\n", $1,$2)}' | head -20
+
