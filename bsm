@@ -56,7 +56,7 @@ You should have received a copy of the GNU General Public License along with thi
 #date epoc, date for sort: YYYYMMDD
 _dte=`date +%s`; _sdte=`date +%Y$m$d`
 
-$date for year
+#_ydte for year
 _ydte=`date +%Y`
 
 # temp dir for working files
@@ -94,16 +94,38 @@ cat a.json | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | a
 
 function kaw()
 {
-	# killed and wounded per state
-	true
+jq '.[] | .date, .killed, .wounded, .state, .city' /home/sean/Downloads/a.json | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | sort -t, -k4 > /tmp/bsm-kow.${_dte}
+
+cat /tmp/bsm-kow.${_dte}  | awk -F',' '{print $4}' | sort | uniq | sort > /tmp/bsm-kow1.${_dte}
+
+lmmstate=`head -1 /tmp/bsm-kow.${_dte} | awk -F',' '{print $4}'`
+mmstate=$lmmstate
+
+sed -i 's/,/ /g' /tmp/bsm-kow.${_dte}
+
+	while read mmdate mmkilled mmwound mmstate trash
+	do
+		if [ ${lmmstate} != ${mmstate} ]
+	then
+			# print totals for state
+			if [ ! -z ${lmmstate} ]
+				then
+					printf "State: %s Killed: %3d Wounded: %3d \n" ${lmmstate} ${totmmkilled} ${totmmwound}
+					totmmkilled=0; totmmwound=0; lmmstate=${mmstate}
+			fi
+		fi
+	totmmkilled=`expr $totmmkilled + $mmkilled`
+	totmmwound=`expr $totmmwound + $mmwound`
+	done < /tmp/bsm-kow.${_dte}
 }
 
 # ****************
 # * BODY OF WORK *
 # ****************
-#!/bin/bash
-# mass shooting stats from https://massshootingtracker.site
-# GNU license 3.0
 
-cat a.json | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | awk -F',' '{print $4}' | sort | uniq -c | sort -rn | awk '{printf("%3d %s\n", $1,$2)}' | head -20
+kaw
+rm /tmp/bsm-kow.${_dte} /tmp/bsm-kow1.${_dte}
+
+# cat a.json | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | awk -F',' '{print $4}' | sort | uniq -c | sort -rn | awk '{printf("%3d %s\n", $1,$2)}' > /tmp/bsm.${_dte}
+
 
