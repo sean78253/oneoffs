@@ -235,7 +235,7 @@ function install_tools()
 {
 
 sudo apt -d update
-sudo apt install -y pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim 
+sudo apt install -y pwgen net-tools htop iptables-persistent lynx debconf-utils cpuid curl gpg ncdu sshfs gparted dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools xfsprogs exfatprogs vim gcp sysstat iostat
 sudo apt upgrade -y
 
 # For typcial desk top or personal servers
