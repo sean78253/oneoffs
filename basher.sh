@@ -48,6 +48,7 @@ then
 	echo '
 export HISTSIZE=-1
 export HISTFILESIZE=-1
+# uncommnet if gcp fiernts export DISPLAY=:0.0
 export EDITOR=/usr/bin/vi
 export BASHMODSWE="true"
 # url = git@github.com:sean78253/notes.git

@@ -13,6 +13,7 @@
 # *********************************************************************
 # NOTES:
 # varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+junk="jq printf date expr awk sed wget xargs "
 #
 #
 #
@@ -65,6 +66,9 @@ _tmpdir="/tmp"
 # were we will ask wget to pull down the current data. Should only run once per day.
 _sitepull="https://mass-shooting-tracker-data.s3.us-east-2.amazonaws.com/${_ydte}-data.json"
 
+# Required external programs here
+_externprog="jq printf date expr awk sed wget xargs"
+
 # *****************
 # * CHECK PREREQS *
 # *****************
@@ -76,6 +80,18 @@ _sitepull="https://mass-shooting-tracker-data.s3.us-east-2.amazonaws.com/${_ydte
 # *************
 # * FUNCTIONS *
 # *************
+
+function checkpreq()
+{
+for i in `which ${_externprog}`
+do
+	if [ $? -eq 1 ]
+	then
+		echo -e "****\n$i external program is missing. If you see an error this is likely what you need to resolve.\n****\n"
+	fi
+done
+
+}
 
 function checkrate()
 {
@@ -110,7 +126,7 @@ sed -i 's/,/ /g' /tmp/bsm-kow.${_dte}
 			# print totals for state
 			if [ ! -z ${lmmstate} ]
 				then
-					printf "State: %s Killed: %3d Wounded: %3d \n" ${lmmstate} ${totmmkilled} ${totmmwound}
+					printf "%s Killed: %3d Wounded: %3d \n" ${lmmstate} ${totmmkilled} ${totmmwound}
 					totmmkilled=0; totmmwound=0; lmmstate=${mmstate}
 			fi
 		fi
@@ -125,7 +141,3 @@ sed -i 's/,/ /g' /tmp/bsm-kow.${_dte}
 
 kaw
 rm /tmp/bsm-kow.${_dte} /tmp/bsm-kow1.${_dte}
-
-# cat a.json | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | awk -F',' '{print $4}' | sort | uniq -c | sort -rn | awk '{printf("%3d %s\n", $1,$2)}' > /tmp/bsm.${_dte}
-
-
