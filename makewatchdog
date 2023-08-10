@@ -1,0 +1,20 @@
+if [ ! -c /dev/watchdog ]
+then
+	echo 'dtparam=watchdog=on' >> /boot/config.txt
+	touch /root/watchdog
+	echo "I've enabled watchdog in kernel"
+	sync;sync
+	reboot
+fi
+
+if [ ! -f /etc/watchdog.conf ]
+then
+	sudo apt-get update
+	sudo apt-get install watchdog
+	echo 'watchdog-device = /dev/watchdog' >> /etc/watchdog.conf
+	echo 'watchdog-timeout = 15' >> /etc/watchdog.conf
+	echo 'max-load-1 = 24' >> /etc/watchdog.conf
+	systemctl enable watchdog
+	systemctl start watchdog
+	systemctl status watchdog
+fi
