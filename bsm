@@ -73,6 +73,13 @@ _externprog="jq printf date expr awk sed wget xargs"
 # * CHECK PREREQS *
 # *****************
 
+if [ -z $1 ]
+then
+	echo "Need an input file name to process"
+else
+infile=$1
+fi
+
 # **********************
 # * RESOLVE VAR ISSUES *
 # **********************
@@ -103,14 +110,14 @@ function incidents()
 {
 	# total incidents per state
 true
-cat a.json | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | awk -F',' '{print $4}' | sort | uniq -c | sort -rn | awk '{printf("%3d %s\n", $1,$2)}'
+cat ${infile} | jq '.[] | .date, .killed, .wounded, .state, .city' | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | awk -F',' '{print $4}' | sort | uniq -c | sort -rn | awk '{printf("%3d %s\n", $1,$2)}'
 
 
 }
 
 function kaw()
 {
-jq '.[] | .date, .killed, .wounded, .state, .city' /home/sean/Downloads/a.json | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | sort -t, -k4 > /tmp/bsm-kow.${_dte}
+jq '.[] | .date, .killed, .wounded, .state, .city' ${infile} | xargs -L 5 | awk '{print $1","$2","$3","$4","$5,$6,$7,$8}' | sed 's/ /_/g' | sed 's/__//g' | sed 's/_$//' | sed 's/T00:00:00.000Z//' | sort -t, -k4 > /tmp/bsm-kow.${_dte}
 
 cat /tmp/bsm-kow.${_dte}  | awk -F',' '{print $4}' | sort | uniq | sort > /tmp/bsm-kow1.${_dte}
 

@@ -1,0 +1,64 @@
+#!/bin/bash
+# 
+#
+#
+# *********************************************************************
+# *
+# * <NAME> <INITALS>
+# *
+# * Revision list here:
+# * YYYY-MM-DD-xxx	Notes
+# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
+# *			
+# *********************************************************************
+# NOTES:
+# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
+#
+#
+#
+#
+# *********************************************************************
+# TODOS
+#
+#
+#
+#
+#
+# *******************
+# * DEFINE VARABLES *
+# *******************
+_dte=`date +%s`
+_yesterday=`date -d "now -1 day" +%Y-%m-%d`
+
+# *****************
+# * CHECK PREREQS *
+# *****************
+
+# **********************
+# * RESOLVE VAR ISSUES *
+# **********************
+
+# *************
+# * FUNCTIONS *
+# *************
+
+function checkup()
+{
+	true
+	exit 0
+# check remote system is up
+}
+
+function fetch()
+{
+	true
+	exit 0
+	# rsync -rv root@camcluster1.home.arpa:/data/output/Camera*/YYYY-MM-DD/* /var/www/html/videocam
+	rsync -rv ${user}@${system}:${directory} ${to}
+	# rsync -rv $user@$system:$from $to
+}
+
+# ****************
+# * BODY OF WORK *
+# ****************
+echo $_yesterday
