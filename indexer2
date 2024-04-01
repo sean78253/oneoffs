@@ -1,63 +1,8 @@
-#!/bin/bash
-# Indexer - index a dir and make a html
-#
-#
-# *********************************************************************
-# *
-# * <NAME> <INITALS>
-# *
-# * Revision list here:
-# * YYYY-MM-DD-xxx	Notes
-# * YYYY-MM-DD-xxx	HOURS: INITALS 1.25 for an hour and 15 minutes
-# *			
-# *********************************************************************
-# NOTES:
-# varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
-#
-#
-#
-#
-# *********************************************************************
-# TODOS
-#
-#
-#
-#
-#
-# *******************
-# * DEFINE VARABLES *
-# *******************
-_dte=`date +%s`
-
-# *****************
-# * CHECK PREREQS *
-# *****************
-
-# **********************
-# * RESOLVE VAR ISSUES *
-# **********************
-pth=`pwd`
-rt="file://"
-
-# rt is referer target, usually either HTTP(S):// or FILE://
-# trg is our target for opening in a new tab or window, leave null to open in the current
-# trg=''
-# trg='target="_blank" rel="noopener noreferrer"'
-trg='target="_blank" rel="noopener noreferrer"'
-
-# *************
-# * FUNCTIONS *
-# *************
-
-# ****************
-# * BODY OF WORK *
-# ****************
-
-for i in `ls -c1 *.jpg`
-do
-# echo "<a href=\"file:///home/sean/temp/orig/$i\"><img src=\"file:///home/sean/temp/orig/$i\" width=\"20%\" height=\"30%\"></a>"
-# echo "<a href=\"file://${pth}/$i\">_<img src=\"file://${pth}/$i\" width=\"18%\" height=\"30%\"></a>"
-# echo "<a href=\"${rt}${pth}/$i\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"${rt}${pth}/$i\" width=\"18%\" height=\"30%\"></a>"
-echo "<a href=\"${rt}${pth}/$i\" ${trg}><img src=\"${rt}${pth}/$i\" width=\"18%\" height=\"30%\"></a>"
-done
-
+echo "<style>
+body {
+background-color: #1c87c9;
+}
+</style>
+</head>
+<body></body>
+<center>"

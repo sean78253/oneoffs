@@ -49,8 +49,8 @@ _dte=`date +%s`
 _movietypes="mkv m4v mp4 mov"
 # _docroot=`apache2ctl -t -D DUMP_VHOSTS | grep -m1 '80' | awk '{print $3}' | sed 's/(//' | sed 's/:/ /' | awk '{print $1}' | grep 'DocumentRoot' $a | awk '{print $2}'`
 _docroot='.'
-_wid="16%"
-_hgt="16%"
+_wid="24%"
+_hgt="24%"
 pthtemp="/tmp"
 pth='.'
 fqdn="./"
@@ -67,6 +67,17 @@ fndmed=0
 # * FUNCTIONS *
 # *************
 
+function headout()
+{
+echo "<style>
+body {
+background-color: #1c87c9;
+}
+</style>
+</head>
+<body></body>"
+}
+
 function filelists()
 {
 find ${pth} -maxdepth 1 -type f -print | sed 's/\.\///' > ${pthtemp}/indexer-list.${_dte}
@@ -76,6 +87,7 @@ do
 	filenm1=${filenm::-4}
 	echo "$filenm1" >> "${pthtemp}"/indexer-bare."${_dte}"
 done < "${pthtemp}"/indexer-list."${_dte}"
+
 }
 
 function gotpng()
@@ -119,7 +131,8 @@ function remtemp()
 function dodirs()
 {
 # <a href="http://pinas.home.arpa/SherlockHomesSeries/index.html" target="_blank" rel="noopener noreferrer"><img src="SherlockHomesSeries/SherlockHomesSeries.png" width="10%" height="10%"></a>
-find . -type d -print | grep -v 'Trash' > "${pthtemp}"/indexer-dirlist."${_dte}"
+# find . -maxdepth 1 -type d -print | grep -v 'Trash' > "${pthtemp}"/indexer-dirlist."${_dte}"
+find . -maxdepth 1 -type d -print | grep '\.\/' | grep -v 'Trash' > "${pthtemp}"/indexer-dirlist."${_dte}"
 
 	while read dirstoidx
 	do
@@ -135,8 +148,8 @@ find . -type d -print | grep -v 'Trash' > "${pthtemp}"/indexer-dirlist."${_dte}"
 	while read idximg
 	do
 		subdir=`echo $idximg | awk -F'/' '{print $2}'`
-		echo "<a href="./${subdir}/index.html" target="_blank" rel="noopener noreferrer"><img src="${idximg}" \"${_wid}\" height=\"${_hgt}\"></a>"
-	done < /tmp/indexer-dirlist1.${_dte}
+		echo "<a href="./${subdir}/index.html" target="_blank" rel="noopener noreferrer"><img src="${idximg}" width=\"${_wid}\" height=\"${_hgt}\"></a>"
+	done < /tmp/indexer-dirlist1.${_dte} | sort
 
 
 }
@@ -145,6 +158,7 @@ find . -type d -print | grep -v 'Trash' > "${pthtemp}"/indexer-dirlist."${_dte}"
 # ****************
 
 rm -f /tmp/indexer-nopng.`date +%Y%m%d`
+# headout
 dodirs
 exit 0
 filelists

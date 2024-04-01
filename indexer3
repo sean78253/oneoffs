@@ -47,10 +47,11 @@
 # *******************
 _dte=`date +%s`
 _movietypes="mkv m4v mp4 mov"
-_docroot=`apache2ctl -t -D DUMP_VHOSTS | grep -m1 '80' | awk '{print $3}' | sed 's/(//' | sed 's/:/ /' | awk '{print $1}' | grep 'DocumentRoot' $a | awk '{print $2}'`
+# _docroot=`apache2ctl -t -D DUMP_VHOSTS | grep -m1 '80' | awk '{print $3}' | sed 's/(//' | sed 's/:/ /' | awk '{print $1}' | grep 'DocumentRoot' $a | awk '{print $2}'`
 pthtemp="/tmp"
 pth='.'
-fqdn="http://pinas.home.arpa/"
+# fqdn="http://pinas.home.arpa/"
+fqdn="./"
 fndmed=0
 # *****************
 # * CHECK PREREQS *
@@ -66,7 +67,7 @@ fndmed=0
 
 function filelists()
 {
-find ${pth} -type f -print | sed 's/\.\///' > ${pthtemp}/indexer-list.${_dte}
+find ${pth} -maxdepth 1 -type f -print | sed 's/\.\///' > ${pthtemp}/indexer-list.${_dte}
 
 while read filenm
 do
@@ -95,7 +96,10 @@ do
 		if [ -f "${bare}"."${mvt}" -a -f "${bare}".png ]
 		then	
 			### echo ""${bare}"."${mvt}" "${bare}".png"
-			echo "<a href="\"$fqdn${bare}"."${mvt}"\"><img src=\"${fqdn}"${bare}".png\" width=\"24%\" height=\"24%\"></a>"
+			echo "<a href="\"$fqdn${bare}"."${mvt}"\"><img src=\"${fqdn}"${bare}".png\" width=\"32%\" height=\"42%\"></a>"
+                        # echo "<a href="\"$fqdn${bare}"."${mvt}"\"><img src=\"${fqdn}"${bare}".png\" width=\"24%\" height=\"24%\"></a>"
+                        # echo "<a href="\"$fqdn${bare}"."${mvt}"\"><img src=\"${fqdn}"${bare}".png\" width=\"19%\" height=\"19%\"></a>"
+                        # echo "<a href="\"$fqdn${bare}"."${mvt}"\"><img src=\"${fqdn}"${bare}".png\" width=\"16%\" height=\"16%\"></a>"
 		fi
 	done
 if [ ! -f "${bare}".png ]
