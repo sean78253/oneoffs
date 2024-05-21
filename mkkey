@@ -50,11 +50,13 @@ _kylgn=4096
 # * CHECK PREREQS *
 # *****************
 
-if [ -e /usr/bin/puttygen ] 
+# if we have puttygen, let's go head and make a ppk file too
+
+if [ -e /usr/bin/puttygen1 ] 
 then
 	havepg=0
 else
-	havepg=1
+	echo -e "\a\n You might want the puttygen tools\n"
 fi
 
 
@@ -75,33 +77,18 @@ read -p "Who is this key for?: " fr
 E=""
 read -p "Enter Email: " E
 
-if [ -z $E ]
-then
-	kfn=~/.ssh/id_rsa-${fr}-${_dte}
-else
-	kfn=~/.ssh/id_rsa-${fr}-$E-${_dte}
-fi
+# if [ -z $E ]
+# then
+	# kfn=~/.ssh/id_rsa-${fr}-${_dte}
+# else
+	# kfn=~/.ssh/id_rsa-${fr}-$E-${_dte}
+# fi
+
+kfn=`echo ~/.ssh/id_rsa-${fr}-$E-${_dte} | sed 's/--/-/g' | sed 's/--/-/g'`
 
 echo "ssh-keygen -trsa -b${_kylgn} -C"${fr}-${_dte}" -f $kfn"
 
-if [ ${havepg} -eq 0 ]
+if [ ! -z ${havepg} ]
 then
 	echo "puttygen $kfn -o $kfn.ppk"
 fi
-
-exit 
-
-# if [ -z $E ]
-# then
-	# echo "ssh-keygen -trsa -b${_kylgn} -C"${fr}-${_dte}" -f ~/.ssh/id_rsa-${fr}-${_dte}"
-	# if [ havegp -eq 0 ]
-	# then
-			# echo "puttygen ~/.ssh/id_rsa-${fr}-${_dte} -o ~/.ssh/id_rsa-${fr}-${_dte}.ppk"
-	# fi
-# else
-	# echo "ssh-keygen -trsa -b${_kylgn} -C"${fr}-$E-${_dte}" -f ~/.ssh/id_rsa-${fr}-$E-${_dte}"
-	# if [ havepg -eq 0 ]
-	# then
-		# echo "puttygen ~/.ssh/id_rsa-${fr}-$E-${_dte} -o ~/.ssh/id_rsa-${fr}-$E-${_dte}.ppk"
-	##  fi
-# fi
