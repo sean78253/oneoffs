@@ -42,12 +42,21 @@
 _dte=`date -u +%Y%m%d`
 # _kylgn=1024
 # _kylgn=2048
-_kylgn=4196
+_kylgn=4096
 # _kylgn=8192
+# _kylgn=16384
 
 # *****************
 # * CHECK PREREQS *
 # *****************
+
+if [ -e /usr/bin/puttygen ] 
+then
+	havepg=0
+else
+	havepg=1
+fi
+
 
 # **********************
 # * RESOLVE VAR ISSUES *
@@ -65,10 +74,34 @@ read -p "Who is this key for?: " fr
 
 E=""
 read -p "Enter Email: " E
+
 if [ -z $E ]
 then
-	E="NoEmail"
+	kfn=~/.ssh/id_rsa-${fr}-${_dte}
+else
+	kfn=~/.ssh/id_rsa-${fr}-$E-${_dte}
 fi
 
-ssh-keygen -trsa -b${_kylgn} -C"${fr}-$E-${_dte}" -f ~/.ssh/id_rsa-${fr}-$E-${_dte}
-puttygen ~/.ssh/id_rsa-${fr}-$E-${_dte} -o ~/.ssh/id_rsa-${fr}-$E-${_dte}.ppk
+echo "ssh-keygen -trsa -b${_kylgn} -C"${fr}-${_dte}" -f $kfn"
+
+if [ ${havepg} -eq 0 ]
+then
+	echo "puttygen $kfn -o $kfn.ppk"
+fi
+
+exit 
+
+# if [ -z $E ]
+# then
+	# echo "ssh-keygen -trsa -b${_kylgn} -C"${fr}-${_dte}" -f ~/.ssh/id_rsa-${fr}-${_dte}"
+	# if [ havegp -eq 0 ]
+	# then
+			# echo "puttygen ~/.ssh/id_rsa-${fr}-${_dte} -o ~/.ssh/id_rsa-${fr}-${_dte}.ppk"
+	# fi
+# else
+	# echo "ssh-keygen -trsa -b${_kylgn} -C"${fr}-$E-${_dte}" -f ~/.ssh/id_rsa-${fr}-$E-${_dte}"
+	# if [ havepg -eq 0 ]
+	# then
+		# echo "puttygen ~/.ssh/id_rsa-${fr}-$E-${_dte} -o ~/.ssh/id_rsa-${fr}-$E-${_dte}.ppk"
+	##  fi
+# fi
