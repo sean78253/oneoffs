@@ -25,7 +25,7 @@
 # *********************************************************************
 # NOTES:
 # varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
-#
+# puttygen openssh_private_key -o output_filename.ppk
 #
 #
 #
@@ -71,3 +71,4 @@ then
 fi
 
 ssh-keygen -trsa -b${_kylgn} -C"${fr}-$E-${_dte}" -f ~/.ssh/id_rsa-${fr}-$E-${_dte}
+puttygen ~/.ssh/id_rsa-${fr}-$E-${_dte} -o ~/.ssh/id_rsa-${fr}-$E-${_dte}.ppk
