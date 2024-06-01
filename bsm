@@ -14,7 +14,7 @@
 # NOTES:
 # varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
 junk="jq printf date expr awk sed wget xargs "
-#
+# We may do a dependency check in the future
 #
 #
 #
