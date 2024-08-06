@@ -1,0 +1,4 @@
+ln /usr/lib/systemd/system/netfilter-persistent.service /etc/systemd/system/multi-user.target.wants/netfilter-persistent.service
+ln /usr/lib/systemd/system/netfilter-persistent.service /etc/systemd/system/ip6tables.service
+ln /usr/lib/systemd/system/netfilter-persistent.service /etc/systemd/system/iptables.service
+# ln /etc/systemd/system/iptables.service /etc/systemd/system/iptables.service
