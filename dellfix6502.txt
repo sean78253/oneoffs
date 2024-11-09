@@ -1,0 +1,8 @@
+https://askubuntu.com/questions/1499890/nvidia-390-drivers-will-not-build
+=== Try 2
+https://ubuntuforums.org/showthread.php?t=2495427
+sudo add-apt-repository ppa:dtl131/nvidiaexp
+sudo apt-get remove --purge '^nvidia-.*'
+sudo apt-get install ubuntu-desktop
+sudo apt install nvidia-dkms-390
+sudo apt install nvidia-driver-390
