@@ -11,6 +11,7 @@ Rail-low            , #c0c0c0,,,
 Rail-low Amastad-LaCoste, #c0c0c0,,,
 ,,,,
 # Frequency , Name                     , Modulation          ,  Bandwidth, Tags
+004458000, BNSF Hy-Rail             , Narrow FM           ,25000, Hy-Rail
 159810000, RR-Ch-01                 , Narrow FM           ,25000, Road
 159810000, RR-Ch-02                 , Narrow FM           ,25000, Road
 159930000, RR-Ch-03                 , Narrow FM           ,25000, Road
@@ -137,40 +138,55 @@ Rail-low Amastad-LaCoste, #c0c0c0,,,
 221872500, ITCM-171                 , Narrow FM           ,25000, ITCM
 221887500, ITCM-172                 , Narrow FM           ,25000, ITCM
 221937500, ITCM-174                 , Narrow FM           ,25000, ITCM
-457937500, EOT-HOT, Narrow FM,25000,EOT
-452937500, EOT-HOT, Narrow FM,25000,HOT
-928718750, ATCS, Narrow FM,25000,ATCS
-952718750, ATCS, Narrow FM,25000,ATCS
-896887500, ATCS, Narrow FM,25000,ATCS
-928068750, ATCS, Narrow FM,25000,ATCS
-928081250, ATCS, Narrow FM,25000,ATCS
-928143750, ATCS, Narrow FM,25000,ATCS
-928231250, ATCS, Narrow FM,25000,ATCS
-928443750, ATCS, Narrow FM,25000,ATCS
-928518750, ATCS, Narrow FM,25000,ATCS
-928556250, ATCS, Narrow FM,25000,ATCS
-928693750, ATCS, Narrow FM,25000,ATCS
-928706250, ATCS, Narrow FM,25000,ATCS
-928706250, ATCS, Narrow FM,25000,ATCS
-928718750, ATCS, Narrow FM,25000,ATCS
-928743750, ATCS, Narrow FM,25000,ATCS
-928743750, ATCS, Narrow FM,25000,ATCS
-932356250, ATCS, Narrow FM,25000,ATCS
-932393750, ATCS, Narrow FM,25000,ATCS
-932431250, ATCS, Narrow FM,25000,ATCS
-935887500, ATCS, Narrow FM,25000,ATCS
-941356250, ATCS, Narrow FM,25000,ATCS
-941393750, ATCS, Narrow FM,25000,ATCS
-941431250, ATCS, Narrow FM,25000,ATCS
-941431250, ATCS, Narrow FM,25000,ATCS
-952068750, ATCS, Narrow FM,25000,ATCS
-952081250, ATCS, Narrow FM,25000,ATCS
-952143750, ATCS, Narrow FM,25000,ATCS
-952231250, ATCS, Narrow FM,25000,ATCS
-952443750, ATCS, Narrow FM,25000,ATCS
-952518750, ATCS, Narrow FM,25000,ATCS
-952556250, ATCS, Narrow FM,25000,ATCS
-952693750, ATCS, Narrow FM,25000,ATCS
-952706250, ATCS, Narrow FM,25000,ATCS
-952718750, ATCS, Narrow FM,25000,ATCS
-952743750, ATCS, Narrow FM,25000,ATCS
+457937500, EOT-HOT                  , Narrow FM           ,25000, EOT
+452937500, EOT-HOT                  , Narrow FM           ,25000, HOT
+928718750, ATCS                     , Narrow FM           ,25000, ATCS
+952718750, ATCS                     , Narrow FM           ,25000, ATCS
+896887500, ATCS                     , Narrow FM           ,25000, ATCS
+928068750, ATCS                     , Narrow FM           ,25000, ATCS
+928081250, ATCS                     , Narrow FM           ,25000, ATCS
+928143750, ATCS                     , Narrow FM           ,25000, ATCS
+928231250, ATCS                     , Narrow FM           ,25000, ATCS
+928443750, ATCS                     , Narrow FM           ,25000, ATCS
+928518750, ATCS                     , Narrow FM           ,25000, ATCS
+928556250, ATCS                     , Narrow FM           ,25000, ATCS
+928693750, ATCS                     , Narrow FM           ,25000, ATCS
+928706250, ATCS                     , Narrow FM           ,25000, ATCS
+928743750, ATCS                     , Narrow FM           ,25000, ATCS
+932356250, ATCS                     , Narrow FM           ,25000, ATCS
+932393750, ATCS                     , Narrow FM           ,25000, ATCS
+932431250, ATCS                     , Narrow FM           ,25000, ATCS
+935887500, ATCS                     , Narrow FM           ,25000, ATCS
+941356250, ATCS                     , Narrow FM           ,25000, ATCS
+941393750, ATCS                     , Narrow FM           ,25000, ATCS
+941431250, ATCS                     , Narrow FM           ,25000, ATCS
+952068750, ATCS                     , Narrow FM           ,25000, ATCS
+952081250, ATCS                     , Narrow FM           ,25000, ATCS
+952143750, ATCS                     , Narrow FM           ,25000, ATCS
+952231250, ATCS                     , Narrow FM           ,25000, ATCS
+952443750, ATCS                     , Narrow FM           ,25000, ATCS
+952518750, ATCS                     , Narrow FM           ,25000, ATCS
+952556250, ATCS                     , Narrow FM           ,25000, ATCS
+952693750, ATCS                     , Narrow FM           ,25000, ATCS
+952706250, ATCS                     , Narrow FM           ,25000, ATCS
+952743750, ATCS                     , Narrow FM           ,25000, ATCS
+902250000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+903750000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+910000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+911500000, AEI                      , Narrow FM           ,25000, AEI Trackside
+913000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+915000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+917000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+918500000, AEI                      , Narrow FM           ,25000, AEI Trackside
+920000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+921500000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+452925000, DPU chan 1               , Narrow FM           ,25000, DPU
+452950000, DPU chan 2               , Narrow FM           ,25000, DPU
+457925000, DPU chan 3               , Narrow FM           ,25000, DPU
+457950000, DPU chan 4               , Narrow FM           ,25000, DPU
+452931250, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
+452943750, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
+452956250, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
+452962500, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
+452968750, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
+
