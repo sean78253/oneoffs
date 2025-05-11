@@ -1,3 +1,4 @@
+# https://www.radioreference.com/db/aid/7747
 # Tag name          ,  color,,,
 Rail-low East Yard  , #c0c0c0,,,
 Rail-low Austin     , #c0c0c0,,,
@@ -23,7 +24,7 @@ Rail-low Amastad-LaCoste, #c0c0c0,,,
 160275000, RR-Ch-11                 , Narrow FM           ,25000, Road
 160290000, RR-Ch-12                 , Narrow FM           ,25000, Road
 160305000, RR-Ch-13                 , Narrow FM           ,25000, Road
-160320000, RR-Ch-14                 , Narrow FM           ,25000, Road
+160320000, RR-Ch-14                 , Narrow FM           ,25000, Road Herne area North
 160335000, RR-Ch-15                 , Narrow FM           ,25000, Road
 160350000, RR-Ch-16                 , Narrow FM           ,25000, Road
 160365000, RR-Ch-17                 , Narrow FM           ,25000, Road
@@ -51,13 +52,13 @@ Rail-low Amastad-LaCoste, #c0c0c0,,,
 160695000, RR-Ch-39                 , Narrow FM           ,25000, Road
 160710000, RR-Ch-40                 , Narrow FM           ,25000, Road
 160725000, RR-Ch-41                 , Narrow FM           ,25000, Road
-160740000, RR-Ch-42 Austin Sub      , Narrow FM           ,25000, Road Austin
+160740000, RR-Ch-42 Austin Sub      , Narrow FM           ,25000, Road Twr 112 to Marjorie
 160755000, RR-Ch-43                 , Narrow FM           ,25000, Road
 160770000, RR-Ch-44                 , Narrow FM           ,25000, Road Eagle Lake - Heaker
 160785000, RR-Ch-45                 , Narrow FM           ,25000, Road
 160800000, RR-Ch-46                 , Narrow FM           ,25000, Road
 160815000, RR-Ch-47                 , Narrow FM           ,25000, Road
-160830000, RR-Ch-48                 , Narrow FM           ,25000, Road
+160830000, RR-Ch-48                 , Narrow FM           ,25000, Road Marjorie to Herne
 160845000, RR-Ch-49                 , Narrow FM           ,25000, Road
 160860000, RR-Ch-50                 , Narrow FM           ,25000, Road
 160875000, RR-Ch-51                 , Narrow FM           ,25000, Road
@@ -72,7 +73,7 @@ Rail-low Amastad-LaCoste, #c0c0c0,,,
 161010000, RR-Ch-60                 , Narrow FM           ,25000, Road
 161025000, RR-Ch-61                 , Narrow FM           ,25000, Road
 161040000, RR-Ch-62                 , Narrow FM           ,25000, Road
-161055000, RR-Ch-63                 , Narrow FM           ,25000, Road
+161055000, RR-Ch-63                 , Narrow FM           ,25000, Road Waco
 161070000, RR-Ch-64                 , Narrow FM           ,25000, Road
 161085000, RR-Ch-65                 , Narrow FM           ,25000, Road
 161100000, RR-Ch-66                 , Narrow FM           ,25000, Road
@@ -96,7 +97,7 @@ Rail-low Amastad-LaCoste, #c0c0c0,,,
 161370000, RR-Ch-84                 , Narrow FM           ,25000, Road
 161385000, RR-Ch-85                 , Narrow FM           ,25000, Road
 161400000, RR-Ch-86                 , Narrow FM           ,25000, Road
-161415000, RR-Ch-87                 , Narrow FM           ,25000, Road
+161415000, RR-Ch-87                 , Narrow FM           ,25000, Road BNSF Galviston
 161430000, RR-Ch-88                 , Narrow FM           ,25000, Road
 161445000, RR-Ch-89                 , Narrow FM           ,25000, Road
 161460000, RR-Ch-90                 , Narrow FM           ,25000, Road
@@ -138,38 +139,38 @@ Rail-low Amastad-LaCoste, #c0c0c0,,,
 221937500, ITCM-174                 , Narrow FM           ,25000, ITCM
 457937500, EOT-HOT, Narrow FM,25000,EOT
 452937500, EOT-HOT, Narrow FM,25000,HOT
-928718750,ATCS, Narrow FM,25000,ATCS
-952718750,ATCS, Narrow FM,25000,ATCS
-896887500,ATCS, Narrow FM,25000,ATCS
-928068750,ATCS, Narrow FM,25000,ATCS
-928081250,ATCS, Narrow FM,25000,ATCS
-928143750,ATCS, Narrow FM,25000,ATCS
-928231250,ATCS, Narrow FM,25000,ATCS
-928443750,ATCS, Narrow FM,25000,ATCS
-928518750,ATCS, Narrow FM,25000,ATCS
-928556250,ATCS, Narrow FM,25000,ATCS
-928693750,ATCS, Narrow FM,25000,ATCS
-928706250,ATCS, Narrow FM,25000,ATCS
-928706250,ATCS, Narrow FM,25000,ATCS
-928718750,ATCS, Narrow FM,25000,ATCS
-928743750,ATCS, Narrow FM,25000,ATCS
-928743750,ATCS, Narrow FM,25000,ATCS
-932356250,ATCS, Narrow FM,25000,ATCS
-932393750,ATCS, Narrow FM,25000,ATCS
-932431250,ATCS, Narrow FM,25000,ATCS
-935887500,ATCS, Narrow FM,25000,ATCS
-941356250,ATCS, Narrow FM,25000,ATCS
-941393750,ATCS, Narrow FM,25000,ATCS
-941431250,ATCS, Narrow FM,25000,ATCS
-941431250,ATCS, Narrow FM,25000,ATCS
-952068750,ATCS, Narrow FM,25000,ATCS
-952081250,ATCS, Narrow FM,25000,ATCS
-952143750,ATCS, Narrow FM,25000,ATCS
-952231250,ATCS, Narrow FM,25000,ATCS
-952443750,ATCS, Narrow FM,25000,ATCS
-952518750,ATCS, Narrow FM,25000,ATCS
-952556250,ATCS, Narrow FM,25000,ATCS
-952693750,ATCS, Narrow FM,25000,ATCS
-952706250,ATCS, Narrow FM,25000,ATCS
-952718750,ATCS, Narrow FM,25000,ATCS
-952743750,ATCS, Narrow FM,25000,ATCS
+928718750, ATCS, Narrow FM,25000,ATCS
+952718750, ATCS, Narrow FM,25000,ATCS
+896887500, ATCS, Narrow FM,25000,ATCS
+928068750, ATCS, Narrow FM,25000,ATCS
+928081250, ATCS, Narrow FM,25000,ATCS
+928143750, ATCS, Narrow FM,25000,ATCS
+928231250, ATCS, Narrow FM,25000,ATCS
+928443750, ATCS, Narrow FM,25000,ATCS
+928518750, ATCS, Narrow FM,25000,ATCS
+928556250, ATCS, Narrow FM,25000,ATCS
+928693750, ATCS, Narrow FM,25000,ATCS
+928706250, ATCS, Narrow FM,25000,ATCS
+928706250, ATCS, Narrow FM,25000,ATCS
+928718750, ATCS, Narrow FM,25000,ATCS
+928743750, ATCS, Narrow FM,25000,ATCS
+928743750, ATCS, Narrow FM,25000,ATCS
+932356250, ATCS, Narrow FM,25000,ATCS
+932393750, ATCS, Narrow FM,25000,ATCS
+932431250, ATCS, Narrow FM,25000,ATCS
+935887500, ATCS, Narrow FM,25000,ATCS
+941356250, ATCS, Narrow FM,25000,ATCS
+941393750, ATCS, Narrow FM,25000,ATCS
+941431250, ATCS, Narrow FM,25000,ATCS
+941431250, ATCS, Narrow FM,25000,ATCS
+952068750, ATCS, Narrow FM,25000,ATCS
+952081250, ATCS, Narrow FM,25000,ATCS
+952143750, ATCS, Narrow FM,25000,ATCS
+952231250, ATCS, Narrow FM,25000,ATCS
+952443750, ATCS, Narrow FM,25000,ATCS
+952518750, ATCS, Narrow FM,25000,ATCS
+952556250, ATCS, Narrow FM,25000,ATCS
+952693750, ATCS, Narrow FM,25000,ATCS
+952706250, ATCS, Narrow FM,25000,ATCS
+952718750, ATCS, Narrow FM,25000,ATCS
+952743750, ATCS, Narrow FM,25000,ATCS

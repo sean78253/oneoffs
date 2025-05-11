@@ -16,7 +16,7 @@
 # * 2021-12-07-000      Add hostname ctl
 # * 2021-12-20-000	Add common tools I use
 # * 2021-21-22-000	fix bugs from typos
-# *
+# * 2025-05-11-000	Add choice to install all partition types
 # *
 # *
 # *********************************************************************
@@ -288,6 +288,26 @@ fi
 scp -P 4822 root@mygeekisp.com:/guac/* /guac/
 }
 
+
+# add drive support
+
+function add_drive_support()
+{
+apt install cryptsetup dmsetup exfat-fuse exfat-utils f2fs-tools gdisk gparted hfsprogs hfsutils jfsutils lvm2 nilfs-tools reiser4progs reiserfsprogs sysstat udftools util-linux xfsdump xfsprogs
+
+# Edit /etc/modules, add exfat to list if not present
+
+grep -s exfat /etc/modules; EX_FAT=$?
+
+if [ ${EX_FAT} -eq 1 ]
+then
+	echo "exfat" >> /etc/modules
+fi
+}
+
+# add_drive_support
+
+
 ################
 ##### WORK #####
 ################
@@ -297,4 +317,5 @@ check_host
 move_ssh
 gitconfig
 install_tools
+# add_drive_support
 locali
