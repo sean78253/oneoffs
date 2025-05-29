@@ -11,182 +11,181 @@ Rail-low            , #c0c0c0,,,
 Rail-low Amastad-LaCoste, #c0c0c0,,,
 ,,,,
 # Frequency , Name                     , Modulation          ,  Bandwidth, Tags
-004458000, BNSF Hy-Rail             , Narrow FM           ,25000, Hy-Rail
-159810000, RR-Ch-01                 , Narrow FM           ,25000, Road
-159810000, RR-Ch-02                 , Narrow FM           ,25000, Road
-159930000, RR-Ch-03                 , Narrow FM           ,25000, Road
-160050000, RR-Ch-04                 , Narrow FM           ,25000, Road
-160185000, RR-Ch-05                 , Narrow FM           ,25000, Road
-160200000, RR-Ch-06                 , Narrow FM           ,25000, Road
-160215000, RR-Ch-07                 , Narrow FM           ,25000, Road
-160230000, RR-Ch-08                 , Narrow FM           ,25000, Road
-160245000, RR-Ch-09                 , Narrow FM           ,25000, Road
-160260000, RR-Ch-10                 , Narrow FM           ,25000, Road
-160275000, RR-Ch-11                 , Narrow FM           ,25000, Road
-160290000, RR-Ch-12                 , Narrow FM           ,25000, Road
-160305000, RR-Ch-13                 , Narrow FM           ,25000, Road
-160320000, RR-Ch-14                 , Narrow FM           ,25000, Road Herne area North
-160335000, RR-Ch-15                 , Narrow FM           ,25000, Road
-160350000, RR-Ch-16                 , Narrow FM           ,25000, Road
-160365000, RR-Ch-17                 , Narrow FM           ,25000, Road
-160380000, RR-Ch-18                 , Narrow FM           ,25000, Road
-160395000, RR-Ch-19                 , Narrow FM           ,25000, Road
-160410000, RR-Ch-20                 , Narrow FM           ,25000, Road
-160425000, RR-Ch-21                 , Narrow FM           ,25000, Road
-160440000, RR-Ch-22                 , Narrow FM           ,25000, Road
-160455000, RR-Ch-23                 , Narrow FM           ,25000, Road
-160470000, RR-Ch-24                 , Narrow FM           ,25000, Road
-160485000, RR-Ch-25                 , Narrow FM           ,25000, Road
-160500000, RR-Ch-26                 , Narrow FM           ,25000, Road
-160515000, RR-Ch-27 SA Term Disp    , Narrow FM           ,25000, Road SA Dispatch LaCost Kirby
-160530000, RR-Ch-28                 , Narrow FM           ,25000, Road
-160545000, RR-Ch-29                 , Narrow FM           ,25000, Road
-160560000, RR-Ch-30                 , Narrow FM           ,25000, Road
-160575000, RR-Ch-31                 , Narrow FM           ,25000, Road
-160590000, RR-Ch-32                 , Narrow FM           ,25000, Road
-160605000, RR-Ch-33                 , Narrow FM           ,25000, Road
-160620000, RR-Ch-34                 , Narrow FM           ,25000, Road
-160635000, RR-Ch-35                 , Narrow FM           ,25000, Road
-160650000, RR-Ch-36                 , Narrow FM           ,25000, Road
-160665000, RR-Ch-37                 , Narrow FM           ,25000, Road
-160680000, RR-Ch-38                 , Narrow FM           ,25000, Road
-160695000, RR-Ch-39                 , Narrow FM           ,25000, Road
-160710000, RR-Ch-40                 , Narrow FM           ,25000, Road
-160725000, RR-Ch-41                 , Narrow FM           ,25000, Road
-160740000, RR-Ch-42 Austin Sub      , Narrow FM           ,25000, Road Twr 112 to Marjorie
-160755000, RR-Ch-43                 , Narrow FM           ,25000, Road
-160770000, RR-Ch-44                 , Narrow FM           ,25000, Road Eagle Lake - Heaker
-160785000, RR-Ch-45                 , Narrow FM           ,25000, Road
-160800000, RR-Ch-46                 , Narrow FM           ,25000, Road
-160815000, RR-Ch-47                 , Narrow FM           ,25000, Road
-160830000, RR-Ch-48                 , Narrow FM           ,25000, Road Marjorie to Herne
-160845000, RR-Ch-49                 , Narrow FM           ,25000, Road
-160860000, RR-Ch-50                 , Narrow FM           ,25000, Road
-160875000, RR-Ch-51                 , Narrow FM           ,25000, Road
-160890000, RR-Ch-52                 , Narrow FM           ,25000, Road
-160905000, RR-Ch-53                 , Narrow FM           ,25000, Road
-160920000, RR-Ch-54                 , Narrow FM           ,25000, Road
-160935000, RR-Ch-55                 , Narrow FM           ,25000, Road
-160950000, RR-Ch-56                 , Narrow FM           ,25000, Road
-160965000, RR-Ch-57                 , Narrow FM           ,25000, Road
-160980000, RR-Ch-58                 , Narrow FM           ,25000, Road
-160995000, RR-Ch-59 East Yard       , Narrow FM           ,25000, Road East Yard
-161010000, RR-Ch-60                 , Narrow FM           ,25000, Road
-161025000, RR-Ch-61                 , Narrow FM           ,25000, Road
-161040000, RR-Ch-62                 , Narrow FM           ,25000, Road
-161055000, RR-Ch-63                 , Narrow FM           ,25000, Road Waco
-161070000, RR-Ch-64                 , Narrow FM           ,25000, Road
-161085000, RR-Ch-65                 , Narrow FM           ,25000, Road
-161100000, RR-Ch-66                 , Narrow FM           ,25000, Road
-161115000, RR-Ch-67                 , Narrow FM           ,25000, Road
-161130000, RR-Ch-68                 , Narrow FM           ,25000, Road
-161145000, RR-Ch-69                 , Narrow FM           ,25000, Road
-161160000, RR-Ch-70                 , Narrow FM           ,25000, Road
-161175000, RR-Ch-71                 , Narrow FM           ,25000, Road
-161190000, RR-Ch-72                 , Narrow FM           ,25000, Road BNSF - Galviston
-161205000, RR-Ch-73                 , Narrow FM           ,25000, Road
-161220000, RR-Ch-74                 , Narrow FM           ,25000, Road
-161235000, RR-Ch-75                 , Narrow FM           ,25000, Road
-161250000, RR-Ch-76                 , Narrow FM           ,25000, Road
-161265000, RR-Ch-77                 , Narrow FM           ,25000, Road Cibilo-Eagle Lake
-161280000, RR-Ch-78                 , Narrow FM           ,25000, Road
-161295000, RR-Ch-79                 , Narrow FM           ,25000, Road
-161310000, RR-Ch-80 SoSan           , Narrow FM           ,25000, Road SoSan
-161325000, RR-Ch-81                 , Narrow FM           ,25000, Road
-161340000, RR-Ch-82                 , Narrow FM           ,25000, Road
-161355000, RR-Ch-83                 , Narrow FM           ,25000, Road
-161370000, RR-Ch-84                 , Narrow FM           ,25000, Road
-161385000, RR-Ch-85                 , Narrow FM           ,25000, Road
-161400000, RR-Ch-86                 , Narrow FM           ,25000, Road
-161415000, RR-Ch-87                 , Narrow FM           ,25000, Road BNSF Galviston
-161430000, RR-Ch-88                 , Narrow FM           ,25000, Road
-161445000, RR-Ch-89                 , Narrow FM           ,25000, Road
-161460000, RR-Ch-90                 , Narrow FM           ,25000, Road
-161475000, RR-Ch-91                 , Narrow FM           ,25000, Road
-161490000, RR-Ch-92                 , Narrow FM           ,25000, Road
-161505000, RR-Ch-93                 , Narrow FM           ,25000, Road
-161520000, RR-Ch-94                 , Narrow FM           ,25000, Road
-161535000, RR-Ch-95                 , Narrow FM           ,25000, Road
-161550000, RR-Ch-96 Amastad-LaCoste , Narrow FM           ,25000, Road Amastad-LaCoste
-161565000, RR-Ch-97                 , Narrow FM           ,25000, Road
-161580000, RR-Ch-98                 , Narrow FM           ,25000, Road
-161595000, RR-Ch-99                 , Narrow FM           ,25000, Road
-161610000, RR-Ch-100                , Narrow FM           ,25000, Road
-220112500, ITCM-101                 , Narrow FM           ,25000, ITCM
-220137500, ITCM-102                 , Narrow FM           ,25000, ITCM
-220262500, ITCM-107                 , Narrow FM           ,25000, ITCM
-220287500, ITCM-108                 , Narrow FM           ,25000, ITCM
-220412500, ITCM-113                 , Narrow FM           ,25000, ITCM
-220437500, ITCM-114                 , Narrow FM           ,25000, ITCM
-220712500, ITCM-125                 , Narrow FM           ,25000, ITCM
-220737500, ITCM-126                 , Narrow FM           ,25000, ITCM
-220762500, ITCM-127                 , Narrow FM           ,25000, ITCM
-220787500, ITCM-128                 , Narrow FM           ,25000, ITCM
-220862500, ITCM-131                 , Narrow FM           ,25000, ITCM
-220887500, ITCM-132                 , Narrow FM           ,25000, ITCM
-220937500, ITCM-134                 , Narrow FM           ,25000, ITCM
-221112500, ITCM-141                 , Narrow FM           ,25000, ITCM
-221137500, ITCM-142                 , Narrow FM           ,25000, ITCM
-221262500, ITCM-147                 , Narrow FM           ,25000, ITCM
-221287500, ITCM-148                 , Narrow FM           ,25000, ITCM
-221412500, ITCM-153                 , Narrow FM           ,25000, ITCM
-221437500, ITCM-154                 , Narrow FM           ,25000, ITCM
-221712500, ITCM-165                 , Narrow FM           ,25000, ITCM
-221737500, ITCM-166                 , Narrow FM           ,25000, ITCM
-221762500, ITCM-167                 , Narrow FM           ,25000, ITCM
-221787500, ITCM-168                 , Narrow FM           ,25000, ITCM
-221872500, ITCM-171                 , Narrow FM           ,25000, ITCM
-221887500, ITCM-172                 , Narrow FM           ,25000, ITCM
-221937500, ITCM-174                 , Narrow FM           ,25000, ITCM
-457937500, EOT-HOT                  , Narrow FM           ,25000, EOT
-452937500, EOT-HOT                  , Narrow FM           ,25000, HOT
-928718750, ATCS                     , Narrow FM           ,25000, ATCS
-952718750, ATCS                     , Narrow FM           ,25000, ATCS
-896887500, ATCS                     , Narrow FM           ,25000, ATCS
-928068750, ATCS                     , Narrow FM           ,25000, ATCS
-928081250, ATCS                     , Narrow FM           ,25000, ATCS
-928143750, ATCS                     , Narrow FM           ,25000, ATCS
-928231250, ATCS                     , Narrow FM           ,25000, ATCS
-928443750, ATCS                     , Narrow FM           ,25000, ATCS
-928518750, ATCS                     , Narrow FM           ,25000, ATCS
-928556250, ATCS                     , Narrow FM           ,25000, ATCS
-928693750, ATCS                     , Narrow FM           ,25000, ATCS
-928706250, ATCS                     , Narrow FM           ,25000, ATCS
-928743750, ATCS                     , Narrow FM           ,25000, ATCS
-932356250, ATCS                     , Narrow FM           ,25000, ATCS
-932393750, ATCS                     , Narrow FM           ,25000, ATCS
-932431250, ATCS                     , Narrow FM           ,25000, ATCS
-935887500, ATCS                     , Narrow FM           ,25000, ATCS
-941356250, ATCS                     , Narrow FM           ,25000, ATCS
-941393750, ATCS                     , Narrow FM           ,25000, ATCS
-941431250, ATCS                     , Narrow FM           ,25000, ATCS
-952068750, ATCS                     , Narrow FM           ,25000, ATCS
-952081250, ATCS                     , Narrow FM           ,25000, ATCS
-952143750, ATCS                     , Narrow FM           ,25000, ATCS
-952231250, ATCS                     , Narrow FM           ,25000, ATCS
-952443750, ATCS                     , Narrow FM           ,25000, ATCS
-952518750, ATCS                     , Narrow FM           ,25000, ATCS
-952556250, ATCS                     , Narrow FM           ,25000, ATCS
-952693750, ATCS                     , Narrow FM           ,25000, ATCS
-952706250, ATCS                     , Narrow FM           ,25000, ATCS
-952743750, ATCS                     , Narrow FM           ,25000, ATCS
-902250000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-903750000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-910000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-911500000, AEI                      , Narrow FM           ,25000, AEI Trackside
-913000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-915000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-917000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-918500000, AEI                      , Narrow FM           ,25000, AEI Trackside
-920000000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-921500000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
-452925000, DPU chan 1               , Narrow FM           ,25000, DPU
-452950000, DPU chan 2               , Narrow FM           ,25000, DPU
-457925000, DPU chan 3               , Narrow FM           ,25000, DPU
-457950000, DPU chan 4               , Narrow FM           ,25000, DPU
-452931250, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
-452943750, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
-452956250, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
-452962500, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
-452968750, Locomotive Remote Ctrl   , Narrow FM           ,25000, RCL
-
+004458000, BNSF Hy-Rail             , Narrow FM           ,10000, Hy-Rail
+159810000, RR-Ch-01                 , Narrow FM           ,10000, Road
+159810000, RR-Ch-02                 , Narrow FM           ,10000, Road
+159930000, RR-Ch-03                 , Narrow FM           ,10000, Road
+160050000, RR-Ch-04                 , Narrow FM           ,10000, Road
+160185000, RR-Ch-05                 , Narrow FM           ,10000, Road
+160200000, RR-Ch-06                 , Narrow FM           ,10000, Road
+160215000, RR-Ch-07                 , Narrow FM           ,10000, Road
+160230000, RR-Ch-08                 , Narrow FM           ,10000, Road
+160245000, RR-Ch-09                 , Narrow FM           ,10000, Road
+160260000, RR-Ch-10                 , Narrow FM           ,10000, Road
+160275000, RR-Ch-11                 , Narrow FM           ,10000, Road
+160290000, RR-Ch-12                 , Narrow FM           ,10000, Road
+160305000, RR-Ch-13                 , Narrow FM           ,10000, Road
+160320000, RR-Ch-14                 , Narrow FM           ,10000, Road Herne area North
+160335000, RR-Ch-15                 , Narrow FM           ,10000, Road
+160350000, RR-Ch-16                 , Narrow FM           ,10000, Road
+160365000, RR-Ch-17                 , Narrow FM           ,10000, Road
+160380000, RR-Ch-18                 , Narrow FM           ,10000, Road
+160395000, RR-Ch-19                 , Narrow FM           ,10000, Road
+160410000, RR-Ch-20                 , Narrow FM           ,10000, Road
+160410000, RR-Ch-21                 , Narrow FM           ,25000, Road
+160440000, RR-Ch-22                 , Narrow FM           ,10000, Road
+160455000, RR-Ch-23                 , Narrow FM           ,10000, Road
+160470000, RR-Ch-24                 , Narrow FM           ,10000, Road
+160485000, RR-Ch-25                 , Narrow FM           ,10000, Road
+160500000, RR-Ch-26                 , Narrow FM           ,10000, Road
+160515000, RR-Ch-27 SA Term Disp    , Narrow FM           ,10000, Road SA Dispatch LaCost Kirby
+160530000, RR-Ch-28                 , Narrow FM           ,10000, Road
+160545000, RR-Ch-29                 , Narrow FM           ,10000, Road
+160560000, RR-Ch-30                 , Narrow FM           ,10000, Road
+160575000, RR-Ch-31                 , Narrow FM           ,10000, Road
+160590000, RR-Ch-32                 , Narrow FM           ,10000, Road
+160605000, RR-Ch-33                 , Narrow FM           ,10000, Road
+160620000, RR-Ch-34                 , Narrow FM           ,10000, Road
+160635000, RR-Ch-35                 , Narrow FM           ,10000, Road
+160650000, RR-Ch-36                 , Narrow FM           ,10000, Road
+160665000, RR-Ch-37                 , Narrow FM           ,10000, Road
+160680000, RR-Ch-38                 , Narrow FM           ,10000, Road
+160695000, RR-Ch-39                 , Narrow FM           ,10000, Road
+160710000, RR-Ch-40                 , Narrow FM           ,10000, Road
+160710000, RR-Ch-41                 , Narrow FM           ,10000, Road
+160740000, RR-Ch-42 Austin Sub      , Narrow FM           ,10000, Road Twr 112 to Marjorie
+160755000, RR-Ch-43                 , Narrow FM           ,10000, Road
+160770000, RR-Ch-44                 , Narrow FM           ,10000, Road Eagle Lake - Heaker
+160785000, RR-Ch-45                 , Narrow FM           ,10000, Road
+160800000, RR-Ch-46                 , Narrow FM           ,10000, Road
+160815000, RR-Ch-47                 , Narrow FM           ,10000, Road
+160830000, RR-Ch-48                 , Narrow FM           ,10000, Road Marjorie to Herne
+160845000, RR-Ch-49                 , Narrow FM           ,10000, Road
+160860000, RR-Ch-50                 , Narrow FM           ,10000, Road
+160875000, RR-Ch-51                 , Narrow FM           ,10000, Road
+160890000, RR-Ch-52                 , Narrow FM           ,10000, Road
+160905000, RR-Ch-53                 , Narrow FM           ,10000, Road
+160920000, RR-Ch-54                 , Narrow FM           ,10000, Road
+160935000, RR-Ch-55                 , Narrow FM           ,10000, Road
+160950000, RR-Ch-56                 , Narrow FM           ,10000, Road
+160965000, RR-Ch-57                 , Narrow FM           ,10000, Road
+160980000, RR-Ch-58                 , Narrow FM           ,10000, Road
+160995000, RR-Ch-59 East Yard       , Narrow FM           ,10000, Road East Yard
+161010000, RR-Ch-60                 , Narrow FM           ,10000, Road
+161010000, RR-Ch-61                 , Narrow FM           ,10000, Road
+161040000, RR-Ch-62                 , Narrow FM           ,10000, Road
+161055000, RR-Ch-63                 , Narrow FM           ,10000, Road Waco
+161070000, RR-Ch-64                 , Narrow FM           ,10000, Road
+161085000, RR-Ch-65                 , Narrow FM           ,10000, Road
+161100000, RR-Ch-66                 , Narrow FM           ,10000, Road
+161115000, RR-Ch-67                 , Narrow FM           ,10000, Road
+161130000, RR-Ch-68                 , Narrow FM           ,10000, Road
+161145000, RR-Ch-69                 , Narrow FM           ,10000, Road
+161160000, RR-Ch-70                 , Narrow FM           ,10000, Road
+161175000, RR-Ch-71                 , Narrow FM           ,10000, Road
+161190000, RR-Ch-72                 , Narrow FM           ,10000, Road BNSF - Galviston
+161205000, RR-Ch-73                 , Narrow FM           ,10000, Road
+161220000, RR-Ch-74                 , Narrow FM           ,10000, Road
+161235000, RR-Ch-75                 , Narrow FM           ,10000, Road
+161100000, RR-Ch-76                 , Narrow FM           ,25000, Road
+161265000, RR-Ch-77                 , Narrow FM           ,10000, Road Cibilo-Eagle Lake
+161280000, RR-Ch-78                 , Narrow FM           ,10000, Road
+161295000, RR-Ch-79                 , Narrow FM           ,10000, Road
+161310000, RR-Ch-80 SoSan           , Narrow FM           ,10000, Road SoSan
+161310000, RR-Ch-81                 , Narrow FM           ,25000, Road
+161340000, RR-Ch-82                 , Narrow FM           ,10000, Road
+161355000, RR-Ch-83                 , Narrow FM           ,10000, Road
+161370000, RR-Ch-84                 , Narrow FM           ,10000, Road
+161385000, RR-Ch-85                 , Narrow FM           ,10000, Road
+161400000, RR-Ch-86                 , Narrow FM           ,10000, Road
+161415000, RR-Ch-87                 , Narrow FM           ,10000, Road BNSF Galviston
+161430000, RR-Ch-88                 , Narrow FM           ,10000, Road
+161445000, RR-Ch-89                 , Narrow FM           ,10000, Road
+161460000, RR-Ch-90                 , Narrow FM           ,10000, Road
+161475000, RR-Ch-91                 , Narrow FM           ,10000, Road
+161490000, RR-Ch-92                 , Narrow FM           ,10000, Road
+161505000, RR-Ch-93                 , Narrow FM           ,10000, Road
+161520000, RR-Ch-94                 , Narrow FM           ,10000, Road
+161535000, RR-Ch-95                 , Narrow FM           ,10000, Road
+161550000, RR-Ch-96 Amastad-LaCoste , Narrow FM           ,10000, Road Amastad-LaCoste
+161565000, RR-Ch-97                 , Narrow FM           ,10000, Road
+161580000, RR-Ch-98                 , Narrow FM           ,10000, Road
+161595000, RR-Ch-99                 , Narrow FM           ,10000, Road
+161610000, RR-Ch-100                , Narrow FM           ,10000, Road
+220112500, ITCM-101                 , Narrow FM           ,10000, ITCM
+220137500, ITCM-102                 , Narrow FM           ,10000, ITCM
+220262500, ITCM-107                 , Narrow FM           ,10000, ITCM
+220287500, ITCM-108                 , Narrow FM           ,10000, ITCM
+220412500, ITCM-113                 , Narrow FM           ,10000, ITCM
+220437500, ITCM-114                 , Narrow FM           ,10000, ITCM
+220712500, ITCM-125                 , Narrow FM           ,10000, ITCM
+220737500, ITCM-126                 , Narrow FM           ,10000, ITCM
+220762500, ITCM-127                 , Narrow FM           ,10000, ITCM
+220787500, ITCM-128                 , Narrow FM           ,10000, ITCM
+220862500, ITCM-131                 , Narrow FM           ,10000, ITCM
+220887500, ITCM-132                 , Narrow FM           ,10000, ITCM
+220937500, ITCM-134                 , Narrow FM           ,10000, ITCM
+221112500, ITCM-141                 , Narrow FM           ,10000, ITCM
+221137500, ITCM-142                 , Narrow FM           ,10000, ITCM
+221262500, ITCM-147                 , Narrow FM           ,10000, ITCM
+221287500, ITCM-148                 , Narrow FM           ,10000, ITCM
+221412500, ITCM-153                 , Narrow FM           ,10000, ITCM
+221437500, ITCM-154                 , Narrow FM           ,10000, ITCM
+221712500, ITCM-165                 , Narrow FM           ,10000, ITCM
+221737500, ITCM-166                 , Narrow FM           ,10000, ITCM
+221762500, ITCM-167                 , Narrow FM           ,10000, ITCM
+221787500, ITCM-168                 , Narrow FM           ,10000, ITCM
+221872500, ITCM-171                 , Narrow FM           ,10000, ITCM
+221887500, ITCM-172                 , Narrow FM           ,10000, ITCM
+221937500, ITCM-174                 , Narrow FM           ,10000, ITCM
+457937500, EOT-HOT                  , Narrow FM           ,10000, EOT
+452937500, EOT-HOT                  , Narrow FM           ,10000, HOT
+928718750, ATCS                     , Narrow FM           ,10000, ATCS
+952718750, ATCS                     , Narrow FM           ,10000, ATCS
+896887500, ATCS                     , Narrow FM           ,10000, ATCS
+928068750, ATCS                     , Narrow FM           ,10000, ATCS
+928081250, ATCS                     , Narrow FM           ,10000, ATCS
+928143750, ATCS                     , Narrow FM           ,10000, ATCS
+928231250, ATCS                     , Narrow FM           ,10000, ATCS
+928443750, ATCS                     , Narrow FM           ,10000, ATCS
+928518750, ATCS                     , Narrow FM           ,10000, ATCS
+928556250, ATCS                     , Narrow FM           ,10000, ATCS
+928693750, ATCS                     , Narrow FM           ,10000, ATCS
+928706250, ATCS                     , Narrow FM           ,10000, ATCS
+928743750, ATCS                     , Narrow FM           ,10000, ATCS
+932356250, ATCS                     , Narrow FM           ,10000, ATCS
+932393750, ATCS                     , Narrow FM           ,10000, ATCS
+932431250, ATCS                     , Narrow FM           ,10000, ATCS
+935887500, ATCS                     , Narrow FM           ,10000, ATCS
+941356250, ATCS                     , Narrow FM           ,10000, ATCS
+941393750, ATCS                     , Narrow FM           ,10000, ATCS
+941431250, ATCS                     , Narrow FM           ,10000, ATCS
+952068750, ATCS                     , Narrow FM           ,10000, ATCS
+952081250, ATCS                     , Narrow FM           ,10000, ATCS
+952143750, ATCS                     , Narrow FM           ,10000, ATCS
+952231250, ATCS                     , Narrow FM           ,10000, ATCS
+952443750, ATCS                     , Narrow FM           ,10000, ATCS
+952518750, ATCS                     , Narrow FM           ,10000, ATCS
+952556250, ATCS                     , Narrow FM           ,10000, ATCS
+952693750, ATCS                     , Narrow FM           ,10000, ATCS
+952706250, ATCS                     , Narrow FM           ,10000, ATCS
+952743750, ATCS                     , Narrow FM           ,10000, ATCS
+902100000, AEI                      , Narrow FM           ,25000, AEI Intermodal/Yard
+903750000, AEI                      , Narrow FM           ,10000, AEI Intermodal/Yard
+910000000, AEI                      , Narrow FM           ,10000, AEI Intermodal/Yard
+911500000, AEI                      , Narrow FM           ,10000, AEI Trackside
+913000000, AEI                      , Narrow FM           ,10000, AEI Intermodal/Yard
+915000000, AEI                      , Narrow FM           ,10000, AEI Intermodal/Yard
+917000000, AEI                      , Narrow FM           ,10000, AEI Intermodal/Yard
+918500000, AEI                      , Narrow FM           ,10000, AEI Trackside
+920000000, AEI                      , Narrow FM           ,10000, AEI Intermodal/Yard
+921500000, AEI                      , Narrow FM           ,10000, AEI Intermodal/Yard
+452910000, DPU chan 1               , Narrow FM           ,10000, DPU
+452950000, DPU chan 2               , Narrow FM           ,10000, DPU
+457910000, DPU chan 3               , Narrow FM           ,10000, DPU
+457950000, DPU chan 4               , Narrow FM           ,10000, DPU
+452931250, Locomotive Remote Ctrl   , Narrow FM           ,10000, RCL
+452943750, Locomotive Remote Ctrl   , Narrow FM           ,10000, RCL
+452956250, Locomotive Remote Ctrl   , Narrow FM           ,10000, RCL
+452962500, Locomotive Remote Ctrl   , Narrow FM           ,10000, RCL
+452968750, Locomotive Remote Ctrl   , Narrow FM           ,10000, RCL
