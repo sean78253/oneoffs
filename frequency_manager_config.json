@@ -1,0 +1,726 @@
+{
+    "bookmarkDisplayMode": 1,
+    "lists": {
+        "General": {
+            "bookmarks": {
+                "AEI INT YARD 1": {
+                    "bandwidth": 10000.0,
+                    "frequency": 903250000.0,
+                    "mode": 0
+                },
+                "AEI INT YARD 2": {
+                    "bandwidth": 10000.0,
+                    "frequency": 903750000.0,
+                    "mode": 0
+                },
+                "AEI INT YARD 3": {
+                    "bandwidth": 10000.0,
+                    "frequency": 910000000.0,
+                    "mode": 0
+                },
+                "AEI INT YARD 4": {
+                    "bandwidth": 10000.0,
+                    "frequency": 913000000.0,
+                    "mode": 0
+                },
+                "AEI INT YARD 5": {
+                    "bandwidth": 10000.0,
+                    "frequency": 915000000.0,
+                    "mode": 0
+                },
+                "AEI INT YARD 6": {
+                    "bandwidth": 10000.0,
+                    "frequency": 917000000.0,
+                    "mode": 0
+                },
+                "AEI INT YARD 7": {
+                    "bandwidth": 10000.0,
+                    "frequency": 920000000.0,
+                    "mode": 0
+                },
+                "AEI INT YARD 8": {
+                    "bandwidth": 10000.0,
+                    "frequency": 921500000.0,
+                    "mode": 0
+                },
+                "AEI Track side1": {
+                    "bandwidth": 10000.0,
+                    "frequency": 911500000.0,
+                    "mode": 0
+                },
+                "AEI Trackside 2": {
+                    "bandwidth": 10000.0,
+                    "frequency": 918500000.0,
+                    "mode": 0
+                },
+                "ATCS": {
+                    "bandwidth": 10000.0,
+                    "frequency": 952743750.0,
+                    "mode": 0
+                },
+                "DPU chan 1": {
+                    "bandwidth": 10000.0,
+                    "frequency": 452910000.0,
+                    "mode": 0
+                },
+                "DPU chan 2": {
+                    "bandwidth": 10000.0,
+                    "frequency": 452950000.0,
+                    "mode": 0
+                },
+                "DPU chan 3": {
+                    "bandwidth": 10000.0,
+                    "frequency": 457910000.0,
+                    "mode": 0
+                },
+                "DPU chan 4": {
+                    "bandwidth": 10000.0,
+                    "frequency": 457950000.0,
+                    "mode": 0
+                },
+                "EOT EOT": {
+                    "bandwidth": 10000.0,
+                    "frequency": 457937500.0,
+                    "mode": 0
+                },
+                "EOT HOT": {
+                    "bandwidth": 10000.0,
+                    "frequency": 452937500.0,
+                    "mode": 0
+                },
+                "ITCM-101": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220112500.0,
+                    "mode": 0
+                },
+                "ITCM-102": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220137500.0,
+                    "mode": 0
+                },
+                "ITCM-107": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220262500.0,
+                    "mode": 0
+                },
+                "ITCM-108": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220287500.0,
+                    "mode": 0
+                },
+                "ITCM-113": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220412500.0,
+                    "mode": 0
+                },
+                "ITCM-114": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220437500.0,
+                    "mode": 0
+                },
+                "ITCM-125": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220712500.0,
+                    "mode": 0
+                },
+                "ITCM-126": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220737500.0,
+                    "mode": 0
+                },
+                "ITCM-127": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220762500.0,
+                    "mode": 0
+                },
+                "ITCM-128": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220787500.0,
+                    "mode": 0
+                },
+                "ITCM-131": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220862500.0,
+                    "mode": 0
+                },
+                "ITCM-132": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220887500.0,
+                    "mode": 0
+                },
+                "ITCM-134": {
+                    "bandwidth": 10000.0,
+                    "frequency": 220937500.0,
+                    "mode": 0
+                },
+                "ITCM-141": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221112500.0,
+                    "mode": 0
+                },
+                "ITCM-142": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221137500.0,
+                    "mode": 0
+                },
+                "ITCM-147": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221262500.0,
+                    "mode": 0
+                },
+                "ITCM-148": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221287500.0,
+                    "mode": 0
+                },
+                "ITCM-153": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221412500.0,
+                    "mode": 0
+                },
+                "ITCM-154": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221437500.0,
+                    "mode": 0
+                },
+                "ITCM-165": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221712500.0,
+                    "mode": 0
+                },
+                "ITCM-166": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221737500.0,
+                    "mode": 0
+                },
+                "ITCM-167": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221762500.0,
+                    "mode": 0
+                },
+                "ITCM-168": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221787500.0,
+                    "mode": 0
+                },
+                "ITCM-171": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221872500.0,
+                    "mode": 0
+                },
+                "ITCM-172": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221887500.0,
+                    "mode": 0
+                },
+                "ITCM-174": {
+                    "bandwidth": 10000.0,
+                    "frequency": 221937500.0,
+                    "mode": 0
+                },
+                "Locomotive Remote Ctrl": {
+                    "bandwidth": 10000.0,
+                    "frequency": 452968750.0,
+                    "mode": 0
+                },
+                "RR-Ch-02": {
+                    "bandwidth": 10000.0,
+                    "frequency": 159810000.0,
+                    "mode": 0
+                },
+                "RR-Ch-03": {
+                    "bandwidth": 10000.0,
+                    "frequency": 159930000.0,
+                    "mode": 0
+                },
+                "RR-Ch-04": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160050000.0,
+                    "mode": 0
+                },
+                "RR-Ch-05": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160185000.0,
+                    "mode": 0
+                },
+                "RR-Ch-06": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160200000.0,
+                    "mode": 0
+                },
+                "RR-Ch-07": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160215000.0,
+                    "mode": 0
+                },
+                "RR-Ch-08": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160230000.0,
+                    "mode": 0
+                },
+                "RR-Ch-09": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160245000.0,
+                    "mode": 0
+                },
+                "RR-Ch-10": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160260000.0,
+                    "mode": 0
+                },
+                "RR-Ch-100": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161610000.0,
+                    "mode": 0
+                },
+                "RR-Ch-11": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160275000.0,
+                    "mode": 0
+                },
+                "RR-Ch-12": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160290000.0,
+                    "mode": 0
+                },
+                "RR-Ch-13": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160305000.0,
+                    "mode": 0
+                },
+                "RR-Ch-14 herne north": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160320000.0,
+                    "mode": 0
+                },
+                "RR-Ch-15": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160335000.0,
+                    "mode": 0
+                },
+                "RR-Ch-16": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160350000.0,
+                    "mode": 0
+                },
+                "RR-Ch-17": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160365000.0,
+                    "mode": 0
+                },
+                "RR-Ch-18": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160380000.0,
+                    "mode": 0
+                },
+                "RR-Ch-19": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160395000.0,
+                    "mode": 0
+                },
+                "RR-Ch-20": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160410000.0,
+                    "mode": 0
+                },
+                "RR-Ch-21": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160410000.0,
+                    "mode": 0
+                },
+                "RR-Ch-22": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160440000.0,
+                    "mode": 0
+                },
+                "RR-Ch-23": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160455000.0,
+                    "mode": 0
+                },
+                "RR-Ch-24": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160470000.0,
+                    "mode": 0
+                },
+                "RR-Ch-25": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160485000.0,
+                    "mode": 0
+                },
+                "RR-Ch-26": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160500000.0,
+                    "mode": 0
+                },
+                "RR-Ch-27 SA Term Disp": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160515000.0,
+                    "mode": 0
+                },
+                "RR-Ch-28": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160530000.0,
+                    "mode": 0
+                },
+                "RR-Ch-29": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160545000.0,
+                    "mode": 0
+                },
+                "RR-Ch-30": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160560000.0,
+                    "mode": 0
+                },
+                "RR-Ch-31": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160575000.0,
+                    "mode": 0
+                },
+                "RR-Ch-32": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160590000.0,
+                    "mode": 0
+                },
+                "RR-Ch-33": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160605000.0,
+                    "mode": 0
+                },
+                "RR-Ch-34": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160620000.0,
+                    "mode": 0
+                },
+                "RR-Ch-35": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160635000.0,
+                    "mode": 0
+                },
+                "RR-Ch-36": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160650000.0,
+                    "mode": 0
+                },
+                "RR-Ch-37": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160665000.0,
+                    "mode": 0
+                },
+                "RR-Ch-38": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160680000.0,
+                    "mode": 0
+                },
+                "RR-Ch-39": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160695000.0,
+                    "mode": 0
+                },
+                "RR-Ch-40": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160710000.0,
+                    "mode": 0
+                },
+                "RR-Ch-41": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160710000.0,
+                    "mode": 0
+                },
+                "RR-Ch-42 T112 Marjorie": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160740000.0,
+                    "mode": 0
+                },
+                "RR-Ch-43": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160755000.0,
+                    "mode": 0
+                },
+                "RR-Ch-44 Eagle Lk Heaker": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160770000.0,
+                    "mode": 0
+                },
+                "RR-Ch-45": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160785000.0,
+                    "mode": 0
+                },
+                "RR-Ch-46": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160800000.0,
+                    "mode": 0
+                },
+                "RR-Ch-47": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160815000.0,
+                    "mode": 0
+                },
+                "RR-Ch-48 Marjorie Herne": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160830000.0,
+                    "mode": 0
+                },
+                "RR-Ch-49": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160845000.0,
+                    "mode": 0
+                },
+                "RR-Ch-50": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160860000.0,
+                    "mode": 0
+                },
+                "RR-Ch-51": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160875000.0,
+                    "mode": 0
+                },
+                "RR-Ch-52": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160890000.0,
+                    "mode": 0
+                },
+                "RR-Ch-53": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160905000.0,
+                    "mode": 0
+                },
+                "RR-Ch-54": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160920000.0,
+                    "mode": 0
+                },
+                "RR-Ch-55": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160935000.0,
+                    "mode": 0
+                },
+                "RR-Ch-56": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160950000.0,
+                    "mode": 0
+                },
+                "RR-Ch-57": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160965000.0,
+                    "mode": 0
+                },
+                "RR-Ch-58": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160980000.0,
+                    "mode": 0
+                },
+                "RR-Ch-59 East Yard": {
+                    "bandwidth": 10000.0,
+                    "frequency": 160995000.0,
+                    "mode": 0
+                },
+                "RR-Ch-60": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161010000.0,
+                    "mode": 0
+                },
+                "RR-Ch-61": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161010000.0,
+                    "mode": 0
+                },
+                "RR-Ch-62": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161040000.0,
+                    "mode": 0
+                },
+                "RR-Ch-63 Waco": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161055000.0,
+                    "mode": 0
+                },
+                "RR-Ch-64": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161070000.0,
+                    "mode": 0
+                },
+                "RR-Ch-65": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161085000.0,
+                    "mode": 0
+                },
+                "RR-Ch-66": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161100000.0,
+                    "mode": 0
+                },
+                "RR-Ch-67": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161115000.0,
+                    "mode": 0
+                },
+                "RR-Ch-68": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161130000.0,
+                    "mode": 0
+                },
+                "RR-Ch-69": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161145000.0,
+                    "mode": 0
+                },
+                "RR-Ch-70": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161160000.0,
+                    "mode": 0
+                },
+                "RR-Ch-71": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161175000.0,
+                    "mode": 0
+                },
+                "RR-Ch-72 BNSF Galvisoton": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161190000.0,
+                    "mode": 0
+                },
+                "RR-Ch-73": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161205000.0,
+                    "mode": 0
+                },
+                "RR-Ch-74": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161220000.0,
+                    "mode": 0
+                },
+                "RR-Ch-75": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161235000.0,
+                    "mode": 0
+                },
+                "RR-Ch-76": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161100000.0,
+                    "mode": 0
+                },
+                "RR-Ch-77 Cibilo-Eagle Lk": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161265000.0,
+                    "mode": 0
+                },
+                "RR-Ch-78": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161280000.0,
+                    "mode": 0
+                },
+                "RR-Ch-79": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161295000.0,
+                    "mode": 0
+                },
+                "RR-Ch-80 SoSan": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161310000.0,
+                    "mode": 0
+                },
+                "RR-Ch-81": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161310000.0,
+                    "mode": 0
+                },
+                "RR-Ch-82": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161340000.0,
+                    "mode": 0
+                },
+                "RR-Ch-83": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161355000.0,
+                    "mode": 0
+                },
+                "RR-Ch-84": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161370000.0,
+                    "mode": 0
+                },
+                "RR-Ch-85": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161385000.0,
+                    "mode": 0
+                },
+                "RR-Ch-86": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161400000.0,
+                    "mode": 0
+                },
+                "RR-Ch-87 Glaviston": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161415000.0,
+                    "mode": 0
+                },
+                "RR-Ch-88": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161430000.0,
+                    "mode": 0
+                },
+                "RR-Ch-89": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161445000.0,
+                    "mode": 0
+                },
+                "RR-Ch-90": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161460000.0,
+                    "mode": 0
+                },
+                "RR-Ch-91": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161475000.0,
+                    "mode": 0
+                },
+                "RR-Ch-92": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161490000.0,
+                    "mode": 0
+                },
+                "RR-Ch-93": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161505000.0,
+                    "mode": 0
+                },
+                "RR-Ch-94": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161520000.0,
+                    "mode": 0
+                },
+                "RR-Ch-95": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161535000.0,
+                    "mode": 0
+                },
+                "RR-Ch-96 Amastad LaCoste": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161550000.0,
+                    "mode": 0
+                },
+                "RR-Ch-97": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161565000.0,
+                    "mode": 0
+                },
+                "RR-Ch-98": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161580000.0,
+                    "mode": 0
+                },
+                "RR-Ch-99": {
+                    "bandwidth": 10000.0,
+                    "frequency": 161595000.0,
+                    "mode": 0
+                }
+            },
+            "showOnWaterfall": true
+        }
+    },
+    "selectedList": "General"
+}
