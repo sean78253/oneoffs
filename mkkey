@@ -42,8 +42,8 @@
 _dte=`date -u +%Y%m%d`
 # _kylgn=1024
 # _kylgn=2048
-_kylgn=4096
-# _kylgn=8192
+# _kylgn=4096
+_kylgn=8192
 # _kylgn=16384
 
 # *****************
