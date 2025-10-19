@@ -12,6 +12,8 @@ Rail-low Amastad-LaCoste, #c0c0c0,,,
 ,,,,
 # Frequency , Name                     , Modulation          ,  Bandwidth, Tags
 004458000, BNSF Hy-Rail             , Narrow FM           ,10000, Hy-Rail
+152270000, UP-SAID                  , Narrow FM           ,10000, Yard
+152375000, TOYOTA-SAIT              , Narrow FM           ,10000, Yard
 159810000, RR-Ch-01                 , Narrow FM           ,10000, Road
 159810000, RR-Ch-02                 , Narrow FM           ,10000, Road
 159930000, RR-Ch-03                 , Narrow FM           ,10000, Road
