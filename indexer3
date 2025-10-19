@@ -32,8 +32,8 @@
 # NOTES:
 # varibles that start with an underscore should be set in the DEFINE VARIABLES section and not modified elsewhere.
 #
-#
-#
+# Take a screen shot 30 seconds in:
+# ffmpeg -ss 00:00:30 -i $inputVideo.m4v -frames:v 1 -q:v 2 $output.jpg
 #
 # *********************************************************************
 # TODOS
