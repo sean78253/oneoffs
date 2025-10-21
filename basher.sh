@@ -39,6 +39,7 @@ datenm=`date +%Y%m%d`
 function check_bash() 
 
 {
+# sed -i 's/HISTSIZE=1000/HISTSIZE=-1/' .bashrc && sed -i 's/HISTFILESIZE=2000/HISTFILESIZE=-1/' .bashrc && sed -i '/HISTFILESIZE=/a export EDITOR=\/usr\/bin\/vi' .bashrc
 grep -q 'BASHMODSWE' ~/.bashrc
 nobash=`echo $?`
 if [ ${nobash} -eq 1 ]
