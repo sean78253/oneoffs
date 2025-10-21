@@ -189,6 +189,12 @@ function move_ssh()
 	fi
 }
 
+function move_new_ssh()
+{
+	true
+# https://askubuntu.com/questions/1533119/ssh-connection-refused
+}
+
 function is-a-pi()
 {
 
