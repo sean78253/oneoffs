@@ -46,6 +46,7 @@ if [ ${nobash} -eq 1 ]
 then
 	echo "Making changes for ~/.bashrc!"; read -p "CTRL C to stop"
 	cp ~/.bashrc ~/.bashrc.${datenm}
+#=====
 	echo '
 export HISTSIZE=-1
 export HISTFILESIZE=-1
@@ -61,7 +62,6 @@ export BASHMODSWE="true"
 # https://github.com/sean78253/fsmod.git
 # https://github.com/sean78253/oneoffs.git
 # https://github.com/sean78253/blocklists.git
-# sshfs -p 4822 root@unfoxthecablebox.com:/root /home/sean/rmtmnt
 # VLC addons
 # apt install -y vlc-plugin-bittorrent vlc-plugin-fluidsynth vlc-plugin-jack vlc-plugin-notify vlc-plugin-qt vlc-plugin-samba vlc-plugin-skins2 vlc-plugin-svg vlc-plugin-video-output vlc-plugin-video-splitter vlc-plugin-visualization vlc-plugin-vlsub
 # more video
@@ -106,6 +106,34 @@ function cleanup()
 
 trap cleanup EXIT
 ' >> ~/.bashrc
+
+#====
+
+function NewSShPort()
+{
+source /etc/os-release
+
+if [ $VERSION_ID = "24.04" ]
+then
+NewPort=4822 
+echo "ssh move to port ${NewPort}"
+read -t 5 -p "Or enter preffered port within 5 seconds: " InPort
+
+if [ ! -z ${InPort} ]; then
+	NewPort=${InPort}
+fi
+
+echo -e "\n ${NewPort}"
+systemctl disable ssh.service
+systemctl stop ssh.service
+systemctl stop ssh.socket
+systemctl enable ssh.socket
+systemctl daemon-reload
+systemctl start ssh.socket
+fi
+
+#====
+
 echo "Host mygeekisp.com
 	Port 4822
 	StrictHostKeyChecking no
